@@ -1,0 +1,23 @@
+[git]
+clang_complete       | git://github.com/Rip-Rip/clang_complete.git
+gundo                | https://github.com/sjl/gundo.vim/
+# nerdtree             | git://github.com/scrooloose/nerdtree.git
+# pydoc.vim            | git://github.com/fs111/pydoc.vim.git
+# supertab             | git://github.com/ervandew/supertab.git
+linediff.vim         | https://github.com/AndrewRadev/linediff.vim.git
+tabular              | git://github.com/godlygeek/tabular.git
+tagbar               | https://github.com/majutsushi/tagbar
+vim-commentary       | https://github.com/tpope/vim-commentary.git
+vim-fswitch          | git://github.com/ewiplayer/vim-fswitch.git
+vim-fugitive         | https://github.com/tpope/vim-fugitive.git
+# vim-fuzzee           | https://github.com/mattsacks/vim-fuzzee.git
+vim-protodef         | git://github.com/ewiplayer/vim-protodef.git
+vim-repeat           | git://github.com/tpope/vim-repeat.git
+vim-surround         | git://github.com/tpope/vim-surround.git
+vim-emacscommandline | https://github.com/houtsnip/vim-emacscommandline.git
+
+[svn]
+# xptemplate     | http://xptemplate.googlecode.com/svn/trunk/dist/
+
+[mercurial]
+singlecompile  | https://bitbucket.org/xuhdev/singlecompile

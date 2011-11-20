@@ -1,0 +1,55 @@
+<c-a> - in insert mode pastes previously typed text.
+<c-w> - in insert mode deletes a word before the cursor.
+<c-r><c-w> - copy word under the cursor to command line.
+<c-x><c-f> - filename completion in insert mode.
+<c-x><c-o> - omni-completion.
+<c-x><c-l> - line-completion.
+helptags <path to doc/> - regenerates docs tags.
+:perldo - perl-style regexps.
+
+[[/]] - outer { block, next/previous
+[]/][ - outer } block, next/previous
+[{/]} - inner block's { and }
+in such commands [ and ] define direction.
+
+[I - list all occurrences of variable.
+<count>[<tab> - go to <count> line in the [I list.
+gt, gT - next/previous tab.
+J - concatenate current and next line.
+diw - delete current word.
+daw - delete current word including surrounding spaces.
+= - indentation (e.g. gg=G indents whole buffer).
+:e $MYVIMRC - edit .vimrc.
+<c-g> - print some information about current buffer.
+g<c-g> - print some information in details about current buffer.
+xp - swap current and next characters.
+<c-^> - quick switch current and alternative buffers.
+<c-w>T - edit file in new tab.
+
+<c-]> - go to function definition (needs tags).
+<c-i>/<c-o> - go forward/backward through history.
+<c-t> - go backward through tags stack.
+
+gd - go to local definition of variable under the cursor.
+gD - go to global definition of variable under the cursor.
+g,/g; - go to place of previous/next edit.
+gi - go to place where the last insert operation was made.
+`. — go to last edited line.
+`` — go to last active line.
+
+]p - same as p key, but re-indents line after pasting it
+
+/ - case sensitivity
+    \ñ - ignore case
+    \C - don't ignore case
+
+Spell check:
+set spell - enable spell check
+set spelllang=ru,en - set spell check languages
+]s — go to next incorrect word
+[s — go to previous incorrect word
+z= — show list of alternatives for incorrect word
+
+A note for ctags:
+    Use \ to escape new line in function definitions or it will not work
+    right.

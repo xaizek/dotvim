@@ -1,0 +1,67 @@
+" vim: syntax=vim
+" Maybe useful someday
+
+" Auto Update a line containing Last Modified
+function! LastMod()
+    if line("$") > 20
+let l = 20
+    else
+let l = line("$")
+    endif
+    exe "1," . l . "g/Last modified: /s/Last modified: .*/Last modified: "
+            \.strftime("%a %b %d, %Y  %H:%M")
+endfun 
+
+" Call the LastMod() Function everytime we save a file
+autocmd BufWrite *   ks|call LastMod()|'s
+
+" ==============================================================================
+
+"**************** 
+" In Makefile, automatically convert eight spaces at the beginning 
+" of line to tab, as you type (or paste) 
+"***************** 
+au FileType make :inoremap
+        \<buffer><silent><space> <space><c-o>:call MapSpaceInMakefile()<cr> 
+" function! MapSpaceInMakefile() "{{{
+function! MapSpaceInMakefile() 
+    " if this space is 8th space from the beginning of line, replace 8 spaces
+    " with one tab (only at the beginning of file) 
+    let line = getline('.') 
+    let col = col('.') 
+
+    if strpart(line, 0, 8) == '        ' 
+        let new = "\t" . strpart(line,8) 
+        call setline('.', new ) 
+    endif 
+
+    return "" 
+endfunction
+
+" ==============================================================================
+
+if has("cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
+
+" ==============================================================================
+
+" vim:foldmethod=marker:ft=vim:
+
+" ==============================================================================
+
+"highlight RedundantSpaces ctermbg=yellow guibg=yellow
+"match     RedundantSpaces /\s\+$\| \+ze\t/
+
+" ==============================================================================
