@@ -710,7 +710,11 @@ let g:pydiction_location = '/home/xaizek/.vim/bundle/pydiction/pydiction.py'
 " misc {{{
 
 " run Terminal in the current directory
-map <leader>T :!Terminal &<cr><cr>
+if has('win32')
+    map <leader>T :!start bash<cr><cr>
+else
+    map <leader>T :!Terminal &<cr><cr>
+endif
 
 " clears marks
 nmap <leader>m :call setqflist([])<cr>:doautocmd QuickFixCmdPost * make<cr>
