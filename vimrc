@@ -711,7 +711,7 @@ let g:pydiction_location = '/home/xaizek/.vim/bundle/pydiction/pydiction.py'
 
 " run Terminal in the current directory
 if has('win32')
-    map <leader>T :!start bash<cr><cr>
+    map <leader>T :!start bash<cr>
 else
     map <leader>T :!Terminal &<cr><cr>
 endif
