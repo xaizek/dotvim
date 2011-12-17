@@ -25,7 +25,7 @@ if v:version < 700
 endif
 
 " Version
-let s:fswitch_version = '0.9.3'
+let s:fswitch_version = '0.9.4'
 
 " Get the path separator right
 let s:os_slash = &ssl == 0 && (has("win16") || has("win32") || has("win64")) ? '\' : '/'
@@ -78,6 +78,20 @@ function! s:FSGetExtensions()
 endfunction
 
 "
+" s:FSGetFilenameMutations
+"
+" Return the list of possible filename mutations
+"
+function! s:FSGetFilenameMutations()
+    if !exists("b:fswitchfnames")
+        " For backward-compatibility out default mutation is an identity.
+        return ['/^//']
+    else
+        return split(b:fswitchfnames, ',')
+    endif
+endfunction
+
+"
 " s:FSGetMustMatch
 "
 " Return a boolean on whether or not the regex must match
@@ -116,6 +130,25 @@ endfunction
 "
 function! s:FSGetFileNameWithoutExtension(filename)
     return expand(a:filename . ':t:r')
+endfunction
+
+"
+" s:FSMutateFilename
+"
+" Takes a filename and a filename mutation directive and applies the mutation
+" to it.
+function! s:FSMutateFilename(filename, directive)
+    let separator = strpart(a:directive, 0, 1)
+    let dirparts = split(strpart(a:directive, 1), separator)
+    if len(dirparts) < 2 || len(dirparts) > 3
+        throw 'Bad mutation directive "' . a:directive . '".'
+    else
+        let flags = ''
+        if len(dirparts) == 3
+            let flags = dirparts[2]
+        endif
+        return substitute(a:filename, dirparts[0], dirparts[1], flags)
+    endif
 endfunction
 
 "
@@ -195,20 +228,24 @@ function! s:FSReturnCompanionFilename(filename, mustBeReadable)
     let ext = s:FSGetFileExtension(a:filename)
     let justfile = s:FSGetFileNameWithoutExtension(a:filename)
     let extensions = s:FSGetExtensions()
+    let filenameMutations = s:FSGetFilenameMutations()
     let locations = s:FSGetLocations()
     let mustmatch = s:FSGetMustMatch()
     let newpath = ''
     for currentExt in extensions
         for loc in locations
-            let newpath = s:FSGetAlternateFilename(fullpath, justfile, currentExt, loc, mustmatch)
-            if a:mustBeReadable == 0 && newpath != ''
-                return newpath
-            elseif a:mustBeReadable == 1
-                let newpath = glob(newpath)
-                if filereadable(newpath)
+            for filenameMutation in filenameMutations
+                let mutatedFilename = s:FSMutateFilename(justfile, filenameMutation)
+                let newpath = s:FSGetAlternateFilename(fullpath, mutatedFilename, currentExt, loc, mustmatch)
+                if a:mustBeReadable == 0 && newpath != ''
                     return newpath
+                elseif a:mustBeReadable == 1
+                    let newpath = glob(newpath)
+                    if filereadable(newpath)
+                        return newpath
+                    endif
                 endif
-            endif
+            endfor
         endfor
     endfor
 
@@ -260,6 +297,19 @@ function! FSwitch(filename, precmd)
             let newpath = FSReturnCompanionFilenameString(a:filename)
         endif
     endif
+    if &switchbuf =~ "^use"
+        let i = 1
+        let bufnum = winbufnr(i)
+        while bufnum != -1
+            let filename = fnamemodify(bufname(bufnum), ':p')
+            if filename == newpath
+                execute ":sbuffer " .  filename
+                return
+            endif
+            let i += 1
+            let bufnum = winbufnr(i)
+        endwhile
+    endif
     if openfile == 1
         if newpath != ''
             if strlen(a:precmd) != 0
@@ -288,11 +338,11 @@ augroup END
 "
 com! FSHere       :call FSwitch('%', '')
 com! FSRight      :call FSwitch('%', 'wincmd l')
-com! FSSplitRight :call FSwitch('%', 'vsplit | wincmd l')
+com! FSSplitRight :call FSwitch('%', 'let b:curspr=&spr | set nospr | vsplit | wincmd l | if b:curspr | set spr | endif | unlet b:curspr')
 com! FSLeft       :call FSwitch('%', 'wincmd h')
-com! FSSplitLeft  :call FSwitch('%', 'vsplit | wincmd h')
+com! FSSplitLeft  :call FSwitch('%', 'let b:curspr=&spr | set nospr | vsplit | wincmd h | if b:curspr | set spr | endif | unlet b:curspr')
 com! FSAbove      :call FSwitch('%', 'wincmd k')
-com! FSSplitAbove :call FSwitch('%', 'split | wincmd k')
+com! FSSplitAbove :call FSwitch('%', 'let b:cursb=&sb | set nosb | split | wincmd k | if b:cursb | set sb | endif | unlet b:cursb')
 com! FSBelow      :call FSwitch('%', 'wincmd j')
-com! FSSplitBelow :call FSwitch('%', 'split | wincmd j')
+com! FSSplitBelow :call FSwitch('%', 'let b:cursb=&sb | set nosb | split | wincmd j | if b:cursb | set sb | endif | unlet b:cursb')
 

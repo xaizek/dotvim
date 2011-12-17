@@ -1,6 +1,6 @@
 " commentary.vim - Comment stuff out
 " Maintainer:   Tim Pope <http://tpo.pe/>
-" Version:      1.0
+" Version:      1.1
 " GetLatestVimScripts: 3695 1 :AutoInstall: commentary.vim
 
 if exists("g:loaded_commentary") || &cp || v:version < 700
@@ -42,7 +42,7 @@ function! s:go(type) abort
   endfor
 
   if a:type =~ '^\d\+$'
-    silent! call repeat#set('\\\',a:type)
+    silent! call repeat#set("\<Plug>CommentaryLine",a:type)
   endif
 endfunction
 
@@ -50,7 +50,7 @@ xnoremap <silent> <Plug>Commentary     :<C-U>call <SID>go(visualmode())<CR>
 nnoremap <silent> <Plug>Commentary     :<C-U>set opfunc=<SID>go<CR>g@
 nnoremap <silent> <Plug>CommentaryLine :<C-U>call <SID>go(v:count1)<CR>
 
-if maparg('\\') ==# ''
+if !hasmapto('<Plug>Commentary') || maparg('\\','n') ==# '' && maparg('\','n') ==# ''
   xmap \\  <Plug>Commentary
   nmap \\  <Plug>Commentary
   nmap \\\ <Plug>CommentaryLine
