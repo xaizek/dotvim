@@ -39,8 +39,9 @@ vifm /path/to/directory/one
 or
 vifm /path/to/directory/one /path/to/directory/two
 
+                                               *vifm---select*
 Paths to files are also allowed in case you want vifm to start with some
-archive opened.
+archive opened.  If you want to select file, prepend its path with --select.
 
 The other command line arguments are:
                                                *vifm--f*
@@ -830,9 +831,12 @@ The builtin commands are:
                                                *vifm-:filetype* *vifm-:filet*
 :filet[ype] pat1,pat2,... def_program,program2,... - will associate given
     program list to each of the patterns.  Accosiated program (command) is
-    used by handlers of l and Enter keys (and also in the :file menu).
-    Currently only * and ? are treated as special symbols in the pattern.
-    If you need to insert comma into command just double it (",,").
+    used by handlers of l and Enter keys (and also in the :file menu).  *,
+    ?, [ and ] are treated as special symbols in the pattern.  Inside square
+    brackets ^ or ! can be used for symbol class negotiation and the - symbol
+    to set a range.  Asterisk at the pattern beginning don't accept dot as
+    the first character.  If you need to insert comma into command just
+    double it (",,").
 
                                                *vifm-:filextype* *vifm-:filex*
 :filex[type] pat1,pat2,... def_program,program2,... - same as :filetype, but
@@ -1129,7 +1133,9 @@ of the hierarchy and transparency for all others.
     last character.
 
                                                *vifm-:sync*
-:sync - change the other panel to the current panels directory.
+:sync [relative path] - change the other panel to the current panel
+    directory or to some path relative to the current directory.  Using
+    macros is allowed.
 
                                                *vifm-:undolist* *vifm-:undol*
 :undol[ist] - show list of latest changes.  Add ! to see commands.
@@ -1403,6 +1409,22 @@ type: boolean
 default: true
 Controls if status bar is visible.
 
+                                               *vifm-'rulerformat'* *vifm-'ruf'*
+rulerformat ruf
+type: string
+default: "%=%l-%S "
+Determines the content of the ruler.  Its width is 13 characters and it's
+right aligned.  Following macros are supported:
+    %l - file number
+    %L - total number of files in view (including filtered)
+    %- - number of filtered files
+    %S - number of showed files
+    %% - percent sign
+Percent sign can be followed by optional minimum field width.  Add '-' before
+minimum field width if you want field to be right aligned.
+Example: >
+ set statusline="  %t%= %A %10u:%-7g %15s %20d "
+<
                                                *vifm-'runexec'*
 runexec
 type: boolean
@@ -1484,6 +1506,23 @@ sortorder
 type: enumeration
 default: ascending
 Sets sort order for primary key: ascending, descending.
+
+                                               *vifm-'statusline'* *vifm-'stl'*
+statusline stl
+type: string
+default: ""
+Determines the content of the status line (the line right above command-line).
+Empty string means use same format like in previous versions.  Following macros
+are supported:
+    %t - file name
+    %A - file permissions
+    %u - user name or uid (if it cannot be resolved)
+    %g - group name or gid (if it cannot be resolved)
+    %s - file size in human readable format
+    %d - file modification date (uses |vifm-'timefmt'| option)
+    all |vifm-'rulerformat'| macros
+Percent sign can be followed by optional minimum field width.  Add '-' before
+minimum field width if you want field to be right aligned.
 
                                                *vifm-'tabstop'* *vifm-'ts'*
 tabstop ts
@@ -1583,6 +1622,7 @@ Since it's not easy to enter special characters there are several special
 sequences that can be used in place of them.  They are:
 
 <cr> - Enter key
+<esc> - Escape key
 <space> - Space key
 <bs> - Backspace key
 <tab> <s-tab> - Tabulation and Shift+Tabulation keys
@@ -1750,7 +1790,9 @@ configuration (which has bigger priority).
 
 The CONFDIR/scripts directory can contain shell scripts.  vifm modifies
 it's PATH environment variable to let user run those scripts without specifying
-full path.
+full path.  All subdirectories of the CONFDIR/scripts will be added to PATH too.
+Script in a subdirectory overlaps script with the same name in all its parent
+directories.
 
 The CONFDIR/colors directory contains color schemes.
 
@@ -1774,7 +1816,8 @@ directory.
 The plugin have only two settings.  It's a string variable named g:vifm_term to
 let user specify command to run gui terminal.  By default it's equal to
 'xterm -e'.  And anoter string variable named g:vifm_exec, which equals 'vifm'
-by default and specifies path to vifm's executable.
+by default and specifies path to vifm's executable.  To pass arguments to
+vifm use g:vifm_exec_args, which is empty by default.
 
 To use the plugin copy the vifm.vim file to either the system wide vim/plugin
 directory or into ~/.vim/plugin.

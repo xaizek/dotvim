@@ -2,15 +2,12 @@ if exists("g:loaded_linediff") || &cp
   finish
 endif
 
-let g:loaded_linediff = '0.1.0' " version number
+let g:loaded_linediff = '0.1.1' " version number
 let s:keepcpo         = &cpo
 set cpo&vim
 
 " Initialized lazily to avoid executing the autoload file before it's really
 " needed.
-"
-" TODO Experiment to see if this matters at all.
-"
 function! s:Init()
   if !exists('s:differ_one')
     let s:differ_one = linediff#differ#New('linediff_one', 1)
