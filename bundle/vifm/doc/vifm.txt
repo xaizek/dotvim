@@ -50,6 +50,8 @@ The other command line arguments are:
 
 --logging                                      *vifm---logging*
     log some errors to CONFDIR/log.
+--remote                                       *vifm---remote*
+    passes all arguments that left in command line to active vifm server.
 -c <command>, +<command>                       *vifm--c* *vifm--+c*
     run <command> on startup.
 --help, -h                                     *vifm---help* *vifm--h*
@@ -1186,6 +1188,17 @@ of the hierarchy and transparency for all others.
 :nm[ap] lhs rhs - map lhs to rhs in normal mode.
 :vm[ap] lhs rhs - map lhs to rhs in visual mode.
 
+:cm[ap] - lists all maps in command line mode.
+:nm[ap] - lists all maps in normal mode.
+:vm[ap] - lists all maps in visual mode.
+
+:cm[ap] beginning - lists all maps in command line mode that start with
+    the beginning.
+:nm[ap] beginning - lists all maps in normal mode that start with the
+    beginning.
+:vm[ap] beginning - lists all maps in visual mode that start with the
+    beginning.
+
                                                *vifm-:noremap* *vifm-:no*
 :no[remap] lhs rhs - map the key sequence lhs to {rhs} for normal and
     visual modes, but disallow mapping of rhs.
@@ -1255,6 +1268,9 @@ Use %% if you need to put a percent sign in your command.
 You can use filename modifiers after %c, %C, %f, %F, %b, %d and %D macros.
 Supported modifiers are:
     :p           - full path
+    :u           - UNC name of path (e.g. "\\server" in "\\server\share"),
+                   Windows only.  Expands to current computer name for not
+                   UNC paths.
     :~           - relative to the home directory
     :.           - relative to current directory
     :h           - head of the filename
