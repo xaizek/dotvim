@@ -903,6 +903,7 @@ set cedit=<c-g>
 map <leader>1 :tab drop $MYVIMRC<cr>
 map <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
 map <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
+map <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
 
 " some additional paths for file searches
 if has('win32')
