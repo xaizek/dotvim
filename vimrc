@@ -900,9 +900,9 @@ nmap <leader>p "+p
 set cedit=<c-g>
 
 " some shortcuts
-map <leader>1 :tabedit $MYVIMRC<cr>
-map <leader>2 :tabedit $HOME/.vim/crib.txt<cr>
-map <leader>3 :tabedit $HOME/.vim/useful.txt<cr>
+map <leader>1 :tab drop $MYVIMRC<cr>
+map <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
+map <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
 
 " some additional paths for file searches
 if has('win32')
