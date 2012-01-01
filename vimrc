@@ -10,6 +10,8 @@ set nocompatible
 " use comma key as <leader>
 let mapleader=','
 
+let $MYVIMRC=$HOME.'/.vim/vimrc'
+
 " ==============================================================================
 " for Pathogen plugin {{{
 
@@ -898,7 +900,6 @@ nmap <leader>p "+p
 set cedit=<c-g>
 
 " some shortcuts
-let $MYVIMRC=$HOME.'/.vim/vimrc'
 map <leader>1 :tabedit $MYVIMRC<cr>
 map <leader>2 :tabedit $HOME/.vim/crib.txt<cr>
 map <leader>3 :tabedit $HOME/.vim/useful.txt<cr>
