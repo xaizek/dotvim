@@ -788,7 +788,7 @@ set cursorline
 nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
 " highlight current word (a word not ignoring characters case)
-nmap <leader>l :setlocal hls<cr>:let @/="\\C\\<<c-r><c-w>\\>"<cr>
+nmap <leader>l :let @/="\\C\\<<c-r><c-w>\\>" \| setlocal hls<cr>
 
 " increase history size
 set history=10000
