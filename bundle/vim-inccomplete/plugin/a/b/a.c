@@ -1,3 +1,4 @@
+#include <sys
 #include <stdi
 #include <ncurses/>
 #include "f/"
