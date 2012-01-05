@@ -1143,6 +1143,12 @@ function! GetFuncBodyLimits()
     return [l:openbracket, l:closebracket]
 endfunction
 
+function! ToUnix()
+    edit ++ff=dos
+    set ff=unix
+    w
+endfunction
+
 " }}}
 " ==============================================================================
 " don't let me use "wrong" keys {{{
