@@ -485,7 +485,7 @@ endif
 let g:clang_complete_copen = 1
 
 " enable autocompletion
-let g:clang_complete_auto = !has('win32')
+let g:clang_complete_auto = 1
 
 " complete macros
 let g:clang_complete_macros = 1
@@ -506,13 +506,10 @@ let g:clang_auto_user_options = 'path, .clang_complete'
 let g:clang_auto_select = 1
 
 " use clang library
-let g:clang_use_library = !has('win32')
-if has('win32')
-    let g:clang_exec = 'E:/programming/other/llvmbuild1/bin/clang.exe'
-    let g:clang_library_path = 'E:/programming/other/llvmbuild1/'
-else
-    let g:clang_library_path = '/home/xaizek/bin'
-endif
+let g:clang_use_library = 1
+
+" specify path to clang library
+let g:clang_library_path = $HOME.'/bin/'
 
 " conceal some odd parts of snippets
 "let g:clang_conceal_snippets = 1
