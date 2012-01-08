@@ -905,6 +905,9 @@ map <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
 map <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
 map <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
 
+" edit visual selection in new tab
+xmap ,t y:tabe<cr>Vp
+
 " some additional paths for file searches
 if has('win32')
     set path+=E:/programming/compilers/MinGW/include/
