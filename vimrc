@@ -873,6 +873,9 @@ vnoremap > >gv
 autocmd BufReadPre *.doc,*.DOC set ro
 autocmd BufReadPost *.doc,*.DOC silent %!antiword -m cp1251.txt "%"
 
+" where to store swap files
+set directory=$HOME/.vim/swap//
+
 " where to store persistent undo files
 if has('win32')
     set undodir=$VIM/undo/,.
