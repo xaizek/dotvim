@@ -722,7 +722,8 @@ else
 endif
 
 " clears marks
-nmap <leader>m :call setqflist([])<cr>:doautocmd QuickFixCmdPost * make<cr>
+nmap <leader>m
+            \ :call setqflist([])\|doautocmd QuickFixCmdPost * make\|cwindow<cr>
 
 " automatically reread file changed by external application
 set autoread
