@@ -826,7 +826,8 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " use current file's directory as working directory
 " set autochdir
-autocmd BufEnter,BufWinEnter * silent! lcd %:p:h
+autocmd BufEnter,BufWinEnter *
+            \ silent! execute 'lcd' fnamemodify(expand('<afile>'), ':p:h')
 
 " create tags on Shift-F12 key
 if has('win32')
