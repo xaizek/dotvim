@@ -4,6 +4,9 @@ set encoding=utf-8
 
 scriptencoding utf-8
 
+" force using of English locale
+let $LANG='en'
+
 " discard vi-compatibility
 set nocompatible
 
