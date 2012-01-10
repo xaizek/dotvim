@@ -883,8 +883,13 @@ if !isdirectory(s:swap_dir)
     call mkdir(s:swap_dir)
 endif
 
-" where to store persistent undo files
-set undodir=~/.vim/undo,.
+" directory where to store persistent undo files
+let s:undo_dir = $HOME.'/.vim/undo'
+execute 'set undodir='.s:undo_dir.',.'
+" ensure it exists
+if !isdirectory(s:undo_dir)
+    call mkdir(s:undo_dir)
+endif
 
 " go to last editing place on file open
 autocmd BufReadPost *
