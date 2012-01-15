@@ -505,9 +505,6 @@ let g:clang_sort_algo = ''
 " use snippets
 let g:clang_snippets = 1
 
-" where to get options from
-let g:clang_auto_user_options = 'path, .clang_complete'
-
 " automatically select current match in the completion menu
 let g:clang_auto_select = 1
 
