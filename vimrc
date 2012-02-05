@@ -1,14 +1,13 @@
 " vim: set foldmethod=marker foldlevel=0 :miv "
 
+" if a .vimrc file exists, vim will start in nocompatible mode
+
 set encoding=utf-8
 
 scriptencoding utf-8
 
 " force using of English locale
 let $LANG='en'
-
-" discard vi-compatibility
-set nocompatible
 
 " use comma key as <leader>
 let mapleader=','
