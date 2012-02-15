@@ -711,7 +711,14 @@ let g:netrw_preview=1
 
 let g:pydiction_location = '/home/xaizek/.vim/bundle/pydiction/pydiction.py'
 
-" }}}
+" pydiction }}}
+" ultisnips {{{
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" ultisnips }}}
 
 " plugins }}}
 " ==============================================================================
