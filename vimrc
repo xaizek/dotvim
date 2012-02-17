@@ -571,6 +571,19 @@ nmap <leader>t :TagbarToggle<cr>
 " }}}
 " FSwitch {{{
 
+" autocommands to setup settings for different file types
+augroup fswitch
+    autocmd!
+    autocmd! BufEnter,BufRead *.h let b:fswitchdst = 'c,cpp'
+                              \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.c let b:fswitchdst = 'h'
+                              \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.hpp let b:fswitchdst = 'cpp'
+                              \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.cpp let b:fswitchdst = 'hpp,h'
+                                \ | let b:fswitchlocs = '.'
+augroup end
+
 " switch to the file and load it into the current window
 nmap <silent> <Leader>of :FSHere<cr>
 nmap <silent> <f5> :FSHere<cr>
@@ -611,7 +624,7 @@ nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 let g:utl_cfg_hdl_mt_text_directory="!Thunar '%p'"
 let g:utl_cfg_hdl_mt_image_djvu="!exo-open '%p'"
 
-" плагин utl }}}
+" utl }}}
 " vifm {{{
 
 if has('win32')
@@ -622,7 +635,7 @@ else
     let g:vifm_term = 'xterm -maximized -e'
 endif
 
-" плагин vifm }}}
+" vifm }}}
 " linediff {{{
 
 nmap <leader>d :Linediff<cr>
@@ -630,14 +643,14 @@ nmap <leader>D :LinediffReset<cr>
 vmap <leader>d :Linediff<cr>
 vmap <leader>D :LinediffReset<cr>
 
-" плагин linediff }}}
+" linediff }}}
 " commentary {{{
 
 xmap gc  \\
 nmap gc  \\
 nmap gcc \\\
 
-" плагин commentary }}}
+" commentary }}}
 " neocomplcache {{{
 
 " Disable AutoComplPop.
@@ -1210,3 +1223,5 @@ vmap <silent> <c-end>    <nop>
 
 " }}}
 " ==============================================================================
+
+let g:pymode_syntax=1
