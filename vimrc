@@ -243,33 +243,15 @@ let g:python_highlight_all=1
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
 " }}}
-" some useful abbreviations for c/c++ {{{
+" some useful abbreviations for c and c++ {{{
+
 autocmd FileType c,cpp execute
             \ 'iabbrev <buffer> #d #define'
 autocmd FileType c,cpp execute
             \ 'iabbrev <buffer> #i #include'
 autocmd FileType c,cpp execute
             \ 'iabbrev <buffer> #p #pragma'
-function! Main()
-    return "int main(int argc, char** argv)\n"
-         \."{\n"
-         \."\n"
-         \."return (0);\n"
-         \."}"
-         \."\<up>\<up>\<end>   "
-endfunction
-autocmd FileType c,cpp execute
-            \ 'iabbrev <buffer> <silent> main <Left><C-R>=Main()<CR>'
-function! Mainn()
-    return "int main(void)\n"
-         \."{\n"
-         \."\n"
-         \."return (0);\n"
-         \."}"
-         \."\<up>\<up>\<end>   "
-endfunction
-autocmd FileType c,cpp execute
-            \ 'iabbrev <buffer> <silent> mainn <Left><C-R>=Mainn()<CR>'
+
 " }}}
 " custom tag jumps {{{
 
