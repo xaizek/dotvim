@@ -969,11 +969,13 @@ function! <SID>SetParams()
     if &filetype != '' && &filetype != 'help'
         " vertical border after 80 column
         set colorcolumn=81
-        " show invisible characters
-        setlocal list
+        " show tabs and trailing whitespace
+        setlocal listchars=tab:.\ ,trail:·
     else
+        " no vertical border
         set colorcolumn=0
-        setlocal nolist
+        " show tabs
+        setlocal listchars=trail:·
     endif
 endfunction
 
