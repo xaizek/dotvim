@@ -1207,5 +1207,15 @@ vmap <silent> <c-end>    <nop>
 
 " }}}
 " ==============================================================================
+" load machine specific local set of settings {{{
+
+let s:vimrc_local_path = $HOME . '/.vimrc_local'
+if filereadable(s:vimrc_local_path)
+    execute "source" s:vimrc_local_path
+endif
+unlet s:vimrc_local_path
+
+" }}}
+" ==============================================================================
 
 let g:pymode_syntax=1
