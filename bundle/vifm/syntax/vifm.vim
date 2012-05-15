@@ -1,6 +1,6 @@
 " vifm syntax file
 " Maintainer:  xaizek <xaizek@gmail.com>
-" Last Change: January 6, 2012
+" Last Change: April 17, 2012
 " Based On:    Vim syntax file by Dr. Charles E. Campbell, Jr.
 
 if exists('b:current_syntax')
@@ -15,11 +15,11 @@ set cpo-=C
 " General commands
 syntax keyword vifmCommand contained alink apropos cd change chmod chown clone
 		\ co[py] d[elete] delm[arks] di[splay] dirs e[dit] empty exe[cute] exi[t]
-		\ file filter fin[d] gr[ep] h[elp] hi[ghlight] his[tory] invert jobs let
-		\ locate ls marks mes[sages] mkdir m[ove] noh[lsearch] on[ly] popd pushd pwd
-		\ q[uit] reg[isters] rename restart restore rlink screen se[t] sh[ell]
-		\ sor[t] so[urce] sp[lit] s[ubstitute] touch tr sync undol[ist] unl[et]
-		\ ve[rsion] vie[w] vifm w[rite] wq x[it] y[ank]
+		\ file filter fin[d] fini[sh] gr[ep] h[elp] hi[ghlight] his[tory] invert
+		\ jobs let locate ls marks mes[sages] mkdir m[ove] noh[lsearch] on[ly] popd
+		\ pushd pwd q[uit] reg[isters] rename restart restore rlink screen se[t]
+		\ sh[ell] sor[t] so[urce] sp[lit] s[ubstitute] touch tr sync undol[ist]
+		\ unl[et] ve[rsion] vie[w] vifm windo winrun w[rite] wq x[it] y[ank]
 
 " Map commands
 syntax keyword vifmMap contained cm[ap] cno[remap] cu[nmap] map nm[ap]
@@ -49,8 +49,8 @@ syntax keyword vifmOption contained autochpos columns co confirm cf cpoptions
 		\ cpo fastrun followlinks fusehome gdefault history hi hlsearch hls iec
 		\ ignorecase ic incsearch is laststatus lines ls rulerformat ruf runexec
 		\ scrollbind scb scrolloff so sort sortorder shell sh slowfs smartcase scs
-		\ sortnumbers statusline stl tabstop timefmt timeoutlen trash ts undolevels
-		\ ul vicmd vixcmd vifminfo vimhelp wildmenu wmnu wrap wrapscan ws
+		\ sortnumbers statusline stl tabstop timefmt timeoutlen trash trashdir ts
+		\ undolevels ul vicmd vixcmd vifminfo vimhelp wildmenu wmnu wrap wrapscan ws
 
 " Disabled boolean options
 syntax keyword vifmOption contained noautochpos noconfirm nocf nofastrun
@@ -104,9 +104,11 @@ syntax region vifmSet2 contained
 syntax region vifmLet
 		\ matchgroup=vifmCommand
 		\ start='\<let\>' skip='\(\n\s*\\\)\|\(\n\s*".*$\)' end='$'
-		\ keepend contains=vifmEnvVar,vifmString
+		\ keepend contains=vifmEnvVar,vifmString,vifmStringInExpr
 syntax region vifmString contained start=+="+hs=s+1 skip=+\\\\\|\\"+  end=+"+
 syntax region vifmString contained start=+='+hs=s+1 skip=+\\\\\|\\'+  end=+'+
+syntax region vifmStringInExpr contained start=+\."+hs=s+1 skip=+\\\\\|\\"+  end=+"+
+syntax region vifmStringInExpr contained start=+\.'+hs=s+1 skip=+\\\\\|\\'+  end=+'+
 syntax match vifmEnvVar contained /\$[0-9a-zA-Z_]\+/
 syntax match vifmNumber contained /\d\+/
 
@@ -136,6 +138,7 @@ highlight link vifmHiColors Special
 highlight link vifmOption PreProc
 highlight link vifmNotation Special
 highlight link vifmString String
+highlight link vifmStringInExpr String
 highlight link vifmEnvVar PreProc
 highlight link vifmNumber Number
 
