@@ -81,7 +81,9 @@ else
     set mouse="a"
 
     " color schemes (good ones for terminal: darkblue, desert, pablo, slate)
-    colorscheme lucius
+    if !has('dos32')
+        colorscheme lucius
+    endif
 endif
 
 " window size (will only make it bigger)
