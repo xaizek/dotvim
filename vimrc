@@ -55,8 +55,7 @@ autocmd InsertEnter * hi Cursor guibg=#ff0000
 if has("gui_running")
     " font
     if has('win32')
-        set guifont=Consolas:h11:cRUSSIAN::
-        "set guifont=Fixedsys:h12:cRUSSIAN::
+        set guifont=Lucida_Console:h11:cRUSSIAN::
         if &lines < 50
             set lines=50
         endif
