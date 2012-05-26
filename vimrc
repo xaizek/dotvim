@@ -7,7 +7,11 @@ set encoding=utf-8
 scriptencoding utf-8
 
 " force using of English locale
-let $LANG='en'
+if has('win32') || has('dos32')
+    let $LANG='en'
+else
+    let $LANG='en_US.utf8'
+endif
 
 " use comma key as <leader>
 let mapleader=','
