@@ -736,11 +736,11 @@ let g:UltiSnipsSnippetDirectories=["ultisnips"]
 " ==============================================================================
 " misc {{{
 
-" run Terminal in the current directory
+" run terminal emulator in the current directory
 if has('win32')
     map <leader>T :!start bash<cr>
 else
-    map <leader>T :!Terminal &<cr><cr>
+    map <leader>T :!xterm &<cr><cr>
 endif
 
 " clears marks
