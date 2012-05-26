@@ -31,6 +31,9 @@ set number
 " number of columns for line number
 set numberwidth=5
 
+" less blinking
+set lazyredraw
+
 " show matches on command-line completion
 set wildmenu
 
