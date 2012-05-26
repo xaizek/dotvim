@@ -188,11 +188,7 @@ function! MyA()
     let l:indent_diff = l:prev_indent - indent(line('.'))
     let l:is_empty = len(getline('.')) == 0
     if l:indent_diff >= 0 && l:is_empty
-        let l:prev_line = getline(line('.') - 1)
-        if  l:prev_line =~ '{\s*$' || l:prev_line =~ '^{$'
-            let l:indent_diff += &ts
-        endif
-        return '0'.repeat('l', l:indent_diff).'i'
+        return 'ddko'
     elseif l:is_empty
         return 'I'
     else
