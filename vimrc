@@ -80,8 +80,8 @@ if has("gui_running")
     " color schemes (good ones for gui: xoria256, lucius, navajo-night)
     colorscheme lucius
 
-    " copy selection (a), show Vim icon (i)
-    set guioptions=ai
+    " copy selection (a), show Vim icon (i), console dialogs (c)
+    set guioptions=aic
 else
     " enable mouse support
     set mouse="a"
