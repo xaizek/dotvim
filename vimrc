@@ -743,6 +743,13 @@ else
     map <leader>T :!xterm &<cr><cr>
 endif
 
+" run vifm in the current directory
+if has('win32')
+    map <leader>V :!start vifm %:p<cr>
+else
+    map <leader>V :silent !xterm -e "vifm '%:p:h'" &<cr>
+endif
+
 " clears marks
 nmap <leader>m
             \ :call setqflist([])\|doautocmd QuickFixCmdPost * make\|cwindow<cr>
