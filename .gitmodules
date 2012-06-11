@@ -10,3 +10,6 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/emacscommandline"]
+	path = bundle/emacscommandline
+	url = git@github.com:xaizek/vim-emacscommandline.git
