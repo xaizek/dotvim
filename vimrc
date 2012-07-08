@@ -437,7 +437,6 @@ let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 " ProtoDef {{{
 
 let g:disable_protodef_sorting = 1
-let g:protodefprotogetter = "/home/xaizek/.vim/bundle/vim-protodef/pullproto.pl"
 
 " }}}
 " XPTemplate {{{
