@@ -808,11 +808,22 @@ set cursorline
 " toggle spell checking for current buffer
 nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
-" highlight current word (a word not ignoring characters case)
-nnoremap <leader>l :let @/="\\C\\<<c-r><c-w>\\>" \| setlocal hls<cr>
-nnoremap <leader><leader>l :let @/="\\C<c-r><c-w>" \| setlocal hls<cr>
-vnoremap <leader>l :<c-u>let @/="\\C\\<<c-r>*\\>" \| setlocal hls<cr>
-vnoremap <leader><leader>l :<c-u>let @/="\\C<c-r>*" \| setlocal hls<cr>
+" highlight current word (case sensitive)
+nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>l :<c-u>let @/="\\C\\<<c-r>*\\>" \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>l :<c-u>let @/="\\C<c-r>*" \| setlocal hls<cr>
+
+function! s:Highlight(before, after)
+    let l:word = expand('<cword>')
+    if empty(l:word)
+        echohl WarningMsg | echo 'No string under the cursor.' | echohl None
+        return
+    end
+
+    execute a:before.l:word.a:after
+    echo 'Highlighting: '.l:word
+endfunction
 
 " increase history size
 set history=10000
