@@ -19,3 +19,6 @@
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "bundle/fswitch"]
+	path = bundle/fswitch
+	url = git://github.com/derekwyatt/vim-fswitch.git
