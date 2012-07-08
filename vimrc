@@ -68,9 +68,9 @@ if has("gui_running")
         endif
     else
         "set guifont=Andale\ Mono\ 12
-        set guifont=Inconsolata\ 11
-        if &lines < 52
-            set lines=52
+        set guifont=Inconsolata\ 10.5
+        if &lines < 62
+            set lines=62
         endif
     endif
 
