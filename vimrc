@@ -467,13 +467,8 @@ let g:gundo_preview_bottom=1
 " clang_complete {{{
 
 " default options
-if has('win32')
-    let g:clang_user_options = ''
-else
-    let g:clang_user_options =
-                \ '-I/usr/include/c++/4.5.1/x86_64-slackware-linux/ '.
-                \ '-I/usr/include/c++/4.5.1/ '.
-                \ '-I/usr/lib64/gcc/x86_64-slackware-linux/4.5.3/include/'
+if !has('win32')
+    let g:clang_user_options = '-I/usr/local/include/'
 endif
 
 " popup Quickfix window on errors
