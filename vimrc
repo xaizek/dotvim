@@ -317,6 +317,20 @@ function! <SID>PrjDo(scrfile)
     endif
 endfunction
 
+function! GetProjectRoot()
+    let l:parts = split(getcwd(), '/')
+    let l:pos = index(l:parts, 'src', 0, has('win32'))
+    if l:pos >= 0
+        let l:result = join(l:parts[:l:pos], '/')
+        if !has('win32')
+            let l:result = '/'.l:result
+        endif
+    else
+        let l:result = '.'
+    endif
+    return l:result
+endfunction
+
 " }}}
 
 " for curly braces
@@ -402,8 +416,8 @@ function! <SID>UpdateTags(changedfile)
 endfunction
 
 " search for word under the cursor in all c and cpp files of current directory
-nmap <leader>g :vimgrep /\C\<<c-r><c-w>\>/ *.c *.cpp \| cw<cr>
-nmap <leader>G :vimgrep /\C\<<c-r><c-w>\>/ *.h *.hpp \| cw<cr>
+nnoremap <leader>g :execute 'vimgrep /\C\<<c-r><c-w>\>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader>G :execute 'vimgrep /\C\<<c-r><c-w>\>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
 
 " introduce variable
 nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
