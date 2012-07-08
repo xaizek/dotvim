@@ -216,6 +216,9 @@ set cpoptions+=$
 " reformat paragraph when any of its lines has been changed
 " set formatoptions+=a
 
+" remove a comment leader when joining lines
+set formatoptions+=j
+
 " go through graphical lines, not text lines
 nnoremap j gj
 nnoremap k gk
