@@ -406,7 +406,7 @@ nmap <leader>g :vimgrep /\C\<<c-r><c-w>\>/ *.c *.cpp \| cw<cr>
 nmap <leader>G :vimgrep /\C\<<c-r><c-w>\>/ *.h *.hpp \| cw<cr>
 
 " introduce variable
-map <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
+nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
 
 " }}}
 " ==============================================================================
