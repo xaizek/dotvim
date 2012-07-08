@@ -13,3 +13,6 @@
 [submodule "bundle/emacscommandline"]
 	path = bundle/emacscommandline
 	url = git@github.com:xaizek/vim-emacscommandline.git
+[submodule "bundle/vrackets"]
+	path = bundle/vrackets
+	url = https://github.com/vim-scripts/vrackets

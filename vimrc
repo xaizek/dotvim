@@ -711,15 +711,6 @@ let g:netrw_preview=1
 let g:pydiction_location = '/home/xaizek/.vim/bundle/pydiction/pydiction.py'
 
 " pydiction }}}
-" delimitMate {{{
-
-let g:delimitMate_expand_cr = 1
-autocmd FileType c,cpp let b:delimitMate_expand_cr = 1
-
-let delimitMate_smart_quotes = 0
-autocmd FileType tcl let b:delimitMate_smart_quotes = 1
-
-" }}}
 " ultisnips {{{
 
 " configure shortcuts
