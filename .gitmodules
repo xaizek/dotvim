@@ -1,9 +1,9 @@
 [submodule "bundle/clang_complete"]
 	path = bundle/clang_complete
-	url = git@github.com:Rip-Rip/clang_complete.git
+	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule "bundle/inccomplete"]
 	path = bundle/inccomplete
-	url = git@github.com:xaizek/vim-inccomplete.git
+	url = https://github.com/xaizek/vim-inccomplete.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
@@ -12,7 +12,7 @@
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "bundle/emacscommandline"]
 	path = bundle/emacscommandline
-	url = git@github.com:xaizek/vim-emacscommandline.git
+	url = https://github.com/xaizek/vim-emacscommandline.git
 [submodule "bundle/vrackets"]
 	path = bundle/vrackets
 	url = https://github.com/vim-scripts/vrackets
@@ -21,7 +21,7 @@
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "bundle/fswitch"]
 	path = bundle/fswitch
-	url = git://github.com/derekwyatt/vim-fswitch.git
+	url = https://github.com/derekwyatt/vim-fswitch.git
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
