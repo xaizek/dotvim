@@ -6,7 +6,7 @@
 	url = https://github.com/xaizek/vim-inccomplete.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
+	url = git://github.com/xaizek/ultisnips.git
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
