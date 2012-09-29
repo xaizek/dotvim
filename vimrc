@@ -1203,6 +1203,38 @@ function! ToUnix()
     w
 endfunction
 
+function! GetIncludesIn(file)
+    let l:lines = readfile(a:file)
+
+    let l:startLine = -1
+    let l:endLine = -1
+
+    let l:i = 0
+    for l:line in l:lines
+        if l:line =~# &include
+            if l:startLine == -1
+                let l:startLine = l:i
+                let l:endLine = l:i
+            else
+                let l:endLine = l:i
+            endif
+        endif
+        let l:i += 1
+    endfor
+
+    if l:startLine != -1
+        while l:startLine > 0 && !empty(l:lines[l:startLine - 1])
+            let l:startLine -= 1
+        endwhile
+        while l:endLine < len(l:lines) - 1 && !empty(l:lines[l:endLine + 1])
+            let l:endLine += 1
+        endwhile
+        return l:lines[l:startLine :l:endLine]
+    else
+        return []
+    endif
+endfunction
+
 " }}}
 " ==============================================================================
 " don't let me use "wrong" keys {{{
