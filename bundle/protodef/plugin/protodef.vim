@@ -1,7 +1,7 @@
 " ============================================================================
 " File:        protodef.vim
 "
-" Description: Vim global plugin that updates a CPP implementation file with
+" Description: Vim global plugin that updates a CPP implementation file with 
 "              concrete definitions of prototypes declared in a header file.
 "
 " Maintainer:  Derek Wyatt <derek at myfirstnamemylastname dot org>
@@ -9,11 +9,11 @@
 " Last Change: Oct 12 2010
 "
 " License:     The VIM LICENSE applies to fswitch.vim, and fswitch.txt
-"              (see |copyright|) except use "protodef" instead of "Vim".
-"              No warranty, express or implied.
-"              Use At-Your-Own-Risk!
+" 	           (see |copyright|) except use "protodef" instead of "Vim".
+" 	           No warranty, express or implied.
+" 	           Use At-Your-Own-Risk!
 "
-" Version:     0.9.4
+" Version:     0.9.5
 " ============================================================================
 
 if exists("g:disable_protodef")
@@ -34,17 +34,10 @@ if !exists('g:protodefctagsexe')
     let g:protodefctagsexe = 'ctags'
 endif
 
-" The default mark pattern for functions that shouldn't be implemented
-if !exists('g:protodef_shouldnt_implement_mark')
-    let g:protodef_shouldnt_implement_mark = '// noimpl$'
-endif
-let g:protodef_shouldnt_implement_mark = substitute(
-            \ g:protodef_shouldnt_implement_mark, '/', '\\\\/', 'g')
-
 " The flags we're using for ctags.  I wouldn't change these if I were you - the
 " code depends on the output of ctags and if you change these, the code's
 " probably going to throw up all kinds of interesting errors.
-let g:protodef_ctags_flags = '--language-force=c++ --c++-kinds=+p-cdefglmnstuvx --fields=nsm -u -o -'
+let g:protodef_ctags_flags = '--language-force=c++ --c++-kinds=+p-cdefglmnstuvx --fields=nsm -o -'
 
 " The path to the pullproto.pl script that's included as part of protodef
 if !exists('g:protodefprotogetter')
@@ -56,7 +49,7 @@ endif
 " set of hints for return values.  Chances are it will never actually be "correct"
 " for a real function - you'll always change the default to something else.
 if !exists('g:protodefvaluedefaults')
-    let g:protodefvaluedefaults =
+    let g:protodefvaluedefaults = 
                 \ {
                 \     'int'                  : '0',
                 \     'unsigned int'         : '0',
@@ -81,7 +74,7 @@ endif
 
 "
 " s:PrototypeSortCompare()
-"
+" 
 " This is a basic stab at trying to order prototypes by putting ctors and
 " dtors first, free functions at the bottom and all of the other stuff
 " in the middle.
@@ -125,11 +118,10 @@ endfunction
 " the header file (as ctags doesn't actually have all the data we need).  The
 " prototypes are then returned in an array in the same format as they appear
 " in the header file.
-"
+" 
 function! s:GetFunctionPrototypesForCurrentBuffer(opts)
     " FSReturnReadableCompanionFilename() is in the fswitch.vim plugin
     let companion = FSReturnReadableCompanionFilename('%')
-    let companion = shellescape(fnamemodify(companion, ':t'))
     let includeNS = 1
     if has_key(a:opts, 'includeNS')
         let includeNS = a:opts['includeNS']
@@ -145,19 +137,10 @@ function! s:GetFunctionPrototypesForCurrentBuffer(opts)
         let ret = []
         let commands = []
         for line in lines
-            " Get definition
-            let def = substitute(matchstr(line, '/\^.\{-}\$/;'), '/\^\s*\(.\{-}\)\$/;', '\1', '')
-            " Ignore friend functions declaration inside class definition
-            if def =~ '^friend\>'
-                continue
-            endif
-            " Skip function if it shouldn't be implemented
-            if def =~ g:protodef_shouldnt_implement_mark
-                continue
-            endif
             " Get rid of the regular expression that ctags has given us as
             " we don't need it and it merely causes problems if there is a
             " tab in the prototype at all
+            let def = substitute(line, '.*/\^\(.\{-}\)\$/;.*', '\1', '')
             let line = substitute(line, '/\^.\{-}\$/;', 'removed', '')
             let parts = split(line, "\t")
             let fname = parts[0]
@@ -181,13 +164,23 @@ function! s:GetFunctionPrototypesForCurrentBuffer(opts)
                     let implementation = matchstr(parts[5], 'implementation:\zs.*\ze')
                 endif
             endif
-            if implementation !=# 'pure virtual'
+            if implementation !=# 'pure virtual' && def !~# ')\s*=\s*default'
                 call add(commands, linenum . '|' . fname . '|' . class)
             endif
         endfor
         " Make the call to the pullproto.pl script to get the full prototype
         " from the header file
-        let protos = system(g:protodefprotogetter . " " . companion, join(commands, "\n"))
+        " try
+        if !empty(commands)
+            let protos = system(g:protodefprotogetter . " " . companion, join(commands, "\n"))
+        else
+            let protos = ''
+        endif
+        " catch 'E677'
+        "     let protos = ''
+        "     echohl WarningMsg | echomsg 'Error running pullproto.pl' | echohl None
+        "     return []
+        " endtry
         " pullproto.pl separates the prototypes by '==' on its own line so
         " we'll split by that
         let ret = split(protos, "==\n")
@@ -216,11 +209,11 @@ function! protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer(opts)
     " Get the prototypes from the header file
     let protos = s:GetFunctionPrototypesForCurrentBuffer(a:opts)
     let full = []
-    let companion = FSReturnReadableCompanionFilename('%')
-    let header_contents = ''
-    for line in readfile(companion)
-        let header_contents .= line
-    endfor
+	let companion = FSReturnReadableCompanionFilename('%')
+	let header_contents = ''
+	for line in readfile(companion)
+		let header_contents .= line
+	endfor
     for proto in protos
         " Clean out the default arguments as these don't belong in the implementation file
         let params = matchstr(proto, '(\_.*$')
@@ -230,7 +223,6 @@ function! protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer(opts)
         let params = substitute(params, '\s*=\s*[^,]\+', '', 'g') " XXX batz deleted the reliance on ) in the char class
         let params = escape(params, '~*&\\')
         let proto = substitute(proto, '(\_.*$', '(' . params . tail, '') " XXX batz changed to replace the parens/tail stripped off
-        let proto = substitute(proto, "^[ \r\t\n]*", '', '') " remove extra whitespace characters at the beginning
         " Set up the search expression so that we can check to see if what we're going to
         " put into the buffer is already there or not
         let protosearch = escape(proto, '~*')
@@ -251,7 +243,6 @@ function! protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer(opts)
                 " Play a bit of a dodgy game to try and put something
                 " reasonable in for the return value
                 let rettype = matchstr(proto, '^.\{-}\ze\s\+\S\+(')
-                let rettype = substitute(rettype, "^[\n\r \t]*", "", "")
                 if has_key(g:protodefvaluedefaults, rettype)
                     call add(full, "    return " . g:protodefvaluedefaults[rettype] . ';')
                 elseif rettype =~ '\*'
@@ -286,5 +277,6 @@ function! protodef#MakeMapping()
 endfunction
 
 augroup protodef_cpp_mapping
-    au! BufReadPost *.cpp,*.C,*.cxx,*.cc,*.CC call protodef#MakeMapping()
+    au! BufEnter *.cpp,*.C,*.cxx,*.cc,*.CC call protodef#MakeMapping()
 augroup END
+

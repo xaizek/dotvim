@@ -113,7 +113,7 @@ In order to get ProtoDef working you'll need to do the following:
   - Optionally tell ProtoDef where ctags and pullproto.pl are
 
 ==============================================================================
-							*protodef-configuration*
+							*protodef-configure*
 8. Configuration~
 
 							*'protodefctagsexe'*
@@ -160,13 +160,6 @@ In order to get ProtoDef working you'll need to do the following:
         <leader>PN mappings, just define this - it doesn't matter what you
 	define it to be.
 
-					  *'protodef_shouldnt_implement_mark'*
-'protodef_shouldnt_implement_mark' string (default is "// noimpl$")
-                                   global
-
-	This is a regular expression that should help protodef to define if it
-	shouldn't implement some functions.
-
 ==============================================================================
    	*protodef-publicfunc* *ReturnSkeletonsFromPrototypesForCurrentBuffer()*
 
@@ -193,6 +186,8 @@ calling the function:
 ==============================================================================
 							*protodef-changes*
 A. Change History~
+
+0.9.5   - Fix for operator[] from johndoe1234 (github)
 
 0.9.4
 	- Made sure that we need at least 7.0 (Timon Kelter)
