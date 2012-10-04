@@ -780,7 +780,8 @@ set shortmess+=atI
 set keywordprg=
 
 " ignore some not useful matches on command-line completion
-set wildignore=*.~cpp,*.~hpp,*.~h,*.obj,*.swp,*.o,*.hi,*.exe,*.un~,*.class,*.d
+set wildignore=*.~cpp,*.~hpp,*.~h,*.obj,*.swp,*.o,*.hi,*.exe,*.un~,*.class,*.d,
+              \tags,a.out
 
 " persistant undo
 set undofile
