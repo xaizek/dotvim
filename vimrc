@@ -424,6 +424,10 @@ nnoremap <leader>g :execute 'vimgrep /\C\<<c-r><c-w>\>/' GetProjectRoot().'/**/*
 nnoremap <leader>G :execute 'vimgrep /\C\<<c-r><c-w>\>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
 vnoremap <leader>g :<c-u>execute 'vimgrep /\C\<<c-r>*\>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
 vnoremap <leader>G :<c-u>execute 'vimgrep /\C\<<c-r>*\>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
+nnoremap <leader><leader>g :execute 'vimgrep /\C<c-r><c-w>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader><leader>G :execute 'vimgrep /\C<c-r><c-w>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
+vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C<c-r>*/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
+vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C<c-r>*/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
 
 " introduce variable
 nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
