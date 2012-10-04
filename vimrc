@@ -213,6 +213,10 @@ set virtualedit=all
 " dollar sign for c-like commands in normal mode
 set cpoptions+=$
 
+" ignore special keys in insert mode (arrow keys, etc.) for faster leaving it
+" with escape in console vim
+set noesckeys
+
 " reformat paragraph when any of its lines has been changed
 " set formatoptions+=a
 
