@@ -1009,16 +1009,12 @@ function! <SID>SetParams()
     if search('colorcolumn=', 'nw') != 0
         return
     endif
-    if &filetype != '' && &filetype != 'help'
+    if &filetype != '' && &filetype != 'qf' && &filetype != 'help'
         " vertical border after 80 column
         set colorcolumn=81
-        " show tabs and trailing whitespace
-        setlocal listchars=tab:.\ ,trail:·
     else
         " no vertical border
         set colorcolumn=0
-        " show tabs
-        setlocal listchars=trail:·
     endif
 endfunction
 
@@ -1035,7 +1031,7 @@ set tabstop=4
 " number of spaces inserted for tabulation replacement
 set softtabstop=4
 
-" show tabulation characters as a dot
+" show tabulation characters as a period and trailing whitespace as a dot
 set list
 set listchars=tab:.\ ,trail:·
 
