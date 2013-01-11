@@ -983,12 +983,12 @@ else
 endif
 
 " line movement commands (up and down)
-nmap <c-j> mz:m+<cr>`z==
-nmap <c-k> mz:m-2<cr>`z==
-imap <c-j> <esc>:m+<cr>==gi
-imap <c-k> <esc>:m-2<cr>==gi
-vmap <c-j> :m'>+<cr>gv=`<my`>mzgv`yo`z
-vmap <c-k> :m'<-2<cr>gv=`>my`<mzgv`yo`z
+nnoremap <a-j> mz:m+<cr>`z==
+nnoremap <a-k> mz:m-2<cr>`z==
+inoremap <a-j> <esc>:m+<cr>==gi
+inoremap <a-k> <esc>:m-2<cr>==gi
+vnoremap <a-j> :m'>+<cr>gv=`<my`>mzgv`yo`z
+vnoremap <a-k> :m'<-2<cr>gv=`>my`<mzgv`yo`z
 
 " for handy binary files editing
 if &binary
