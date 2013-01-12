@@ -22,7 +22,7 @@ for hdrname in s:hdrnames
 endfor
 if s:found != ''
     0put = '#include \"'.s:found.'\"'
-    let s:fullPath = fnamemodify(s:filename, ':p:h').'/'.s:hdrname
+    let s:fullPath = fnamemodify(s:filename, ':p:h').'/'.s:found
     silent! $put = GetIncludesIn(s:fullPath)
     $put = ''
     $put = ''
