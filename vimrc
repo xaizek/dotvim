@@ -860,6 +860,9 @@ set showcmd
 " set slepp check languages
 set spelllang=ru,en
 
+" show at most 20 suggestions on z=
+set spellsuggest+=20
+
 " smart indentation
 filetype plugin indent on
 
