@@ -794,6 +794,9 @@ set hidden
 " more colours in a terminal
 set t_Co=256
 
+" don't put header files to the back of wild menu list
+set suffixes-=.h
+
 " don't jump when one types brackets
 set noshowmatch
 
