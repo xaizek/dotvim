@@ -847,8 +847,11 @@ function! s:Highlight(before, what, after)
         return
     end
 
-    execute a:before.a:word.a:after
-    echo 'Highlighting: '.l:word
+    let l:escapedWord = escape(a:what, '()[]~')
+    " Need to do this again because it will be used inside double quoted string
+    let l:escapedWord = escape(l:escapedWord, '\')
+    execute a:before.l:escapedWord.a:after
+    echo 'Highlighting: '.a:what
 endfunction
 
 " increase history size
