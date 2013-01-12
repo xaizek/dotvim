@@ -814,8 +814,8 @@ set laststatus=2
 set statusline=%-20(%t%m%r%w%)
 " |[ff][fenc][ft]
 set statusline+=\|\%23([%{&ff}][%{&fenc}]%y%)
-" |char[hexchar] col,line/total lines
-set statusline+=\ \|\ %4(%b%)[%6(0x%B%)]%=%c,%l/%L
+" |char[hexchar] \[vcol-\]col,line/total lines
+set statusline+=\ \|\ %4(%b%)[%6(0x%B%)]%=%c%V,%l/%L
 " |percentage of file
 set statusline+=\ \|%10p%%
 
