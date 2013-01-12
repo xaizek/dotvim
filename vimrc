@@ -403,16 +403,31 @@ autocmd! BufWritePost *.c,*.cpp,*.h,*.hpp call <SID>UpdateTags(expand('%'))
 function! <SID>UpdateTags(changedfile)
     let l:tags = findfile('tags', '.;')
     if l:tags != ''
+        let l:tagsfile = fnamemodify(l:tags, ':p')
+        let l:srcdir = fnamemodify(l:tagsfile, ':h')
+
         let l:olddir = getcwd()
-        execute 'silent! lcd '.escape(fnamemodify(l:tags, ':p:h'), ' ')
+        execute 'silent! lcd '.escape(l:srcdir, ' ')
+
+        if empty(readfile(l:tagsfile))
+            let l:pathtoscan = l:srcdir
+        else
+            if has('win32')
+                let l:pathtoscan = l:olddir[2 + strlen(l:srcdir) - 1:]
+            else
+                let l:pathtoscan = l:olddir[strlen(l:srcdir) + 1:]
+            endif
+        endif
+
         if has('win32')
             execute 'silent !start /b ctags -R -a --c++-kinds=+p '
                         \.'--tag-relative=yes --fields=+iaS --extra=+q '
-                        \.l:olddir[2 + strlen(fnamemodify(l:tags, ':p:h')) - 1:]
+                        \.l:pathtoscan
         else
-            call system('ctags -R -a --tag-relative=yes -f '.shellescape(l:tags)
+            call system('ctags -R -a --tag-relative=yes -f '
+                        \.shellescape(l:tagsfile)
                         \.' --c++-kinds=+p --fields=+iaS --extra=+q '
-                        \.l:olddir[strlen(fnamemodify(l:tags, ':p:h')) + 1:]
+                        \.l:pathtoscan
                         \.'&')
         endif
         execute 'silent! lcd '.escape(l:olddir, ' ')
