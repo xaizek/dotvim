@@ -822,8 +822,9 @@ set nostartofline
 " automatically write buffer on some commands
 set autowrite
 
-" don't create backup copies
-set nobackup
+" create backup copies
+set backup
+set backupdir=~/.vim/bak/,.,~/tmp,~/
 
 " don't break lines on input automatically
 set textwidth=0
