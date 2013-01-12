@@ -4,6 +4,7 @@ let s:hdrexts = ['h', 'hpp', 'hxx', 'hh']
 
 if index(s:hdrexts, s:ext) != -1
     " for header files
+    call AddBasicTemplate()
     call AddHeaderGuard()
     call AddHeaderAndFooter()
     finish

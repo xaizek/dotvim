@@ -1083,6 +1083,24 @@ if !exists(":DiffOrig")
               \ | diffthis | wincmd p | diffthis | set autowrite
 endif
 
+" if current buffer is empty, performs search of file named .src_template from
+" current directory up and loads its contents into the buffer
+function! AddBasicTemplate()
+    let l:empty_buffer = line2byte(line('$') + 1) == -1
+    if !l:empty_buffer
+        return
+    endif
+
+    " add file template
+    let l:template = findfile('.src_template', '.;')
+    if !empty(l:template)
+        let l:file = readfile(l:template)
+        call append(0, l:file)
+    endif
+
+    call cursor(line('$')/2 + 1, 0)
+endfunction
+
 function! AddHeaderGuard()
     let l:line = line('.')
     let l:filename = toupper(expand("%:t:r"))
