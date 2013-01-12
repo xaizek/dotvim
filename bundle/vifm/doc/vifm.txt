@@ -1,5 +1,6 @@
-*vifm.txt*
+*vifm.txt*    For Vifm version 0.7.3a  Last change: 2012 Sep 27
 
+ Email for bugs and suggestions: <xaizek@lavabit.com>
 
 |vifm-options|            Command line arguments.
 |vifm-general-keys|       General keys, that work in the most of modes.
@@ -11,10 +12,16 @@
 |vifm-commands-bg|        Backgrounding of commands.
 |vifm-set-options|        Available options.
 |vifm-mappings|           Special sequences.
+|vifm-expression-syntax|  Syntax of supported expressions.
+|vifm-functions|          List of builtin functions with description.
 |vifm-startup|            Determining of environment variables on startup.
 |vifm-configure|          Configuration of vifm.
 |vifm-compatibility-mode| Its description.
 |vifm-menus-and-dialogs|  Keys for menus and dialogs.
+|vifm-view-look|          Gives general overview of view displaying variants.
+|vifm-ls-view|            ls-like view details.
+|vifm-column-view|        Column view configuration details.
+|vifm-colorschemes|       Details on using color schemes in vifm.
 |vifm-fuse|               Using automated FUSE mounts.
 |vifm-plugin|             Using the vifm.vim plugin.
 |vifm-reserved|           List of reserved commands.
@@ -24,7 +31,7 @@ Tag name structure:
           WHAT                 PREPEND     EXAMPLE~
       Normal mode command      vifm-       :help vifm-h
       Visual mode command      vifm-v_     :help vifm-v_u
-      View mode command        vifm-V_     :help vifm-V_j
+      View mode command        vifm-q_     :help vifm-q_j
       Menu or dialog command   vifm-m_     :help vifm-m_zh
       Command-line command     vifm-:      :help vifm-:quit
       Command-line editing     vifm-c_     :help vifm-c_CTRL-H
@@ -86,17 +93,25 @@ Basic Movement~
 
 The basic vi key bindings are used to move through the files and popup windows.
 
-k is up                                        *vifm-k*
-j is down                                      *vifm-j*
+k, gk or Ctrl-P moves cursor up one line.      *vifm-k* *vifm-gk* *vifm-CTRL-P*
+j, gj or Ctrl-N moves cursor down one line.    *vifm-j* *vifm-gj* *vifm-CTRL-N*
 
                                                *vifm-h*
-h is up directory
+when |vifm-'lsview'| is off moves up one directory, otherwise moves left one
+file.
 
-                                               *vifm-l* *vifm-Enter*
-l, Enter - handle file (enter directory or run program)
+                                               *vifm-l*
+l - when |vifm-'lsview'| is off moves into a directory or launches a file,
+    otherwise moves left one file.
 
                                                *vifm-gg*
 gg will move to the first line of the file list.
+
+                                               *vifm-gh*
+gh is up one directory.
+
+                                               *vifm-gl* *vifm-Enter*
+gl or Enter moves into a directory or launches a file.
 
                                                *vifm-G*
 G will move to the last line in the file list.
@@ -121,6 +136,12 @@ Ctrl-U - jump forward one half page.           *vifm-CTRL-U*
                                                *vifm-%*
 n% move to nth file of the file list (for example 25%).
 
+                                               *vifm-0* *vifm-^*
+move cursor to the first column.  See |vifm-'lsview'| option description.
+
+                                               *vifm-$*
+move cursor to the last column.  See |vifm-'lsview'| option description.
+
                                                *vifm-Space* *vifm-Tab*
 Space or Tab to switch file lists.
 
@@ -144,18 +165,22 @@ Pane manipulation~
 
 Second character can be entered with or without Control key.
 
-Ctrl-W B - switch to bottom-right window       *vifm-CTRL-W_B*
-Ctrl-W H - switch to left pane.                *vifm-CTRL-W_H*
-Ctrl-W J - switch to pane below.               *vifm-CTRL-W_J*
-Ctrl-W K - switch to pane above.               *vifm-CTRL-W_K*
-Ctrl-W L - switch to right pane.               *vifm-CTRL-W_L*
-Ctrl-W W - switch to other pane.               *vifm-CTRL-W_W*
-Ctrl-W O - shortcut for |vifm-:only|           *vifm-CTRL-W_O*
-Ctrl-W P - switch to previous window           *vifm-CTRL-W_P*
-Ctrl-W S - shortcut for |vifm-:split|          *vifm-CTRL-W_S*
-Ctrl-W T - switch to top-left window           *vifm-CTRL-W_T*
-Ctrl-W V - shortcut for |vifm-:vsplit|         *vifm-CTRL-W_V*
-Ctrl-W X - exchange panes                      *vifm-CTRL-W_X*
+Ctrl-W H - move the pane to the far left.      *vifm-CTRL-W_H*
+Ctrl-W J - move the pane to the very bottom.   *vifm-CTRL-W_J*
+Ctrl-W K - move the pane to the very top.      *vifm-CTRL-W_K*
+Ctrl-W L - move the pane to the far right.     *vifm-CTRL-W_L*
+Ctrl-W b - switch to bottom-right window       *vifm-CTRL-W_b*
+Ctrl-W h - switch to left pane.                *vifm-CTRL-W_h*
+Ctrl-W j - switch to pane below.               *vifm-CTRL-W_j*
+Ctrl-W k - switch to pane above.               *vifm-CTRL-W_k*
+Ctrl-W l - switch to right pane.               *vifm-CTRL-W_l*
+Ctrl-W w - switch to other pane.               *vifm-CTRL-W_w*
+Ctrl-W o - shortcut for |vifm-:only|             *vifm-CTRL-W_o*
+Ctrl-W p - switch to previous window           *vifm-CTRL-W_p*
+Ctrl-W s - shortcut for |vifm-:split|            *vifm-CTRL-W_s*
+Ctrl-W t - switch to top-left window           *vifm-CTRL-W_t*
+Ctrl-W v - shortcut for |vifm-:vsplit|           *vifm-CTRL-W_v*
+Ctrl-W x - exchange panes                      *vifm-CTRL-W_x*
 Ctrl-W + - increase size of the view.          *vifm-CTRL-W_+*
 Ctrl-W - - decrease size of the view.          *vifm-CTRL-W_-*
 Ctrl-W < - increase size of the view.          *vifm-CTRL-W_<*
@@ -275,9 +300,9 @@ gA - like ga, but force update.                *vifm-gA*
 gf - find link destination (like l with |vifm-'followlinks'| off, but also
     finds directories).
 
-                                               *vifm-gl*
+                                               *vifm-gr*
                                                {only for MS-Windows}
-gl - same as l key, but tries to run program with administrative
+gr - same as l key, but tries to run program with administrative
     privileges.
 
 
@@ -443,11 +468,11 @@ will insert previously yanked and deleted files into current directory.
 
 Selectors~
                                                *vifm-selectors*
-y, d and D commands accept selectors.  You can combine them with every of
+y, d and D commands accept selectors.  You can combine them with any of
 selectors below to quickly remove or yank several files.
 
-j, k, gg, G, H, L, M, %, f, F, ;, comma and ' can be used as selectors for
-several commands.
+j, k, gg, G, H, L, M, %, f, F, ;, comma, ', ^, 0 and $ can be used as
+selectors for several commands.
 Also following selectors can be used:
  a - all files in current view
  s - selected files
@@ -491,96 +516,96 @@ gU, U - make names of selected files uppercase.
 This mode tries to imitate the less program. Currently the following keys are
 supported:
 
-                                               *vifm-V_SHIFT-Tab* *vifm-V_Tab*
-                                               *vifm-V_q* *vifm-V_Q* *vifm-V_ZZ*
+                                               *vifm-q_SHIFT-Tab* *vifm-q_Tab*
+                                               *vifm-q_q* *vifm-q_Q* *vifm-q_ZZ*
 Shift-Tab, Tab, q, Q, ZZ - go back to normal mode.
 
 
-                                               *vifm-V_e* *vifm-V_CTRL-E*
-                                               *vifm-V_j* *vifm-V_CTRL-N*
-                                               *vifm-V_Enter*
+                                               *vifm-q_e* *vifm-q_CTRL-E*
+                                               *vifm-q_j* *vifm-q_CTRL-N*
+                                               *vifm-q_Enter*
 [count]e, [count]Ctrl-E, [count]j, [count]Ctrl-N, [count]Enter
 forward one line (or [count] lines).
 
-                                               *vifm-V_y* *vifm-V_CTRL-Y*
-                                               *vifm-V_k* *vifm-V_CTRL-K*
-                                               *vifm-V_CTRL-P*
+                                               *vifm-q_y* *vifm-q_CTRL-Y*
+                                               *vifm-q_k* *vifm-q_CTRL-K*
+                                               *vifm-q_CTRL-P*
 [count]y, [count]Ctrl-Y, [count]k, [count]Ctrl-K, [count]Ctrl-P
 backward one line (or [count] lines).
 
 
-                                               *vifm-V_f* *vifm-V_CTRL-F*
-                                               *vifm-V_CTRL-V* *vifm-V_Space*
+                                               *vifm-q_f* *vifm-q_CTRL-F*
+                                               *vifm-q_CTRL-V* *vifm-q_Space*
 [count]f, [count]Ctrl-F, [count]Ctrl-V, [count]Space Bar
 forward one window (or [count] lines).
 
-                                               *vifm-V_b* *vifm-V_CTRL-B*
-                                               *vifm-V_ALT-V*
+                                               *vifm-q_b* *vifm-q_CTRL-B*
+                                               *vifm-q_ALT-V*
 [count]b, [count]Ctrl-B, [count]Alt-V
 backward one window (or [count] lines).
 
 
-                                               *vifm-V_z*
+                                               *vifm-q_z*
 [count]z - forward one window (and set window to [count]).
 
-                                               *vifm-V_w*
+                                               *vifm-q_w*
 [count]w - backward one window (and set window to [count]).
 
-                                               *vifm-V_ALT-Space*
+                                               *vifm-q_ALT-Space*
 [count]Alt-Space - forward one window, but don't stop at end-of-file.
 
 
-                                               *vifm-V_d* *vifm-V_CTRL-D*
+                                               *vifm-q_d* *vifm-q_CTRL-D*
 [count]d, [count]Ctrl-D - forward one half-window (and set half-window to
     [count]).
 
-                                               *vifm-V_u* *vifm-V_CTRL-U*
+                                               *vifm-q_u* *vifm-q_CTRL-U*
 [count]u, [count]Ctrl-U - backward one half-window (and set half-window to
     [count]).
 
 
-                                               *vifm-V_r* *vifm-V_CTRL-R*
-                                               *vifm-V_R* *vifm-V_CTRL-L*
+                                               *vifm-q_r* *vifm-q_CTRL-R*
+                                               *vifm-q_R* *vifm-q_CTRL-L*
 r, Ctrl-R, Ctrl-L, R - repaint screen.
 
 
-                                               *vifm-V_/*
+                                               *vifm-q_/*
 [count]/pattern - search forward for ([count]-th) matching line.
 
-                                               *vifm-V_?*
+                                               *vifm-q_?*
 [count]?pattern - search backward for ([count]-th) matching line.
 
-                                               *vifm-V_n*
+                                               *vifm-q_n*
 [count]n - repeat previous search (for [count]-th occurrence).
 
-                                               *vifm-V_N*
+                                               *vifm-q_N*
 [count]N - repeat previous search in reverse direction.
 
 
-                                               *vifm-V_g* *vifm-V_<*
-                                               *vifm-V_ALT-<*
+                                               *vifm-q_g* *vifm-q_<*
+                                               *vifm-q_ALT-<*
 [count]g, [count]<, [count]Alt-< - go to first line in file (or line [count]).
 
-                                               *vifm-V_G* *vifm-V_>*
-                                               *vifm-V_ALT->*
+                                               *vifm-q_G* *vifm-q_>*
+                                               *vifm-q_ALT->*
 [count]G, [count]>, [count]Alt-> - go to last line in file (or line [count]).
 
-                                               *vifm-V_p* *vifm-V_%*
+                                               *vifm-q_p* *vifm-q_%*
 [count]p, [count]% - go to beginning of file (or N percent into file).
 
-                                               *vifm-V_v*
+                                               *vifm-q_v*
 v - edit the current file with vim.
 
 
-Ctrl-W S - split window horizontally.          *vifm-V_CTRL-W_S*
-Ctrl-W V - split window vertically.            *vifm-V_CTRL-W_v*
-Ctrl-W + - increase size of the view.          *vifm-V_CTRL-W_+*
-Ctrl-W - - decrease size of the view.          *vifm-V_CTRL-W_-*
-Ctrl-W < - increase size of the view.          *vifm-V_CTRL-W_<*
-Ctrl-W > - decrease size of the view.          *vifm-V_CTRL-W_>*
-Ctrl-W | - maximize current view.              *vifm-V_CTRL-W_|*
-Ctrl-W _ - maximize current view.              *vifm-V_CTRL-W__*
-Ctrl-W = - make size of two views equal.       *vifm-V_CTRL-W_=*
+Ctrl-W S - split window horizontally.          *vifm-q_CTRL-W_S*
+Ctrl-W V - split window vertically.            *vifm-q_CTRL-W_v*
+Ctrl-W + - increase size of the view.          *vifm-q_CTRL-W_+*
+Ctrl-W - - decrease size of the view.          *vifm-q_CTRL-W_-*
+Ctrl-W < - increase size of the view.          *vifm-q_CTRL-W_<*
+Ctrl-W > - decrease size of the view.          *vifm-q_CTRL-W_>*
+Ctrl-W | - maximize current view.              *vifm-q_CTRL-W_|*
+Ctrl-W _ - maximize current view.              *vifm-q_CTRL-W__*
+Ctrl-W = - make size of two views equal.       *vifm-q_CTRL-W_=*
 
 --------------------------------------------------------------------------------
 *vifm-command-line*
@@ -644,6 +669,15 @@ Ctrl-W - remove characters from cursor position till the beginning of previous
                                                *vifm-c_ALT-D*
 Alt-D - remove characters from cursor position till the beginning of next
     word.
+
+                                               *vifm-c_CTRL-T*
+Ctrl-T - swap the order of current and previous character and move cursor
+    forward or, if cursor past the end of line, swap the order of two last
+    characters in the line.
+
+                                               *vifm-c_ALT-.*
+Alt-. - insert last part of previous command to current cursor position.
+    Each next call will insert last part of older command.
 
                                                *vifm-c_CTRL-N*
 Ctrl-N - recall more recent command-line from history.
@@ -767,7 +801,10 @@ The builtin commands are:
 :colo[rscheme] color_scheme_name - changes default color scheme to
     color_scheme_name.
 :colo[rscheme] color_scheme_name directory - associates directory with the
-    color scheme.
+    color scheme.  The directory argument can be both absolute or relative
+    path when :colorscheme command is executed from command line, but
+    mandatory should be an absolute path when the command is executed in
+    scripts loaded at startup (until vifm is completely loaded).
 
                                                *vifm-:comclear* *vifm-:comc*
 :comc[lear] - removes all user defined commands.
@@ -787,7 +824,11 @@ The builtin commands are:
 :com[mand] backup /pattern - will set search pattern.
 :com[mand] name filter pattern - will set file name filter.
 :com[mand] cmd :commands - will set kind of alias for internal command (like
-    in a shell).
+    in a shell).  Will pass range given to alias to an aliased command, so
+    running :%cp after >
+      :command cp :copy %a
+<   equals >
+      :%copy
 
                                                *vifm-:copy* *vifm-:co*
 :[range]co[py][!?][ &] - copies files to directory of other view.  With
@@ -822,15 +863,27 @@ The builtin commands are:
                                                *vifm-:dirs*
 :dirs - display directory stack.
 
+                                               *vifm-:echo* *vifm-:ec*
+:ec[ho] [<expr>...] - echoes each of argument as expressions and
+    outputs them separated by a space.  See |vifm-:let| for definition of
+    <expr>.
+
                                                *vifm-:edit* *vifm-:e*
 :[range]e[dit] [file...] - will load the selected or passed file or files
     into vi.  Accepts macros.
+
+                                               *vifm-:else* *vifm-:el*
+:el[se] - executes commands until next matching |vifm-:endif| if they
+    previously were not being executed.  See also |vifm-:if|.
 
                                                *vifm-:empty*
 :empty - permanently remove files from the $VIFM/Trash directory.  It will
     also remove all operations from undolist that have no sense after :empty
     and remove all records about files in the Trash directory from all
     registers.
+
+                                               *vifm-:endif* *vifm-:en*
+:en[dif] - ends conditional block.  See also |vifm-:if| and |vifm-:else|.
 
                                                *vifm-:execute* *vifm-:exe*
 :exe[cute] [arg...] - will join all passed arguments by inserting a single
@@ -858,12 +911,15 @@ The builtin commands are:
     ampersand as two last characters of a command means running of the
     command in the background.  Optional description can be given to each
     command to ease understanding of what command will do in the :file menu.
-    See |vifm-fuse|.
+    Vifm will try the rest of the programs for an association when the
+    default isn't found.  On Windows path to executables containing spaces
+    can (and should be for correct work with such paths) be double quoted.
+    See also |vifm-fuse|.
 
                                                *vifm-:filextype* *vifm-:filex*
 :filex[type] pat1,pat2,... [{ description }] def_program,program2,... - same
     as :filetype, but vifm will ignore this command if it's not running in X.
-    In X :filextype is equal to :filetype.  See |vifm-fuse|.
+    In X :filextype is equal to :filetype.  See also |vifm-fuse|.
 
                                                *vifm-:filevtype* *vifm-:filev*
 :filev[iewer] pat1,pat2,... command - will associate given command as a
@@ -947,16 +1003,27 @@ Available group-name values:
 
 Available colors:
  - -1 or default or none - transparent
- - black
- - red
- - green
- - yellow
- - blue
- - magenta
- - cyan
- - white
+ - black   and lightblack
+ - red     and lightred
+ - green   and lightgreen
+ - yellow  and lightyellow
+ - blue    and lightblue
+ - magenta and lightmagenta
+ - cyan    and lightcyan
+ - white   and lightwhite
 
-Here is the hierarchy of the highlight group, which you need to know for using
+Light versions of colors are regular colors with bold attribute set.  So order
+of arguments of :highlight command is important and it's better to put "cterm"
+in front of others to prevent it from overwriting attributes set by "ctermfg" or
+"ctermbg" arguments.
+
+Since there are two colors and only one bold attribute it affects both colors
+when "reverse" attribute is used when running vifm in terminal emulator.  While
+linux native console can handle boldness of foreground and background colors
+independently, which is for consistency with terminal emulators accessible from
+vifm only implicitly by using light versions of colors.
+
+Here is the hierarchy of highlight groups, which you need to know for using
 transparency:
   StatusLine
     WildMenu
@@ -990,6 +1057,11 @@ of the hierarchy and transparency for all others.
       b[search] or ?  show search history and search backward on l key.
       c[md]     or :  show command line history.
 
+                                               *vifm-:if*
+:if {expr1} - starts conditional block.  Commands are executed until next
+    matching |vifm-:else| or |vifm-:endif| command if {expr1} evaluates to
+    non-zero, otherwise they are ignored.
+
                                                *vifm-:invert*
 :invert - invert file name filter.
 :invert? - show current filter state.
@@ -1003,8 +1075,8 @@ of the hierarchy and transparency for all others.
 :let $ENV_VAR .= <expr> - append value to environment variable.
 
 Where <expr> could be a single-quoted string, double-quoted string, an
-environment variable or a concatanation of any of them in any order using
-the '.' operator. Any whitespace is ignored.
+environment variable, function call or a concatanation of any of them in any
+order using the '.' operator.  Any whitespace is ignored.
 
                                                *vifm-:locate*
 :locate filename - uses the locate command to create a menu of filenames
@@ -1041,6 +1113,13 @@ the '.' operator. Any whitespace is ignored.
 
                                                *vifm-:nohlsearch* *vifm-:noh*
 :noh[lsearch] - clear selection in current pane.
+
+                                               *vifm-:normal* *vifm-:norm*
+:norm[al][!] commands - executes normal mode commands.  If "!" is used,
+    mappings will not be used.  If the last command is unfinished it will be
+    aborted as if <esc> or <c-c> was typed.  A ":" should be completed as
+    well.  commands can't start with a space, so put a count of 1 (one)
+    before it.
 
                                                *vifm-:only* *vifm-:on*
 :on[ly] - switch to a one window view.
@@ -1132,11 +1211,17 @@ the '.' operator. Any whitespace is ignored.
      - option+=x - add x to option
      - option-=x - remove (or subtract) x from option
 
+    Option name can be prepended and appended by any number of whitespace
+    characters.
+
                                                *vifm-:shell* *vifm-:sh*
 :sh[ell] - will start a shell.
 
                                                *vifm-:sort* *vifm-:sor*
-:sor[t] - menu of different sorting methods.
+:sor[t] - menu of different sorting methods, when one can select primary
+sorting key.  When |vifm-'viewcolumns'| options is empty and |vifm-'lsview'|
+is off, changing primary sorting key will also affect view look (in
+particular the second column of the view will be changed).
 
                                                *vifm-:source* *vifm-:so*
 :so[urce] file - reads command-line commands from the file.
@@ -1145,8 +1230,8 @@ the '.' operator. Any whitespace is ignored.
 :sp[lit] - switch to a two window horizontal view.
 :sp[lit]! - toggles window horizontal splitting.
 :sp[lit] path - splits the window horizontally to show both file
-    directories.  And changes other pane to path (absolute or relative to it's
-    current directory).
+    directories.  And changes other pane to path (absolute or relative to
+    current directory of active pane).
 
                                                *vifm-:substitute* *vifm-:s*
 :[range]s[ubstitute]/pattern/string/[flags] - for each file in range
@@ -1202,8 +1287,8 @@ the '.' operator. Any whitespace is ignored.
 :vs[plit] - switch to a two window vertical view.
 :vs[plit]! - toggles window vertical splitting.
 :vs[plit] path - splits the window vertically to show both file
-    directories.  And changes other pane to path (absolute or relative to it's
-    current directory).
+    directories.  And changes other pane to path (absolute or relative to
+    current directory of active pane).
 
                                                *vifm-:windo*
 :windo [command...]
@@ -1236,19 +1321,29 @@ Execute command for pane(s), which is determined by type argument:
 :map! lhs rhs - map lhs key sequence to rhs in command line mode.
 
                                                *vifm-:cmap* *vifm-:cm*
+                                               *vifm-:mmap* *vifm-:mm*
                                                *vifm-:nmap* *vifm-:nm*
+                                               *vifm-:qmap* *vifm-:qm*
                                                *vifm-:vmap* *vifm-:vm*
 :cm[ap] lhs rhs - map lhs to rhs in command line mode.
+:mm[ap] lhs rhs - map lhs to rhs in menu mode.
 :nm[ap] lhs rhs - map lhs to rhs in normal mode.
+:qm[ap] lhs rhs - map lhs to rhs in view mode.
 :vm[ap] lhs rhs - map lhs to rhs in visual mode.
 
 :cm[ap] - lists all maps in command line mode.
+:mm[ap] - lists all maps in menu mode.
 :nm[ap] - lists all maps in normal mode.
+:qm[ap] - lists all maps in view mode.
 :vm[ap] - lists all maps in visual mode.
 
 :cm[ap] beginning - lists all maps in command line mode that start with
     the beginning.
+:mm[ap] beginning - lists all maps in menu mode that start with the
+    beginning.
 :nm[ap] beginning - lists all maps in normal mode that start with the
+    beginning.
+:qm[ap] beginning - lists all maps in view mode that start with the
     beginning.
 :vm[ap] beginning - lists all maps in visual mode that start with the
     beginning.
@@ -1260,11 +1355,17 @@ Execute command for pane(s), which is determined by type argument:
     mode, but disallow mapping of rhs.
 
                                                *vifm-:cnoremap* *vifm-:cno*
+                                               *vifm-:mnoremap* *vifm-:mn*
                                                *vifm-:nnoremap* *vifm-:nn*
+                                               *vifm-:qnoremap* *vifm-:qn*
                                                *vifm-:vnoremap* *vifm-:vn*
 :cno[remap] lhs rhs - map the key sequence lhs to {rhs} for command line
     mode, but disallow mapping of rhs.
+:mn[oremap] lhs rhs - map the key sequence lhs to {rhs} for menu mode,
+    but disallow mapping of rhs.
 :nn[oremap] lhs rhs - map the key sequence lhs to {rhs} for normal mode,
+    but disallow mapping of rhs.
+:qn[oremap] lhs rhs - map the key sequence lhs to {rhs} for view mode,
     but disallow mapping of rhs.
 :vn[oremap] lhs rhs - map the key sequence lhs to {rhs} for visual mode,
     but disallow mapping of rhs.
@@ -1274,21 +1375,26 @@ Execute command for pane(s), which is determined by type argument:
 :unm[ap]! lhs - remove the mapping of lhs from command line mode.
 
                                                *vifm-:cunmap* *vifm-:cu*
+                                               *vifm-:munmap* *vifm-:mu*
                                                *vifm-:nunmap* *vifm-:nun*
+                                               *vifm-:qunmap* *vifm-:qun*
                                                *vifm-:vunmap* *vifm-:vu*
 :cu[nmap] lhs - remove the mapping of lhs from command line mode.
+:mu[nmap] lhs - remove the mapping of lhs from menu mode.
 :nun[map] lhs - remove the mapping of lhs from normal mode.
+:qun[map] lhs - remove the mapping of lhs from view mode.
 :vu[nmap] lhs - remove the mapping of lhs from visual mode.
 
 Ranges~
                                                                *vifm-ranges*
 The ranges implemented include:
-  Numbers :2,3
+  2,3 - from second to third file in the list (including it)
   % - the entire directory.
   . - the current position in the filelist.
   $ - the end of the filelist.
   't - the mark position t.
 
+Examples:
   :%delete would delete all files in the directory.
   :2,4delete would delete the files in the list positions 2 through 4.
   :.,$delete would delete the files from the current position to the end
@@ -1303,7 +1409,8 @@ The builtin commands that accept a range are :d[elete] and :y[ank].
 Command macros~
 
 The command macros may be used in user commands.
-  %a      user arguments.
+  %a      user arguments.  When user arguments contain macros, they are
+          expanded before preforming substitution of %a.
   %c %"c  the current file under the cursor.
   %C %"C  the current file under the cursor in the other directory.
   %f %"f  all of the selected files.
@@ -1319,6 +1426,9 @@ The command macros may be used in user commands.
   %i      completely ignore command output.
 
 Use %% if you need to put a percent sign in your command.
+
+Note that %m, %M, %s, %S and %i macros are mutually exclusive. Only the
+last one of them in the command will take effect.
 
 You can use filename modifiers after %c, %C, %f, %F, %b, %d and %D macros.
 Supported modifiers are:
@@ -1337,8 +1447,7 @@ Supported modifiers are:
                    or sub
     :gs?pat?sub? - like :s, but substitutes all occurrences of "pat" with
                    "sub".
-See ':h filename-modifiers' in Vim's documentation for the detailed
-description.
+See |filename-modifiers| for the detailed description.
 
 Using %x means expand corresponding macro escaping all characters that have
 special meaning.  And %"x means using of double quotes and escape only backslash
@@ -1375,7 +1484,13 @@ You don't want to run terminal commands, which require terminal input or
 output something because they will mess up vifm's TUI. Anyway, if you did run
 such a command, you can use Ctrl-L key to update vifm's TUI.
 
-:!mv %f %D &
+Rewriting the example command with macros given above with backgrounding:
+>
+ :!mv %f %D &
+<
+Note that %m, %M, %s, %S and %i macros have bigger priority than &.  So
+command containing at least one of them can't be backgrounded and " &" at the
+end will be just silently ignored.
 
 --------------------------------------------------------------------------------
 *vifm-commands-bg*
@@ -1394,6 +1509,10 @@ Background operations cannot be undone.
 
 --------------------------------------------------------------------------------
 *vifm-set-options*
+
+                                               *vifm-local-options*
+These are kind of options that are local to a specific view. So you can set
+ascending sorting order for left pane and descending order for right pane.
 
                                                *vifm-'autochpos'*
 autochpos
@@ -1499,6 +1618,15 @@ type: int
 default: terminal height on startup
 Terminal height in lines.
 
+                                               *vifm-'lsview'*
+lsview
+type: boolean
+default: false
+type: local
+When this option is set, directory view will be displayed in multiple
+columns with filenames similar to output of `ls -x` command.  See also
+|vifm-ls-view|.
+
                                                *vifm-'rulerformat'* *vifm-'ruf'*
 rulerformat ruf
 type: string
@@ -1565,7 +1693,8 @@ is enabled.  It doesn't affect file filtering.
                                                *vifm-'sort'*
 sort
 type: enumeration
-default: name
+default: +name on *nix and +iname on Windows
+type: local
 Sets list of sorting keys (first item is primary key, second is secondary
 key, etc.):
    [+-]ext   - sort by extension
@@ -1585,6 +1714,9 @@ key, etc.):
 In case name (iname on Windows) is skipped, it will be added at the end
 automatically.
 
+This option also changes view columns according to primary sorting key set,
+unless |vifm-'viewcolumns'| option is not empty.
+
                                                *vifm-'sortnumbers'*
 sortnumbers
 type: boolean
@@ -1595,6 +1727,7 @@ Natural sort of (version) numbers within text.
 sortorder
 type: enumeration
 default: ascending
+type: local
 Sets sort order for primary key: ascending, descending.
 
                                                *vifm-'statusline'* *vifm-'stl'*
@@ -1609,6 +1742,9 @@ are supported:
     %u - user name or uid (if it cannot be resolved)
     %g - group name or gid (if it cannot be resolved)
     %s - file size in human readable format
+    %E - size of selected files in human readable format, same as %s when no
+         files are selected, except that it will never show size of ../ in
+         visual mode, since it cannot be selected
     %d - file modification date (uses |vifm-'timefmt'| option)
     all |vifm-'rulerformat'| macros
 Percent sign can be followed by optional minimum field width.  Add '-' before
@@ -1673,6 +1809,16 @@ type: string
 default: "vim"
 The actual command used to start vi.  Ampersand sign at the end (regardless
 whether it's preceded by space or not) means backgrounding of command.
+
+                                               *vifm-'viewcolumns'*
+viewcolumns
+type: string
+default: ""
+type: local
+Format string containing list of columns in the view. When this option is
+empty view columns to show are chosen automatically using sorting keys
+(see |vifm-'sort'|) as a base.  Value of this option is ignored if
+|vifm-'lsview'| is set.  See |vifm-column-view| for format description.
 
                                                *vifm-'vixcmd'*
 vixcmd
@@ -1765,6 +1911,130 @@ example: >
 will put "man " in line when you hit the <f1> key in the command line mode.
 
 --------------------------------------------------------------------------------
+*vifm-expression-syntax*
+
+Supported expressions is a subset of what VimL provides.
+
+Expression syntax summary, from least to most significant:
+
+|vifm-expr1| expr2 == expr2          equal
+             expr2 != expr2          not equal
+
+|vifm-expr2| expr3 . expr3 ..        string concatenation
+
+|vifm-expr3| "string"                string constant, backslash is special
+             'string'                string constant, ' is doubled
+             $VAR                    environment variable
+             function(expr1, ...)    function call
+
+".." indicates that the operations in this level can be concatenated.
+
+expr1                                          *vifm-expr1*
+-----
+expr2 {cmp} expr2
+
+Compare two expr2 expressions, resulting in a 0 if it evaluates to false or 1
+if it evaluates to true.
+
+equal     ==                                   *vifm-expr-==*
+notequal  !=                                   *vifm-expr-!=*
+
+Examples: >
+  'a' == 'a'    evaluates to 1
+  'a' == 'b'    evaluates to 0
+<
+
+expr2                                          *vifm-expr2*
+-----
+expr3 . expr3 ..     string concatenation      *vifm-expr-.*
+
+Examples: >
+  'a' . 'b' = 'ab'
+  'aaa' . '' . 'c' = 'aaac'
+<
+
+expr3                                          *vifm-expr3*
+-----
+
+string                                         *vifm-expr-string*
+------
+"string"             string constant           *vifm-expr-quote*
+
+Note that double quotes are used.
+
+A string constant accepts these special characters:
+\b      backspace <bs>
+\e      escape <esc>
+\n      newline
+\r      return <cr>
+\t      tab <tab>
+\\      backslash
+\"      double quote
+
+Examples: >
+  "\"Hello,\tWorld!\""
+  "Hi,\nthere!"
+<
+
+literal-string                                 *vifm-literal-string*
+--------------
+'string'             string constant           *vifm-expr-'*
+
+Note that single quotes are used.
+
+This string is taken as it is.  No backslashes are removed or have a special
+meaning.  The only exception is that two quotes stand for one quote.
+
+Examples: >
+  'All\slashes\are\saved.'
+  'This string contains doubled single quotes ''here'''
+<
+
+environment variable                           *vifm-expr-env*
+--------------------
+$VAR                  environment variable
+
+The String value of any environment variable.  When it is not defined, the
+result is an empty string.
+
+Examples: >
+  'This is my $PATH env: ' . $PATH
+  'vifmrc at ' . $MYVIFMRC . ' is used.'
+<
+
+function call                                  *vifm-expr-function*
+-------------
+function(expr1, ...)  function call
+
+See below |vifm-functions|.
+
+Examples: >
+  "'" . filetype('.') . "'"
+  filetype('.') == 'reg'
+<
+
+--------------------------------------------------------------------------------
+*vifm-functions*
+
+USAGE             RESULT        DESCRIPTION	~
+
+filetype({fnum})  String        Returns file type from position.
+
+filetype({fnum})                               *vifm-filetype()*
+The result is a string, which represents file type and is one of the list:
+    exe    executables
+    reg    regular files
+    link   symbolic links
+    dir    directories
+    char   character devices
+    block  block devices
+    fifo   pipes
+    sock   *nix domain sockets
+    ?      unknown file type (should never appear)
+Parameter {fnum} can have following values:
+    - '.' to get type of file under the cursor in the active pane
+
+--------------------------------------------------------------------------------
 *vifm-compatibility-mode*
 
 Compatibility mode:
@@ -1785,7 +2055,7 @@ Ctrl-L - redraw the menu.                      *vifm-m_CTRL-L*
 
                                                *vifm-m_Escape* *vifm-m_CTRL-C*
                                                *vifm-m_ZQ* *vifm-m_ZZ*
-Escape, Ctrl-C, ZZ, ZQ - quit.
+Escape, Ctrl-C, ZZ, ZQ, q - quit.
 
 In all menus~
 
@@ -1982,6 +2252,177 @@ All % macros are expanded by vifm at runtime and have the following meaning:
 
 %CLEAR is an optional macro.  Other macros are not mandatory, but mount
 commands likely wont work without them.
+
+The mounted FUSE file systems will be automatically unmounted in two cases:
+   - when vifm quits (with |vifm-ZZ|, |vifm-:q|, etc. or when killed by signal);
+   - when you explicitly leave mount point going up to its parent directory
+     (with |vifm-h|, |vifm-Enter| on "../" or ":cd ..") and other pane is not
+     in the same directory or its child directories.
+
+--------------------------------------------------------------------------------
+*vifm-view-look*
+
+vifm supports displaying of file list view in two different ways:
+   - in a table mode, when multiple columns can be set using |vifm-'viewcolumns'|
+     option (see |vifm-column-view| for details);
+   - in a multicolumn list manner which looks almost like `ls -x` command
+     output (see |vifm-ls-view| for details).
+
+The look is local for each view and can be chosen by changing value of the
+|vifm-'lsview'| boolean option.
+
+Depending on view look some of keys change their meaning to allow more natural
+cursor moving.  This concerns mainly |vifm-h|, |vifm-j|, |vifm-k|, |vifm-l| and other
+similar navigation keys.
+
+Also some of options can be ignored if they don't affect view displaying in
+selected look.  For example value of |vifm-'viewcolumns'| when |vifm-'lsview'| is
+set.
+
+--------------------------------------------------------------------------------
+*vifm-ls-view*
+
+When this view look is enabled by setting |vifm-'lsview'| option on, vifm will
+display files in multiple columns.  Number of columns depends on the length of
+the longest file name present in current directory of the view.  Whole file
+list is automatically reflowed on directory change, terminal or view resize.
+
+View looks close to output of `ls -x` command, so files are listed left to
+right in rows.
+
+In this mode file manipulation commands (e.g. |vifm-d|) don't work line-wise like
+they do in Vim, since such operations would be uncommon for file manipulating
+tasks.  Thus, for example, |vifm-dd| will remove only current file.
+
+--------------------------------------------------------------------------------
+*vifm-column-view*
+
+View columns are described by a comma-separated list of column descriptions,
+each of which has the following format >
+    [ '-' ] [ fw ( [ '.' tw ] | '%' ) ] '{' type '}' '.'{0,3}
+where fw stands for full width and tw stands for text width.
+
+So it basically consists of four parts:
+ 1. Optional alignment specifier
+ 2. Optional width specifier
+ 3. Mandatory column name
+ 4. Optional cropping specifier
+
+Alignment specifier~
+
+It's an optional minus sign as the first symbol of the string.
+
+Specifies type of text alignment within a column. Two types are supported:
+ - left align (default) >
+     set viewcolumns=-{name}
+<- right align >
+     set viewcolumns={name}
+<
+Width specifier~
+
+It's a number followed by a percent sign, two numbers (second one should be
+less than or equal to the first one) separated with a dot or a single number.
+
+Specifies column width and its units. There are tree size types:
+ - absolute size - column width is specified in characters >
+     set viewcolumns=-100{name},20.15{ext}
+<  results in two columns with lengths of 100 and 20 and a reserved space of
+   five characters on the left of second column.
+ - relative (percent) size - column width is specified in percents of view width >
+     set viewcolumns=-80%{name},15%{ext},5%{mtime}
+<  results in three columns with lengths of 80/100, 15/100 and 5/100 of view
+   width.
+ - auto size (default) - column width is automatically determined >
+     set viewcolumns=-{name},{ext},{mtime}
+<  results in three columns with length of one third of view width. There is
+   no size adjustment to content, since it will slow down rendering.
+
+Columns of different sizing types can be freely mixed in one view. Though
+sometimes some of columns can be seen partly or be completely invisible if
+there is not enough space to display them.
+
+Column name~
+
+This is just a sort key surrounded with curly braces, e.g. >
+    {name},{ext},{mtime}
+<
+{name} and {iname} keys are the same and present both for consistency with
+|vifm-'sort'| option.
+
+Empty curly braces ({}) are replaced with the default secondary column for
+primary sort key. So after the next command views will be displayed almost as
+if |vifm-'viewcolumns'| is empty, but adding ellipsis for long file names: >
+    set viewcolumns=-{name}..,6{}.
+<
+Cropping specifier~
+
+It's from one to three dots after closing curly brace in column format.
+
+Specifies type of text truncation if it doesn't fix in the column. Currently
+tree types are supported:
+ - truncation - text is truncated >
+     set viewcolumns=-{name}.
+<  results in truncation of names that are too long too fit in the view.
+ - adding of ellipsis - ellipsis on the left or right are added when needed >
+     set viewcolumns=-{name}..
+<  results in that ellipsis are added at the end of too long file names.
+ - none (default) - text can pass column boundaries >
+     set viewcolumns=-{name}...,{ext}
+<  results in that long file names can partially be written on the ext column.
+
+--------------------------------------------------------------------------------
+*vifm-colorschemes*
+
+The color schemes in vifm can be applied in two different ways:
+   - as the default (or main) color scheme
+   - as local to a panel color scheme
+
+Both types are set using |vifm-:colorscheme| command, but of different forms:
+   - :colorscheme color_scheme_name - for the default color scheme
+   - :colorscheme color_scheme_name directory - for local color schemes
+
+Look of different parts of the TUI (Terminal User Interface) is determined in
+this way:
+   - Border, TopLineSel, TopLine, CmdLine, ErrorMsg, StatusLine and WildMenu
+     are always determined by the default color scheme
+   - CurrLine, Selected, Directory, Link, BrokenLink, Socket, Device,
+     Executable, Fifo and Win are determined by default color scheme and a set
+     of local colorschemes, which can be empty
+
+There might be a set of local color schemes because they are structured
+hierarchically according to file system structure. For example, having the
+following piece of file system: >
+
+ ~
+ `-- bin
+    |
+    `-- my
+<
+Two color schemes: >
+
+ # ~/.vifm/colors/for_bin
+ highlight Win cterm=none ctermfg=white ctermbg=red
+ highlight CurrLine cterm=none ctermfg=red ctermbg=black
+
+ # ~/.vifm/colors/for_bin_my
+ highlight CurrLine cterm=none ctermfg=green ctermbg=black
+<
+And these three commands in the vifmrc file: >
+
+ colorscheme Default
+ colorscheme for_bin ~/bin
+ colorscheme for_bin_my ~/bin/my
+<
+File list will look in the following way for each level:
+   - ~/ - Default color scheme
+       black background
+       cursor with blue background
+   - ~/bin/ - mix of Default and for_bin color schemes
+       red background
+       cursor with black background and red foreground
+   - ~/bin/my/ - mix of Default, for_bin and for_bin_my color schemes
+       red background
+       cursor with black background and green foreground
 
 --------------------------------------------------------------------------------
 *vifm-plugin*
