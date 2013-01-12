@@ -800,6 +800,10 @@ set suffixes-=.h
 " don't jump when one types brackets
 set noshowmatch
 
+" don't reset cursor position on some of motions (e.g. G, gg) to the beginning
+" of a line
+set nostartofline
+
 " automatically write buffer on some commands
 set autowrite
 
