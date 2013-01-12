@@ -836,19 +836,18 @@ set cursorline
 nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
-nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', '\\>"') \| setlocal hls<cr>
-nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', '"') \| setlocal hls<cr>
-vnoremap <silent> <leader>l :<c-u>let @/="\\C\\<<c-r>*\\>" \| setlocal hls<cr>
-vnoremap <silent> <leader><leader>l :<c-u>let @/="\\C<c-r>*" \| setlocal hls<cr>
+nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
 
-function! s:Highlight(before, after)
-    let l:word = expand('<cword>')
-    if empty(l:word)
+function! s:Highlight(before, what, after)
+    if empty(a:what)
         echohl WarningMsg | echo 'No string under the cursor.' | echohl None
         return
     end
 
-    execute a:before.l:word.a:after
+    execute a:before.a:word.a:after
     echo 'Highlighting: '.l:word
 endfunction
 
