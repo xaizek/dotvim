@@ -852,10 +852,10 @@ set cursorline
 nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
-nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"')<cr>
-nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', expand('<cword>'), '"')<cr>
-vnoremap <silent> <leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"')<cr>
-vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"')<cr>
+nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
 
 function! s:Highlight(before, what, after)
     if empty(a:what)
@@ -868,8 +868,6 @@ function! s:Highlight(before, what, after)
     let l:escapedWord = escape(l:escapedWord, '\')
     execute a:before.l:escapedWord.a:after
     echo 'Highlighting: '.a:what
-
-    setlocal hlsearch
 endfunction
 
 " increase history size
