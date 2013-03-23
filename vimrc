@@ -976,11 +976,13 @@ if !isdirectory(s:undo_dir)
     call mkdir(s:undo_dir)
 endif
 
-" go to last editing place on file open
+" go to last editing place on file open (unless git commit message is edited)
 autocmd BufReadPost *
-            \ if line("'\"") > 1 && line("'\"") <= line("$") |
-            \     execute "normal! g`\"" |
-            \ endif
+     \  if line("'\"") > 1
+     \          && line("'\"") <= line("$")
+     \          && &filetype != 'gitcommit'
+     \|     execute "normal! g`\""
+     \| endif
 
 " copy&paste to system's clipboard
 nmap <leader>y "+y
