@@ -786,8 +786,9 @@ set autoread
 " extended capacities of %
 runtime macros/matchit.vim
 
-" make some messages a bit shorter
-set shortmess+=atI
+" make some messages a bit shorter and ignore the fact that file is already
+" opened in another instance of Vim
+set shortmess+=atIA
 
 " show in vim help on K key
 set keywordprg=
