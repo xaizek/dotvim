@@ -605,6 +605,11 @@ augroup fswitch
                               \ | let b:fswitchlocs = '.'
     autocmd! BufEnter,BufRead *.cpp let b:fswitchdst = 'hpp,h'
                                 \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.xaml let b:fswitchdst = 'xaml.cs'
+                              \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.xaml.cs let b:fswitchdst = 'xaml'
+                              \ | let b:fswitchfnames = '/\.xaml//'
+                              \ | let b:fswitchlocs = '.'
 augroup end
 
 " switch to the file and load it into the current window
