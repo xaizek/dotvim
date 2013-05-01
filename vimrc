@@ -852,9 +852,13 @@ nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
 nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader>L :call <SID>Highlight('let @/="\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
 nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>L :call <SID>Highlight('let @/="', expand('<cword>'), '"') \| setlocal hls<cr>
 vnoremap <silent> <leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
 function! s:Highlight(before, what, after)
     if empty(a:what)
