@@ -1308,6 +1308,7 @@ imap <silent> <pageup>   <nop>
 imap <silent> <pagedown> <nop>
 imap <silent> <c-home>   <nop>
 imap <silent> <c-end>    <nop>
+imap <silent> <del>      <nop>
 nmap <silent> <up>       <nop>
 nmap <silent> <down>     <nop>
 nmap <silent> <left>     <nop>
@@ -1318,6 +1319,7 @@ nmap <silent> <pageup>   <nop>
 nmap <silent> <pagedown> <nop>
 nmap <silent> <c-home>   <nop>
 nmap <silent> <c-end>    <nop>
+nmap <silent> <del>      <nop>
 vmap <silent> <up>       <nop>
 vmap <silent> <down>     <nop>
 vmap <silent> <left>     <nop>
@@ -1328,6 +1330,7 @@ vmap <silent> <pageup>   <nop>
 vmap <silent> <pagedown> <nop>
 vmap <silent> <c-home>   <nop>
 vmap <silent> <c-end>    <nop>
+vmap <silent> <del>      <nop>
 
 " }}}
 " ==============================================================================
