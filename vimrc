@@ -609,8 +609,6 @@ augroup end
 
 " switch to the file and load it into the current window
 nmap <silent> <Leader>of :FSHere<cr>
-nmap <silent> <f5> :FSHere<cr>
-imap <silent> <f5> <c-o>:FSHere<cr>
 
 " in current window
 nmap <silent> <Leader>oo :FSHere<cr>
