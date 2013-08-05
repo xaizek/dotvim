@@ -28,3 +28,6 @@
 [submodule "bundle/linediff"]
 	path = bundle/linediff
 	url = https://github.com/AndrewRadev/linediff.vim.git
+[submodule "bundle/argtextobj"]
+	path = bundle/argtextobj
+	url = https://github.com/vim-scripts/argtextobj.vim.git
