@@ -449,7 +449,32 @@ nnoremap <leader><leader>g :execute 'vimgrep /\C'.expand('<cword>').'/' GetProje
 nnoremap <leader><leader>G :execute 'vimgrep /\C'.expand('<cword>').'/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
 vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
 vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
-command! -nargs=1 LookUp execute 'vimgrep /\C\<<args>\>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'
+command! -nargs=1 -bang LookUp call s:LookUp(<q-args>, <q-bang>)
+
+function s:LookUp(what, with_bang)
+    if a:with_bang == '!'
+        let l:pattern = '\C\<'.a:what.'\>'
+    else
+        let l:pattern = '\C'.a:what
+    endif
+    try
+        execute 'vimgrep /'.l:pattern.'/' s:IfAny(GetProjectRoot().'/**/*.c') s:IfAny(GetProjectRoot().'/**/*.cpp')
+    catch 'E480'
+        redraw
+        echohl WarningMsg
+        echomsg 'Nothing matching '.l:pattern.' was found.'
+        echohl None
+        return
+    endtry
+    cwindow
+endfunction
+
+function s:IfAny(glob)
+    if !empty(glob(a:glob))
+        return a:glob
+    endif
+    return ''
+endfunction
 
 " introduce variable
 nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
