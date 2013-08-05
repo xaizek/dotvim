@@ -7,6 +7,8 @@
 helptags <path to doc/> - regenerates docs tags.
 :perldo - perl-style regexps.
 
+zi - toggle folding on/off
+
 [[/]] - outer { block, next/previous
 []/][ - outer } block, next/previous
 [{/]} - inner block's { and }
@@ -23,6 +25,7 @@ daw - delete current word including surrounding spaces.
 <c-g> - print some information about current buffer.
 g<c-g> - print some information in details about current buffer.
 xp - swap current and next characters.
+Xp - swap current and previous characters.
 <c-^> - quick switch current and alternative buffers.
 <c-w>T - edit file in new tab.
 
