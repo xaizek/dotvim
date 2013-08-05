@@ -8,9 +8,9 @@ scriptencoding utf-8
 
 " force using of English locale
 if has('win32') || has('dos32')
-    let $LANG='en'
+    language en
 else
-    let $LANG='en_US.utf8'
+    language en_US.utf8
 endif
 
 " use comma key as <leader>
