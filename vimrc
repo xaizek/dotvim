@@ -317,7 +317,7 @@ autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call <SID>PrjDo('.out.vim')
 
 function! <SID>PrjDo(scrfile)
     let l:scr = findfile(a:scrfile, '.;')
-    if l:scr != '' && filereadable(l:scr)
+    if !empty(l:scr) && filereadable(l:scr)
         execute 'source '.escape(l:scr, ' ')
     endif
 endfunction
