@@ -1,12 +1,12 @@
-*vifm.txt*    For Vifm version 0.7.3a  Last change: 2012 Sep 27
+*vifm.txt*    For Vifm version 0.7.4b  Last change: 2013 Apr 14
 
  Email for bugs and suggestions: <xaizek@lavabit.com>
 
 |vifm-options|            Command line arguments.
 |vifm-general-keys|       General keys, that work in the most of modes.
-|vifm-normal|             normal mode keys.
-|vifm-visual|             visual mode keys.
-|vifm-view|               view mode keys.
+|vifm-normal|             Normal mode keys.
+|vifm-visual|             Visual mode keys.
+|vifm-view|               View mode keys.
 |vifm-command-line|       Command line mode keys.
 |vifm-commands|           How to use and set :commands.
 |vifm-commands-bg|        Backgrounding of commands.
@@ -16,13 +16,14 @@
 |vifm-functions|          List of builtin functions with description.
 |vifm-startup|            Determining of environment variables on startup.
 |vifm-configure|          Configuration of vifm.
-|vifm-compatibility-mode| Its description.
 |vifm-menus-and-dialogs|  Keys for menus and dialogs.
 |vifm-view-look|          Gives general overview of view displaying variants.
-|vifm-ls-view|            ls-like view details.
+|vifm-ls-view|            Some details about ls-like view.
 |vifm-column-view|        Column view configuration details.
 |vifm-colorschemes|       Details on using color schemes in vifm.
 |vifm-fuse|               Using automated FUSE mounts.
+|vifm-trash|              Details about trash directory in vifm.
+|vifm-clientserver|       Client-server communication.
 |vifm-plugin|             Using the vifm.vim plugin.
 |vifm-reserved|           List of reserved commands.
 
@@ -66,10 +67,17 @@ The other command line arguments are:
     of executable (on Windows) is used to log startup process (when
     configuration directory isn't determined).
 --remote                                       *vifm---remote*
-    passes all arguments that left in command line to active vifm server
-    (already running instance if any).
+    sends the rest of command line to the active vifm server (one of already
+    running instances if any).  When there is no server, quits silently.
+    There is no limit on how many arguments can be processed.  One can
+    combine --remote with -c <command> or +<command> to execute command in
+    already running instance of vifm.  See also |vifm-clientserver|.
 -c <command>, +<command>                       *vifm--c* *vifm--+c*
-    run <command> on startup.
+    run command-line mode <command> on startup.  Commands in such arguments
+    are executed in the order they appear in command line.  Commands with
+    spaces or special symbols must be enclosed in double or single quotes or
+    all special symbols should be escaped (the exact syntax strongly depends
+    on shell).
 --help, -h                                     *vifm---help* *vifm--h*
     show a brief command summary and exit vifm.
 --version, -v                                  *vifm---version* *vifm--v*
@@ -142,8 +150,8 @@ move cursor to the first column.  See |vifm-'lsview'| option description.
                                                *vifm-$*
 move cursor to the last column.  See |vifm-'lsview'| option description.
 
-                                               *vifm-Space* *vifm-Tab*
-Space or Tab to switch file lists.
+                                               *vifm-Space*
+switch file lists.
 
 Movement with Count~
 
@@ -181,13 +189,18 @@ Ctrl-W s - shortcut for |vifm-:split|            *vifm-CTRL-W_s*
 Ctrl-W t - switch to top-left window           *vifm-CTRL-W_t*
 Ctrl-W v - shortcut for |vifm-:vsplit|           *vifm-CTRL-W_v*
 Ctrl-W x - exchange panes                      *vifm-CTRL-W_x*
-Ctrl-W + - increase size of the view.          *vifm-CTRL-W_+*
-Ctrl-W - - decrease size of the view.          *vifm-CTRL-W_-*
-Ctrl-W < - increase size of the view.          *vifm-CTRL-W_<*
-Ctrl-W > - decrease size of the view.          *vifm-CTRL-W_>*
+Ctrl-W + - increase size of the view by count. *vifm-CTRL-W_+*
+Ctrl-W - - decrease size of the view by count. *vifm-CTRL-W_-*
+Ctrl-W < - increase size of the view by count. *vifm-CTRL-W_<*
+Ctrl-W > - decrease size of the view by count. *vifm-CTRL-W_>*
 Ctrl-W | - maximize current view.              *vifm-CTRL-W_|*
 Ctrl-W _ - maximize current view.              *vifm-CTRL-W__*
 Ctrl-W = - make size of two views equal.       *vifm-CTRL-W_=*
+
+For Ctrl-W +, Ctrl-W -, Ctrl-W < and Ctrl-W > commands count
+can be given before and/or after Ctrl-W.  The resulting count
+is a multiplication of those two.  So "2 Ctrl-W 2 - " will
+decrease window size by 4 lines or columns.
 
 Marks~
 
@@ -282,8 +295,13 @@ Other Normal Mode Keys~
 [count]!! and [count]!<selector> - enter command line mode with entered !
     command.  Count will modify range.
 
-Ctrl-O - go backward through history.          *vifm-CTRL-O*
-Ctrl-I - go forward through history.           *vifm-CTRL-I*
+                                               *vifm-CTRL-O*
+Ctrl-O - go backward through history.
+
+                                               *vifm-CTRL-I* *vifm-Tab*
+Ctrl-I - if |vifm-'cpoptions'| contains "f" flag, <tab> and <c-i> switch
+    active pane just like |vifm-Space| does, otherwise it goes forward
+    through directory history of the current view.
 
                                                *vifm-CTRL-G*
 Ctrl-G - creates a window showing detailed information about the current
@@ -355,13 +373,13 @@ cp - change file attributes (permission on *nix and properties on
 [count]C - clone file [count] times.
 
                                                *vifm-d* *vifm-dd*
-dd - move selected file or files to $VIFM/Trash (if option |vifm-'trash'|
-    is set otherwise delete)
+dd - move selected file or files to |vifm-trash| directory (if option
+    |vifm-'trash'| is set, otherwise delete).
 d<selector> - like dd.
 
                                                *vifm-D* *vifm-DD*
-DD and D<selector> - like dd and d<selector>, but omitting trash directory
-    (even when option |vifm-'trash'| is set).
+DD and D<selector> - like dd and d<selector>, but omitting |vifm-trash|
+    directory (even when |vifm-'trash'| option is set).
 
 yy, Y - yank selected files.                   *vifm-yy* *vifm-Y*
 y<selector> - yank files.                      *vifm-y*
@@ -369,7 +387,7 @@ y<selector> - yank files.                      *vifm-y*
                                                *vifm-p*
 p - will copy the yanked files to the current directory or move the files
     to the current directory if they were deleted with dd or :d[elete] or
-    if the files were yanked from the Trash directory.
+    if the files were yanked from |vifm-trash| directory.
 
                                                *vifm-P*
 P - moves the last yanked files.  The advantage of using P instead of d
@@ -400,8 +418,12 @@ v, V - start visual selection of files.        *vifm-v* *vifm-V*
 ZQ - same as :quit!                            *vifm-ZQ*
 ZZ - same as :quit                             *vifm-ZZ*
 
+
                                                *vifm-.*
-. - repeat last command line command (not normal mode command).
+. - repeat last command line command (not normal mode command) of this
+    session (does nothing right after startup or |vifm-:restart| command).
+    The command doesn't depend on command-line history and can be used
+    with completely disabled history.
 
 
                                                *vifm-(*
@@ -453,7 +475,7 @@ aren't and should be used to append new files to the existing file list
 of appropriate lowercase register (A for a, B for b, ...).
 
 Registers can be changed on :empty command if they contain files under
-Trash directory.
+|vifm-trash| directory.
 
 Registers do not contain one file more than once.
 
@@ -468,8 +490,8 @@ will insert previously yanked and deleted files into current directory.
 
 Selectors~
                                                *vifm-selectors*
-y, d and D commands accept selectors.  You can combine them with any of
-selectors below to quickly remove or yank several files.
+y, d, D, !, gu and gU commands accept selectors.  You can combine them with
+any of selectors below to quickly remove or yank several files.
 
 j, k, gg, G, H, L, M, %, f, F, ;, comma, ', ^, 0 and $ can be used as
 selectors for several commands.
@@ -482,6 +504,12 @@ For example:
 dj - delete file under cursor and one below.
 d2j - delete file under cursor and two below.
 y6gg - yank all files from cursor position to 6th file in the list.
+
+When you pass a count to whole command and its selector they are
+multiplied. So:
+2d2j - delete file under cursor and four below.
+2dj - delete file under cursor and two below.
+2y6gg - yank all files from cursor position to 12th file in the list.
 
 --------------------------------------------------------------------------------
 *vifm-visual*
@@ -864,9 +892,8 @@ The builtin commands are:
 :dirs - display directory stack.
 
                                                *vifm-:echo* *vifm-:ec*
-:ec[ho] [<expr>...] - echoes each of argument as expressions and
-    outputs them separated by a space.  See |vifm-:let| for definition of
-    <expr>.
+:ec[ho] [<expr>...] - evaluates each argument as an expression and outputs
+    them separated by a space.  See |vifm-:let| for definition of <expr>.
 
                                                *vifm-:edit* *vifm-:e*
 :[range]e[dit] [file...] - will load the selected or passed file or files
@@ -877,17 +904,17 @@ The builtin commands are:
     previously were not being executed.  See also |vifm-:if|.
 
                                                *vifm-:empty*
-:empty - permanently remove files from the $VIFM/Trash directory.  It will
-    also remove all operations from undolist that have no sense after :empty
-    and remove all records about files in the Trash directory from all
-    registers.
+:empty - permanently remove files from |vifm-trash| directory.  It will also
+    remove all operations from undolist that have no sense after :empty and
+    remove all records about files in |vifm-trash| directory from all registers.
 
                                                *vifm-:endif* *vifm-:en*
 :en[dif] - ends conditional block.  See also |vifm-:if| and |vifm-:else|.
 
                                                *vifm-:execute* *vifm-:exe*
-:exe[cute] [arg...] - will join all passed arguments by inserting a single
-    space between them and execute resulting string as a command-line command.
+:exe[cute] [<expr>...] - evaluates each argument as an expression and joins
+    results separated by a space to get a single string which is then executed
+    as a command-line command.  See |vifm-:let| for definition of <expr>.
 
                                                *vifm-:exit* *vifm-:exi*
 :exi[t][!] - same as :quit.
@@ -1162,8 +1189,8 @@ order using the '.' operator.  Any whitespace is ignored.
     keys mapped in current session).
 
                                                *vifm-:restore*
-:[range]restore - will restore file from Trash.  Works in trash directory
-    only.
+:[range]restore - will restore file from |vifm-trash| directory, doesn't work
+    in any other directory.
 
                                                *vifm-:rlink*
 :[range]rlink[!?] - creates relative symbolic links of files in directory of
@@ -1199,6 +1226,7 @@ order using the '.' operator.  Any whitespace is ignored.
      - for enumeration options - option=x, option+=x and option-=x
      - for enumeration options - option=x
      - for set options - option=x, option+=x and option-=x
+     - for charset options - option=x, option+=x and option-=x
     the meaning:
      - option - turn option on (for boolean) or print its value (for all
          others)
@@ -1260,6 +1288,8 @@ particular the second column of the view will be changed).
 :sync [relative path] - change the other panel to the current panel
     directory or to some path relative to the current directory.  Using
     macros is allowed.
+:sync! - change the other panel to the current panel directory and
+    synchronize cursor position.
 
                                                *vifm-:undolist* *vifm-:undol*
 :undol[ist] - show list of latest changes.  Add ! to see commands.
@@ -1407,27 +1437,44 @@ user can chose what to do next.
 The builtin commands that accept a range are :d[elete] and :y[ank].
 
 Command macros~
-
+                                                               *vifm-macros*
 The command macros may be used in user commands.
-  %a      user arguments.  When user arguments contain macros, they are
-          expanded before preforming substitution of %a.
-  %c %"c  the current file under the cursor.
-  %C %"C  the current file under the cursor in the other directory.
-  %f %"f  all of the selected files.
-  %F %"F  all of the selected files in the other directory list.
-  %b %"b  same as %f %F.
-  %d %"d  full path to current directory.
-  %D %"D  full path to other file list directory.
-  %m      show command output in a menu.
-  %M      same as %m, but l (or Enter) key is handled like for :locate
-          and :find commands.
-  %S      show command output in the status bar.
-  %s      execute command in screen split.
-  %i      completely ignore command output.
+                                                               *vifm-%a*
+  %a        user arguments.  When user arguments contain macros, they are
+            expanded before preforming substitution of %a.
+                                                               *vifm-%c*
+  %c  %"c   the current file under the cursor.
+                                                               *vifm-%C*
+  %C  %"C   the current file under the cursor in the other directory.
+                                                               *vifm-%f*
+  %f  %"f   all of the selected files.
+                                                               *vifm-%F*
+  %F  %"F   all of the selected files in the other directory list.
+                                                               *vifm-%b*
+  %b  %"b   same as %f %F.
+                                                               *vifm-%d*
+  %d  %"d   full path to current directory.
+                                                               *vifm-%D*
+  %D  %"D   full path to other file list directory.
+                                                               *vifm-%r*
+  %rx %"rx  full paths to files in the register {x}.  In case of invalid
+            symbol in place of {x}, it's processed with the rest of the
+            line and default register is used.
+                                                               *vifm-%m*
+  %m        show command output in a menu.
+                                                               *vifm-%M*
+  %M        same as %m, but l (or Enter) key is handled like for :locate
+            and :find commands.
+                                                               *vifm-%S*
+  %S        show command output in the status bar.
+                                                               *vifm-%s*
+  %s        execute command in screen split (ignored if not running in screen).
+                                                               *vifm-%i*
+  %i        completely ignore command output.
 
 Use %% if you need to put a percent sign in your command.
 
-Note that %m, %M, %s, %S and %i macros are mutually exclusive. Only the
+Note that %m, %M, %s, %S and %i macros are mutually exclusive.  Only the
 last one of them in the command will take effect.
 
 You can use filename modifiers after %c, %C, %f, %F, %b, %d and %D macros.
@@ -1525,6 +1572,20 @@ and :pushd commands (and on startup if autochpos is disabled in the vifmrc).
 l key in the :history . menu is treated like :cd command.  This option affects
 bookmarks, file position will not preserved.
 
+                                               *vifm-'classify'*
+classify
+type: string list
+default: ":dir:/"
+Specifies file name prefixes and suffixes depending on file types.  The format
+is: [{prefix}]:{filetype}:[{suffix}].  Either {prefix} or {suffix} or both of
+them can be omitted (which is the default for all unspecified file types),
+this means empty {prefix} and/or {suffix}.  {prefix} and {suffix} should
+consist exactly of one character. Elements are separated by commas.  Neither
+prefixes nor suffixes are part of file names, so they don't affect commands
+which operate on file names in any way. Comma (',') character should not be
+used.  List of file type names can be found in the description of
+|vifm-filetype()| function.
+
                                                *vifm-'columns'* *vifm-'co'*
 columns co
 type: int
@@ -1540,12 +1601,25 @@ undo/redo operation).
 
                                                *vifm-'cpoptions'* *vifm-'cpo'*
 cpoptions cpo
-type: string
-default: "s"
+type: charset
+default: "st"
 Contains a sequence of single-character flags.  Each flag enables behaviour of
 older versions of vifm.  Flags:
-s - when included, yy and dd act on the selection, otherwise they operate on
-    current file only.
+s - when included, |vifm-yy|, |vifm-dd| and |vifm-DD| normal mode commands act on
+    selection, otherwise they operate on current file only;
+t - when included, <tab> (thus <c-i>) behave as <space> and switch active
+    pane, otherwise <c-i> goes forward in the view history.
+
+                                               *vifm-'dotdirs'*
+dotdirs
+type: set
+default: nonrootparent
+Controls displaying of dot directories.  The following values are possible:
+   rootparent    - show "../" in root directory of file system
+   nonrootparent - show "../" in non-root directories of file system
+Note that empty directories will always contain "../" entry regardless of value
+of this option.  "../" will disappear at the moment at least one file is created
+inside the directory.
 
                                                *vifm-'fastrun'*
 fastrun
@@ -1563,7 +1637,7 @@ Follow links on l or Enter.
                                                *vifm-'fusehome'*
 fusehome
 type: string
-default: "/tmp/vifm_FUSE/"
+default: "($TMPDIR | $TEMP | $TEMPDIR | $TMP)/vifm_FUSE/"
 Directory to be used as a root dir for FUSE mounts.
 If you change this option, vifm won't remount anything.  It affects future
 mounts only. See |vifm-fuse| section for more information about FUSE mounts.
@@ -1671,6 +1745,15 @@ type: string
 default: $SHELL or "sh" or "cmd" (on MS-Windows)
 Full path to the shell to use to run external commands.
 
+                                               *vifm-'shortmess'* *vifm-'shm'*
+shortmess shm
+type: charset
+default: ""
+Contains a sequence of single-character flags.  Each flag enables shortening
+of some message displayed by vifm in the TUI.  Flags:
+T - truncate status-bar messages in the middle if they are too long to fit on
+    the command line.  "..." will appear in the middle.
+
                                                *vifm-'slowfs'*
                                                {only for *nix}
 slowfs
@@ -1703,6 +1786,7 @@ key, etc.):
    [+-]gid   - sort by group id (*nix only)
    [+-]gname - sort by group name (*nix only)
    [+-]mode  - sort by mode (*nix only)
+   [+-]perms - sort by permissions string (*nix only)
    [+-]uid   - sort by owner id (*nix only)
    [+-]uname - sort by owner name (*nix only)
    [+-]size  - sort by size
@@ -1781,14 +1865,14 @@ Format of time in file list.  See man date or man strftime for details.
 trash
 type: boolean
 default: true
-Use trash directory.
+Use |vifm-trash| directory.
 
                                                *vifm-'trashdir'*
 trashdir
 type: string
 default: "$HOME/.vifm/Trash
-Sets the trash directory. Will attempt to create the directory if it does not
-exist.
+Sets path to |vifm-trash| directory.  Will attempt to create the directory
+if it does not exist.
 
                                                *vifm-'timeoutlen'* *vifm-'tm'*
 timeoutlen tm
@@ -1839,7 +1923,7 @@ Controls what will be saved in the $VIFM/vifminfo file.
    tui       - state of the user interface (sorting, number of windows, quick
                view state, active view)
    dhistory  - directory history
-   state     - filters and screen program using state
+   state     - file name and dot filters and screen program using state
    cs        - default color scheme
    savedirs  - save last visited directory (needs dhistory)
    chistory  - command line history
@@ -2018,7 +2102,18 @@ Examples: >
 
 USAGE             RESULT        DESCRIPTION	~
 
+expand({expr})    String        Expand macros in {expr}.
 filetype({fnum})  String        Returns file type from position.
+
+expand({expr})                                 *vifm-expand()*
+Expands macros in {expr} just like it's done for command-line commands.
+Returns a string.  See |vifm-macros|.
+
+Examples: >
+  " percent sign
+  :echo expand('%%')
+  " the last part of directory name of the other pane
+  :echo expand('%D:t')
 
 filetype({fnum})                               *vifm-filetype()*
 The result is a string, which represents file type and is one of the list:
@@ -2033,15 +2128,6 @@ The result is a string, which represents file type and is one of the list:
     ?      unknown file type (should never appear)
 Parameter {fnum} can have following values:
     - '.' to get type of file under the cursor in the active pane
-
---------------------------------------------------------------------------------
-*vifm-compatibility-mode*
-
-Compatibility mode:
-    - <tab> to switch between panes.
-
-Vim like mode:
-    - <c-i> (<tab>) to go forward on history.
 
 --------------------------------------------------------------------------------
 *vifm-menus-and-dialogs*
@@ -2093,7 +2179,7 @@ and :range are supported).
 
 Apropos menu~
 
-l key wont close the menu allowing user to pick another man page, use :q to
+l key won't close the menu allowing user to pick another man page, use :q to
 close the menu.
 
 vifm-commands menu~
@@ -2251,7 +2337,7 @@ All % macros are expanded by vifm at runtime and have the following meaning:
    - %CLEAR means that you want to clear screen before running mount command.
 
 %CLEAR is an optional macro.  Other macros are not mandatory, but mount
-commands likely wont work without them.
+commands likely won't work without them.
 
 The mounted FUSE file systems will be automatically unmounted in two cases:
    - when vifm quits (with |vifm-ZZ|, |vifm-:q|, etc. or when killed by signal);
@@ -2312,10 +2398,10 @@ Alignment specifier~
 
 It's an optional minus sign as the first symbol of the string.
 
-Specifies type of text alignment within a column. Two types are supported:
- - left align (default) >
+Specifies type of text alignment within a column.  Two types are supported:
+ - left align >
      set viewcolumns=-{name}
-<- right align >
+<- right align (default) >
      set viewcolumns={name}
 <
 Width specifier~
@@ -2381,7 +2467,7 @@ Both types are set using |vifm-:colorscheme| command, but of different forms:
    - :colorscheme color_scheme_name - for the default color scheme
    - :colorscheme color_scheme_name directory - for local color schemes
 
-Look of different parts of the TUI (Terminal User Interface) is determined in
+Look of different parts of the TUI (Text User Interface) is determined in
 this way:
    - Border, TopLineSel, TopLine, CmdLine, ErrorMsg, StatusLine and WildMenu
      are always determined by the default color scheme
@@ -2425,6 +2511,63 @@ File list will look in the following way for each level:
        cursor with black background and green foreground
 
 --------------------------------------------------------------------------------
+*vifm-trash*
+
+vifm has support of trash directory, which is used as temporary storage for
+deleted files or files that were cut.  Using trash is controlled by the
+|vifm-'trash'| option, and exact path to the trash can be set with
+|vifm-'trashdir'| option.  Trash directory in vifm differs from the system-wide
+one by default, because of possible incompatibilities of storing deleted files
+among different file managers.  But one can set |vifm-'trashdir'| to
+"~/.local/share/Trash" to use a "standard" trash directory.
+
+There are two scenarios of using trash in vifm:
+
+1. As a place for storing files that were cut by |vifm-d| and may be
+   inserted to some other place in file system.
+2. As a storage of files, that are deleted but not purged yet.
+
+The first scenario uses deletion (|vifm-d|) operations to put files to
+trash and put (|vifm-p|) operations to restore files from trash directory.
+Note that such operations move files to and from trash directory,
+which can be long term operations in case of different partitions or
+remote drives mounted locally.
+
+The second scenario uses deletion (|vifm-d|) operations for moving files
+to trash directory and |vifm-:empty| command-line command to purge all
+previously deleted files.
+
+Deletion and put operations depend on registers, which can point to files in
+trash directory.  Normally, there are no nonexistent files in registers, but
+vifm doesn't keep track of modifications under trash directory, so one
+shouldn't expect value of registers to be absolutely correct if trash
+directory was modified not by operation that are meant for it.  But this
+won't lead to any issues with operations, since they ignore nonexistent
+files.
+
+--------------------------------------------------------------------------------
+*vifm-clientserver*
+
+vifm supports remote execution of command-line mode commands as well as remote
+changing of directories.  This is possible using |vifm---remote| command-line
+argument.
+
+To execute a command remotely combine --remote argument with |vifm--c| or
+|vifm--+c|.  For example: >
+    vifm --remote -c 'cd /'
+    vifm --remote '+cd /'
+<
+To change directory not using command-line mode commands one can specify paths
+right after --remote argument, like this: >
+    vifm --remote /
+    vifm --remote ~
+    vifm --remote /usr/bin /tmp
+<
+At the moment there is no way of specifying, which instance of vifm should
+arguments be sent.  The main purpose of --remote argument is to provide
+support of using vifm as a single-instance application.
+
+--------------------------------------------------------------------------------
 *vifm-plugin*
 
 vifm-plugin for using vifm in vim as a file selector.
@@ -2439,7 +2582,11 @@ Commands:
   :TabVifm    select a file or files to open in tabs.
 
 Each command accepts up to two arguments: left pane directory and right pane
-directory.
+directory.  After arguments are checked, vifm process is spawned in a special
+"file-picker" mode.  To pick files just open them either by pressing l, i or
+Enter keys, or by running :edit command.  If no files are selected, file
+under the cursor is opened, otherwise whole selection is passed to the plugin
+and opened in vim.
 
 The plugin have only two settings.  It's a string variable named g:vifm_term to
 let user specify command to run gui terminal.  By default it's equal to
