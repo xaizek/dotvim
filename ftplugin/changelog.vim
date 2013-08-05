@@ -8,7 +8,7 @@ nnoremap <silent><buffer> ]] :call <SID>GoToSection(1)<cr>
 
 " Moves cursor to next or previous section depending on value of the
 " searchForward argument.
-function! <SID>FindBegin(searchForward)
+function! <SID>GoToSection(searchForward)
     let l:backwardFlag = a:searchForward ? '' : 'b'
     let l:position = search('^\S', 'nW'.l:backwardFlag)
     if l:position == 0
