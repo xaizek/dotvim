@@ -1124,9 +1124,9 @@ inoremap <c-l> <c-^>
 
 " for work of normal mode commands
 if has('win32')
-    lang ctype Russian_Russia.1251
+    language ctype Russian_Russia.1251
 else
-    lang ctype ru_RU.utf8
+    language ctype ru_RU.utf8
 endif
 
 " }}}
