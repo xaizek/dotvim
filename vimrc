@@ -158,6 +158,7 @@ autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 " break current line into two on Enter key (except some windows)
 autocmd BufReadPost,BufEnter,BufWinEnter,WinEnter  *
             \ if &filetype == 'qf' |
+            \ elseif &filetype == 'vifm-cmdedit' |
             \ elseif bufname("%") == '__TagBar__' |
             \ elseif !&modifiable |
             \ elseif &readonly |
