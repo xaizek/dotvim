@@ -31,3 +31,6 @@
 [submodule "bundle/argtextobj"]
 	path = bundle/argtextobj
 	url = https://github.com/vim-scripts/argtextobj.vim.git
+[submodule "bundle/firsteffectiveline"]
+	path = bundle/firsteffectiveline
+	url = https://github.com/vim-scripts/FirstEffectiveLine.vim.git
