@@ -402,6 +402,11 @@ endif
 " for automatic tags regeneration on file write
 autocmd! BufWritePost *.c,*.cpp,*.h,*.hpp call <SID>UpdateTags(expand('%'))
 function! <SID>UpdateTags(changedfile)
+    " don't try to write to non-accessible directories, e.g. to fugitive:///...
+    if filewritable(expand('%:p:h')) != 2
+        return
+    endif
+
     let l:tags = findfile('tags', '.;')
     if l:tags != ''
         let l:tagsfile = fnamemodify(l:tags, ':p')
