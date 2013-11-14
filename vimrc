@@ -1,5 +1,3 @@
-" vim: set foldmethod=marker foldlevel=0 :miv "
-
 " if a .vimrc file exists, vim will start in nocompatible mode
 
 set encoding=utf-8
@@ -19,16 +17,15 @@ let mapleader=','
 let $MYVIMRC=$HOME.'/.vim/vimrc'
 
 " ==============================================================================
-" for Pathogen plugin {{{
+" for Pathogen plugin
 
 if &loadplugins == 1
     filetype off
     call pathogen#infect()
 endif
 
-" }}}
 " ==============================================================================
-" look&feel {{{
+" look&feel
 
 " enable line numbers
 set number
@@ -149,11 +146,11 @@ set showtabline=2
 " don't use conceal feature in cpp and c files
 autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 
-" }}}
 " ==============================================================================
-" editing and formatting {{{
+" editing and formatting
 
-" modification for Enter key in normal mode {{{
+" ------------------------------------------------------------------------------
+" modification for Enter key in normal mode
 
 " break current line into two on Enter key (except some windows)
 autocmd BufReadPost,BufEnter,BufWinEnter,WinEnter  *
@@ -179,8 +176,8 @@ function! MyEnter()
     endif
 endfunction
 
-" }}}
-" improved A normal mode key{{{
+" ------------------------------------------------------------------------------
+" improved A normal mode key
 
 nmap <expr> A MyA()
 nnoremap ZA A
@@ -197,7 +194,7 @@ function! MyA()
     endif
 endfunction
 
-" }}}
+" ------------------------------------------------------------------------------
 
 " use unix-style eol by default
 set fileformats=unix,dos
@@ -240,22 +237,22 @@ set formatprg=par\ -w80\ T2\ \|\ sed\ 's/\ \ /\\t/g'
 nmap <leader>f o<esc>
 nmap <leader>F O<esc>
 
-" }}}
 " ==============================================================================
-" programming {{{
+" programming
 
-" for Python {{{
+" ------------------------------------------------------------------------------
+" for Python
 
 " highlight more things for Python-scripts
 let g:python_highlight_all=1
 
-" }}}
-" for Java {{{
+" ------------------------------------------------------------------------------
+" for Java
 
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
-" }}}
-" some useful abbreviations for c and c++ {{{
+" ------------------------------------------------------------------------------
+" some useful abbreviations for c and c++
 
 autocmd FileType c,cpp execute
             \ 'iabbrev <buffer> #d #define'
@@ -264,8 +261,8 @@ autocmd FileType c,cpp execute
 autocmd FileType c,cpp execute
             \ 'iabbrev <buffer> #p #pragma'
 
-" }}}
-" custom tag jumps {{{
+" ------------------------------------------------------------------------------
+" custom tag jumps
 
 " on each next <c-]> press jumps to next tag with same name
 nmap <silent> <c-]> :silent! call <SID>CallTagJump()<cr>
@@ -309,8 +306,8 @@ function! <SID>TagJump(tg)
     call cursor(line('.'), match(getline('.'), a:tg) + 1)
 endfunction
 
-" }}}
-" some kind of projects {{{
+" ------------------------------------------------------------------------------
+" some kind of projects
 
 autocmd BufEnter,BufWinEnter,WinEnter * call <SID>PrjDo('.in.vim')
 autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call <SID>PrjDo('.out.vim')
@@ -336,7 +333,7 @@ function! GetProjectRoot()
     return l:result
 endfunction
 
-" }}}
+" ------------------------------------------------------------------------------
 
 " for curly braces
 "autocmd BufReadPost * :call <SID>SetAutoBrackets()
@@ -479,28 +476,28 @@ endfunction
 " introduce variable
 nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
 
-" }}}
 " ==============================================================================
-" plugins {{{
+" plugins
 
-" SuperTab {{{
+" ------------------------------------------------------------------------------
+" SuperTab
 
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 
-" }}}
-" ProtoDef {{{
+" ------------------------------------------------------------------------------
+" ProtoDef
 
 let g:disable_protodef_sorting = 1
 
-" }}}
-" XPTemplate {{{
+" ------------------------------------------------------------------------------
+" XPTemplate
 
 " disable bracket autocompletion
 let g:xptemplate_brace_complete=''
 
-" }}}
-" inccomplete {{{
+" ------------------------------------------------------------------------------
+" inccomplete
 
 if has('win32')
     let g:inccomplete_findcmd = 'e:/cygwin/bin/find'
@@ -512,8 +509,8 @@ let g:inccomplete_addclosebracket = ''
 
 let g:inccomplete_showdirs = 1
 
-" }}}
-" qthelp {{{
+" ------------------------------------------------------------------------------
+" qthelp
 
 if has('win32')
     let g:qthelp_browser = 'start '
@@ -525,16 +522,16 @@ endif
 " show help on Qt classes
 nmap <silent> <leader>q :QHelpOnThis<cr>
 
-" }}}
-" Gundo {{{
+" ------------------------------------------------------------------------------
+" Gundo
 
 nmap <f12> :GundoToggle<cr>
 
 " show preview in the bottom
 let g:gundo_preview_bottom=1
 
-" }}}
-" clang_complete {{{
+" ------------------------------------------------------------------------------
+" clang_complete
 
 " default options
 if !has('win32')
@@ -577,8 +574,8 @@ nmap <silent> <leader>Q :call g:ClangUpdateQuickFix()<cr>
 " toggle autocompletion on <leader>q
 nmap <silent> <leader>q :let g:clang_complete_auto=!g:clang_complete_auto<cr>
 
-" }}}
-" TagList {{{
+" ------------------------------------------------------------------------------
+" TagList
 "
 " show TagList window at right
 " let Tlist_Use_Right_Window=1
@@ -604,8 +601,8 @@ nmap <silent> <leader>q :let g:clang_complete_auto=!g:clang_complete_auto<cr>
 " show taglist on ,t
 " map <leader>t :TlistToggle<cr>
 "
-"" }}}
-" TagBar {{{
+" ------------------------------------------------------------------------------
+" TagBar
 
 " expand window when it's needed
 let g:tagbar_expand = 1
@@ -622,8 +619,8 @@ let g:tagbar_autofocus = 1
 " map tagbar toggle on ,t
 nmap <leader>t :TagbarToggle<cr>
 
-" }}}
-" FSwitch {{{
+" ------------------------------------------------------------------------------
+" FSwitch
 
 " autocommands to setup settings for different file types
 augroup fswitch
@@ -675,14 +672,14 @@ nmap <silent> <Leader>oj :FSBelow<cr>
 " switch to the file and load it into a new window split below
 nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
-" }}}
-" utl {{{
+" ------------------------------------------------------------------------------
+" utl
 
 let g:utl_cfg_hdl_mt_text_directory="!Thunar '%p'"
 let g:utl_cfg_hdl_mt_image_djvu="!exo-open '%p'"
 
-" utl }}}
-" vifm {{{
+" ------------------------------------------------------------------------------
+" vifm
 
 if has('win32')
     let g:vifm_term = ''
@@ -692,23 +689,23 @@ else
     let g:vifm_term = 'xterm -maximized -e'
 endif
 
-" vifm }}}
-" linediff {{{
+" ------------------------------------------------------------------------------
+" linediff
 
 nmap <leader>d :Linediff<cr>
 nmap <leader>D :LinediffReset<cr>
 vmap <leader>d :Linediff<cr>
 vmap <leader>D :LinediffReset<cr>
 
-" linediff }}}
-" commentary {{{
+" ------------------------------------------------------------------------------
+" commentary
 
 xmap gc  \\
 nmap gc  \\
 nmap gcc \\\
 
-" commentary }}}
-" neocomplcache {{{
+" ------------------------------------------------------------------------------
+" neocomplcache
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -724,8 +721,8 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-" }}}
-" SingleCompile {{{
+" ------------------------------------------------------------------------------
+" SingleCompile
 
 nmap <f9> :call <SID>CSWrapper('SCCompile')<cr>
 nmap <s-f9> :call <SID>CSWrapper('SCCompileRun')<cr>
@@ -752,8 +749,8 @@ function! <SID>ReadSCAF()
     let b:SCAF = substitute(l:directive, '^SCAF:\s*', '', '')
 endfunction
 
-" SingleCompile }}}
-" NERDTree {{{
+" ------------------------------------------------------------------------------
+" NERDTree
 
 " map NERDTree toggle
 nmap <leader>n :NERDTreeToggle<cr>
@@ -761,8 +758,8 @@ nmap <leader>n :NERDTreeToggle<cr>
 " don't use NERDTree as file manager
 let g:NERDTreeHijackNetrw=0
 
-" }}}
-" netrw {{{
+" ------------------------------------------------------------------------------
+" netrw
 
 " patterns of files that should be ignored by netrw
 let g:netrw_list_hide='^.*\.un\~$,^.*\.swp$'
@@ -776,13 +773,13 @@ let g:netrw_liststyle=3
 " preview in a vertival split
 let g:netrw_preview=1
 
-" }}}
-" pydiction {{{
+" ------------------------------------------------------------------------------
+" pydiction
 
 let g:pydiction_location = '/home/xaizek/.vim/bundle/pydiction/pydiction.py'
 
-" pydiction }}}
-" ultisnips {{{
+" ------------------------------------------------------------------------------
+" ultisnips
 
 " configure shortcuts
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -792,11 +789,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " configure snippets directory name
 let g:UltiSnipsSnippetDirectories=["ultisnips"]
 
-" ultisnips }}}
+" ------------------------------------------------------------------------------
 
-" plugins }}}
 " ==============================================================================
-" misc {{{
+" misc
 
 " run terminal emulator in the current directory
 if has('win32')
@@ -1087,9 +1083,8 @@ function! <SID>SetParams()
     endif
 endfunction
 
-" }}}
 " ==============================================================================
-" tabulation and indentation {{{
+" tabulation and indentation
 
 " replace tabulation characters with spaces
 set expandtab
@@ -1109,9 +1104,8 @@ set listchars+=precedes:<,extends:>
 " width of a shift for normal, visual and selection modes
 set shiftwidth=4
 
-" }}}
 " ==============================================================================
-" work with Cyrillic symbols {{{
+" work with Cyrillic symbols
 
 " this is needed for normal work with non-English languages in insert mode
 set keymap=russian-jcukenwin
@@ -1129,9 +1123,8 @@ else
     language ctype ru_RU.utf8
 endif
 
-" }}}
 " ==============================================================================
-" folding {{{
+" folding
 
 " use syntactic folding for vim-script
 let g:vimsyn_folding = 'f'
@@ -1145,9 +1138,8 @@ let g:vimsyn_folding = 'f'
 " close folds automatically
 " set foldclose=all
 
-" }}}
 " ==============================================================================
-" misc commands and functions {{{
+" misc commands and functions
 
 if !exists(":DiffOrig")
   command DiffOrig set noautowrite | vert new | set bt=nofile | r # | 0d_
@@ -1330,9 +1322,8 @@ function! GetIncludesIn(file)
     endif
 endfunction
 
-" }}}
 " ==============================================================================
-" don't let me use "wrong" keys {{{
+" don't let me use "wrong" keys
 
 imap <silent> <up>       <nop>
 imap <silent> <down>     <nop>
@@ -1368,9 +1359,8 @@ vmap <silent> <c-home>   <nop>
 vmap <silent> <c-end>    <nop>
 vmap <silent> <del>      <nop>
 
-" }}}
 " ==============================================================================
-" load machine specific local set of settings {{{
+" load machine specific local set of settings
 
 let s:vimrc_local_path = $HOME . '/.vimrc_local'
 if filereadable(s:vimrc_local_path)
@@ -1378,7 +1368,9 @@ if filereadable(s:vimrc_local_path)
 endif
 unlet s:vimrc_local_path
 
-" }}}
 " ==============================================================================
+" experiments and tests
 
 let g:pymode_syntax=1
+
+" vim: set textwidth=80 syntax+=.autofold :
