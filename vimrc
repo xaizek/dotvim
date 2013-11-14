@@ -21,7 +21,7 @@ let $MYVIMRC=$HOME.'/.vim/vimrc'
 
 if &loadplugins == 1
     filetype off
-    call pathogen#infect()
+    execute pathogen#infect('bundle/*/{}')
 endif
 
 " ==============================================================================

@@ -5,7 +5,7 @@
 " Install in ~/.vim/autoload (or ~\vimfiles\autoload).
 "
 " For management of individually installed plugins in ~/.vim/bundle (or
-" ~\vimfiles\bundle), adding `call pathogen#infect()` to the top of your
+" ~\vimfiles\bundle), adding `execute pathogen#infect()` to the top of your
 " .vimrc is the only other setup necessary.
 "
 " The API is documented inline below.  For maximum ease of reading,
@@ -32,7 +32,7 @@ function! pathogen#infect(...) abort " {{{1
     if path =~# '^[^\\/]\+$'
       call s:warn('Change pathogen#infect('.string(path).') to pathogen#infect('.string(path.'/{}').')')
       call pathogen#incubate(path . '/{}')
-    elseif path =~# '^[^\\/]\+[\\/]\%({}\|\*\)$'
+    elseif path =~# '^[^\\/]\+[\\/][^\\/]\+[\\/]\%({}\|\*\)$'
       call pathogen#incubate(path)
     elseif path =~# '[\\/]\%({}\|\*\)$'
       call pathogen#surround(path)

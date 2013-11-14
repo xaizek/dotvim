@@ -1,36 +1,36 @@
-[submodule "bundle/clang_complete"]
-	path = bundle/clang_complete
+[submodule "bundle/completion/clang_complete"]
+	path = bundle/completion/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
-[submodule "bundle/inccomplete"]
-	path = bundle/inccomplete
+[submodule "bundle/completion/inccomplete"]
+	path = bundle/completion/inccomplete
 	url = https://github.com/xaizek/vim-inccomplete.git
-[submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
+[submodule "bundle/other/ultisnips"]
+	path = bundle/other/ultisnips
 	url = git://github.com/xaizek/ultisnips.git
-[submodule "bundle/repeat"]
-	path = bundle/repeat
+[submodule "bundle/other/repeat"]
+	path = bundle/other/repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/emacscommandline"]
-	path = bundle/emacscommandline
+[submodule "bundle/other/emacscommandline"]
+	path = bundle/other/emacscommandline
 	url = https://github.com/xaizek/vim-emacscommandline.git
-[submodule "bundle/vrackets"]
-	path = bundle/vrackets
+[submodule "bundle/other/vrackets"]
+	path = bundle/other/vrackets
 	url = https://github.com/vim-scripts/vrackets
-[submodule "bundle/commentary"]
-	path = bundle/commentary
+[submodule "bundle/other/commentary"]
+	path = bundle/other/commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "bundle/fswitch"]
-	path = bundle/fswitch
+[submodule "bundle/other/fswitch"]
+	path = bundle/other/fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git
-[submodule "bundle/fugitive"]
-	path = bundle/fugitive
+[submodule "bundle/other/fugitive"]
+	path = bundle/other/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "bundle/linediff"]
-	path = bundle/linediff
+[submodule "bundle/other/linediff"]
+	path = bundle/other/linediff
 	url = https://github.com/AndrewRadev/linediff.vim.git
-[submodule "bundle/argtextobj"]
-	path = bundle/argtextobj
+[submodule "bundle/textobj/arg"]
+	path = bundle/textobj/arg
 	url = https://github.com/vim-scripts/argtextobj.vim.git
-[submodule "bundle/firsteffectiveline"]
-	path = bundle/firsteffectiveline
+[submodule "bundle/other/firsteffectiveline"]
+	path = bundle/other/firsteffectiveline
 	url = https://github.com/vim-scripts/FirstEffectiveLine.vim.git
