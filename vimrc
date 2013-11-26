@@ -448,7 +448,7 @@ vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'
 vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
 command! -nargs=1 -bang LookUp call s:LookUp(<q-args>, <q-bang>)
 
-function s:LookUp(what, with_bang)
+function! s:LookUp(what, with_bang)
     if a:with_bang == '!'
         let l:pattern = '\C\<'.a:what.'\>'
     else
@@ -466,7 +466,7 @@ function s:LookUp(what, with_bang)
     cwindow
 endfunction
 
-function s:IfAny(glob)
+function! s:IfAny(glob)
     if !empty(glob(a:glob))
         return a:glob
     endif
