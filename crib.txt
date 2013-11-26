@@ -39,6 +39,7 @@ g,/g; - go to place of previous/next edit.
 gi - go to place where the last insert operation was made.
 `. — go to last edited line.
 `` — go to last active line.
+gJ - join lines not inserting space between them
 
 ]p - same as p key, but re-indents line after pasting it
 
