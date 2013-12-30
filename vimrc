@@ -965,6 +965,7 @@ map <silent><f8> :vimgrep /fixme\\|todo\\|FIXME\\|TODO\\|FIXIT\\|fixit/j
 " quick date and time pasting
 iabbrev td <c-r>=strftime("%H:%M %d.%m.%Y")<cr>
 iabbrev dt <c-r>=strftime("%d.%m.%Y %H:%M")<cr>
+iabbrev dd <c-r>=strftime("%d.%m.%Y")<cr>
 
 " swap ' and ` keys
 nnoremap ' `
