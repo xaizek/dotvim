@@ -6,7 +6,7 @@ scriptencoding utf-8
 
 " force using of English locale
 if has('win32') || has('dos32')
-    language en
+    language english
 else
     language en_US.utf8
 endif
