@@ -1079,7 +1079,8 @@ function! <SID>SetParams()
     if search('^[^a-z]*vim: .*colorcolumn=', 'nw') != 0
         return
     endif
-    if &filetype != '' && &filetype != 'qf' && &filetype != 'help' && &filetype != 'git'
+    let l:nocc = ['', 'gitrebase', 'gitcommit', 'qf', 'help', 'git']
+    if index(l:nocc, &filetype) == -1
         " vertical border after 80 column
         set colorcolumn=81
     else
