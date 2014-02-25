@@ -8,7 +8,7 @@ scriptencoding utf-8
 if has('win32') || has('dos32')
     language english
 else
-    language en_US.utf8
+    language en_US.utf-8
 endif
 
 " use comma key as <leader>
@@ -1126,7 +1126,7 @@ inoremap <c-l> <c-^>
 if has('win32')
     language ctype Russian_Russia.1251
 else
-    language ctype ru_RU.utf8
+    language ctype ru_RU.utf-8
 endif
 
 " ==============================================================================
