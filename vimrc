@@ -923,6 +923,12 @@ set spelllang=ru,en
 " show at most 20 suggestions on z=
 set spellsuggest+=20
 
+" by default display new window to the right on splitting
+set splitright
+
+" by default display new window below on splitting
+set splitbelow
+
 " smart indentation
 filetype plugin indent on
 
