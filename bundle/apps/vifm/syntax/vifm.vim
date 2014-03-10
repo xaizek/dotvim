@@ -1,6 +1,6 @@
 " vifm syntax file
-" Maintainer:  xaizek <xaizek@lavabit.com>
-" Last Change: July 21, 2013
+" Maintainer:  xaizek <xaizek@openmailbox.org>
+" Last Change: March 10, 2014
 " Based On:    Vim syntax file by Dr. Charles E. Campbell, Jr.
 
 if exists('b:current_syntax')
@@ -16,10 +16,10 @@ set cpo-=C
 syntax keyword vifmCommand contained alink apropos change chmod chown clone
 		\ co[py] d[elete] delm[arks] di[splay] dirs e[dit] el[se] empty en[dif]
 		\ exi[t] file filter fin[d] fini[sh] gr[ep] h[elp] his[tory] jobs locate ls
-		\ marks mes[sages] mkdir m[ove] noh[lsearch] on[ly] popd pushd pwd q[uit]
-		\ reg[isters] rename restart restore rlink screen sh[ell] sor[t] sp[lit]
-		\ s[ubstitute] touch tr sync undol[ist] unl[et] ve[rsion] vie[w] vifm windo
-		\ winrun w[rite] wq x[it] y[ank]
+		\ lstrash marks mes[sages] mkdir m[ove] noh[lsearch] on[ly] popd pushd pwd
+		\ q[uit] reg[isters] rename restart restore rlink screen sh[ell] sor[t]
+		\ sp[lit] s[ubstitute] touch tr trashes sync undol[ist] unl[et] ve[rsion]
+		\ vie[w] vifm vs[plit] windo winrun w[rite] wq x[it] y[ank]
 
 " Map commands
 syntax keyword vifmMap contained map mm[ap] mn[oremap] mu[nmap] nm[ap]
@@ -233,7 +233,7 @@ syntax match vifmNumber contained /\d\+/
 
 " Ange-bracket notation
 syntax case ignore
-syntax match vifmNotation '<\(esc\|cr\|space\|del\|\(s-\)\?tab\|home\|end\|left\|right\|up\|down\|bs\|delete\|pageup\|pagedown\|\([acms]-\)\?f\d\{1,2\}\|c-s-[a-z[\]^_]\|s-c-[a-z[\]^_]\|c-[a-z[\]^_]\|[am]-c-[a-z]\|c-[am]-[a-z]\|[am]-[a-z]\)>'
+syntax match vifmNotation '<\(esc\|cr\|space\|del\|nop\|\(s-\)\?tab\|home\|end\|left\|right\|up\|down\|bs\|delete\|pageup\|pagedown\|\([acms]-\)\?f\d\{1,2\}\|c-s-[a-z[\]^_]\|s-c-[a-z[\]^_]\|c-[a-z[\]^_]\|[am]-c-[a-z]\|c-[am]-[a-z]\|[am]-[a-z]\)>'
 syntax case match
 
 " Whole line comments
