@@ -195,6 +195,19 @@ function! MyA()
 endfunction
 
 " ------------------------------------------------------------------------------
+" expand double { ("{{") as {<cr>}
+
+inoremap <silent> { <c-r>=<SID>ExpandBracket()<cr>
+function! s:ExpandBracket()
+    let l:line = getline('.')
+    let l:col = col('.') - 2
+    if '{' == l:line[l:col]
+        return "\<esc>o}\<esc>\"_O"
+    endif
+    return '{'
+endfunction
+
+" ------------------------------------------------------------------------------
 
 " use unix-style eol by default
 set fileformats=unix,dos
