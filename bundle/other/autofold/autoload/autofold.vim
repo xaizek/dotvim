@@ -10,16 +10,15 @@ function! autofold#foldexpr()
 
     if l:prevChar ==# '=' || l:thisChar ==# '='
         if s:Matches(l:prevLine)
-            return l:thisLine[0] ==# l:prevLine[0] ? 'a1' : '='
+            return l:thisLine[0] ==# l:prevLine[0] ? 1 : 0
         elseif s:Matches(l:thisLine)
             return 0
         endif
     elseif l:prevChar ==# '-' || l:thisChar ==# '-'
         if s:Matches(l:prevLine)
-            return l:thisLine[0] ==# l:prevLine[0] ? 'a1' : '='
+            return l:thisLine[0] ==# l:prevLine[0] ? 2 : 1
         elseif s:Matches(l:thisLine)
-            let farPrevChar = getline(v:lnum - 3)[2]
-            return farPrevChar ==# '=' ? '=' : 's1'
+            return 1
         endif
     endif
 
