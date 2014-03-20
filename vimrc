@@ -1040,6 +1040,7 @@ autocmd BufReadPost *
      \  if line("'\"") > 1
      \          && line("'\"") <= line("$")
      \          && &filetype != 'gitcommit'
+     \          && &filetype != 'gitrebase'
      \|     execute "normal! g`\""
      \| endif
 
