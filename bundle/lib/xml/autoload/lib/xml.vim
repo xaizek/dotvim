@@ -11,8 +11,8 @@ endfunction
 
 function! lib#xml#ToggleOneLineXML()
     if line('$') == 1
-        call lib#xml#FoldToOneLineXML()
-    else
         call lib#xml#ExpandOneLineXML()
+    else
+        call lib#xml#FoldToOneLineXML()
     endif
 endfunction

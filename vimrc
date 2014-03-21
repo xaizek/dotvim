@@ -146,6 +146,11 @@ set showtabline=2
 " don't use conceal feature in cpp and c files
 autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 
+" preserve window view (to do not reset relative top line and relative position
+" of the cursor) when switching buffers (see tip 1375 on Vim Wiki)
+" autocmd BufLeave * if !&diff | let b:winview = winsaveview() | endif
+" autocmd BufEnter * if exists('b:winview') && !&diff | call winrestview(b:winview) | endif
+
 " ==============================================================================
 " editing and formatting
 
@@ -970,7 +975,7 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 " use current file's directory as working directory
 " set autochdir
 autocmd BufEnter,BufWinEnter *
-            \ silent! execute 'lcd' fnamemodify(expand('<afile>'), ':p:h')
+            \ if &filetype != 'fugitiveblame' | silent! execute 'lcd' fnamemodify(expand('<afile>'), ':p:h') | endif
 
 " create tags on Shift-F12 key
 if has('win32')
@@ -1190,6 +1195,21 @@ function! AddBasicTemplate()
     call cursor(line('$')/2 + 1, 0)
 endfunction
 
+function! Center()
+    se splitright!
+    vsplit empty
+    setlocal nonumber
+    exe "normal \<c-w>w"
+    se splitright!
+    vsplit empty
+    setlocal nonumber
+    exe "normal \<c-w>b"
+    exe "normal \<c-w>h"
+
+    " find longest line
+    " add a split to the left so that current window become centered
+endfunction
+
 function! AddHeaderGuard()
     let l:line = line('.')
     let l:filename = toupper(expand("%:t:r"))
@@ -1398,5 +1418,7 @@ unlet s:vimrc_local_path
 " experiments and tests
 
 let g:pymode_syntax=1
+
+map [[ ][%0
 
 " vim: set textwidth=80 syntax+=.autofold :
