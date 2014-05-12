@@ -1130,6 +1130,9 @@ set listchars+=precedes:<,extends:>
 " width of a shift for normal, visual and selection modes
 set shiftwidth=4
 
+" round indentation to multiple of 'shiftwidth'
+set shiftround
+
 " ==============================================================================
 " work with Cyrillic symbols
 
