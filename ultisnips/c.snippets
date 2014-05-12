@@ -18,18 +18,24 @@ $0
 #endif /* $1 */
 endsnippet
 
-snippet main "int main(int argc, char *argv[]) {}"
-int main(int argc, char *argv[])
+snippet main "int main(int argc, char *argv[]) { }"
+int
+main(int argc, char *argv[])
 {
 	$0
-	return (0);
+	return 0;
 }
 endsnippet
 
-snippet mainn "int main(void) {}"
-int main(void)
+snippet maina "main(int argc, char *argv[])"
+main(int argc, char *argv[])
+endsnippet
+
+snippet mainn "int main(void) { }"
+int
+main(void)
 {
 	$0
-	return (0);
+	return 0;
 }
 endsnippet
