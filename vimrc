@@ -161,6 +161,7 @@ autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 autocmd BufReadPost,BufEnter,BufWinEnter,WinEnter  *
             \ if &filetype == 'qf' |
             \ elseif &filetype == 'vifm-cmdedit' |
+            \ elseif &filetype == 'vifm-edit' |
             \ elseif bufname("%") == '__TagBar__' |
             \ elseif !&modifiable |
             \ elseif &readonly |
