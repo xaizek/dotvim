@@ -873,7 +873,18 @@ set autowrite
 
 " create backup copies
 set backup
-set backupdir=~/.vim/bak/,.,~/tmp,~/
+
+" directory where to store backup files
+let s:backup_dir = lib#cfg#CreateVimStorageDir('bak')
+execute 'set backupdir='.s:backup_dir.'/,.,~/tmp,~/'
+
+" directory where to store swap files
+let s:swap_dir = lib#cfg#CreateVimStorageDir('swap')
+execute 'set directory='.s:swap_dir.'/'
+
+" directory where to store persistent undo files
+let s:undo_dir = lib#cfg#CreateVimStorageDir('undo')
+execute 'set undodir='.s:undo_dir.'/,.'
 
 " don't break lines on input automatically
 set textwidth=0
@@ -1023,22 +1034,6 @@ vnoremap > >gv
 " show Vim how to read doc-files
 autocmd BufReadPre *.doc,*.DOC set ro
 autocmd BufReadPost *.doc,*.DOC silent %!antiword -m cp1251.txt "%"
-
-" directory where to store swap files
-let s:swap_dir = $HOME.'/.vim/swap/'
-execute 'set directory='.s:swap_dir.'/'
-" ensure it exists
-if !isdirectory(s:swap_dir)
-    call mkdir(s:swap_dir)
-endif
-
-" directory where to store persistent undo files
-let s:undo_dir = $HOME.'/.vim/undo'
-execute 'set undodir='.s:undo_dir.',.'
-" ensure it exists
-if !isdirectory(s:undo_dir)
-    call mkdir(s:undo_dir)
-endif
 
 " go to last editing place on file open (unless git commit message is edited)
 autocmd BufReadPost *
