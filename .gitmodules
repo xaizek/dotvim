@@ -37,3 +37,6 @@
 [submodule "bundle/filetypes/gitignore"]
 	path = bundle/filetypes/gitignore
 	url = https://github.com/rdolgushin/gitignore.vim.git
+[submodule "bundle/filetypes/syntax-extra"]
+    path = bundle/filetypes/syntax-extra
+    url = https://github.com/justinmk/vim-syntax-extra.git
