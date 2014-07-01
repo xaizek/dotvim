@@ -1,6 +1,6 @@
 [submodule "bundle/completion/clang_complete"]
 	path = bundle/completion/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete.git
+	url = git@github.com:Rip-Rip/clang_complete.git
 [submodule "bundle/completion/inccomplete"]
 	path = bundle/completion/inccomplete
 	url = https://github.com/xaizek/vim-inccomplete.git
