@@ -13,9 +13,6 @@
 [submodule "bundle/other/emacscommandline"]
 	path = bundle/other/emacscommandline
 	url = https://github.com/xaizek/vim-emacscommandline.git
-[submodule "bundle/other/vrackets"]
-	path = bundle/other/vrackets
-	url = https://github.com/vim-scripts/vrackets
 [submodule "bundle/other/commentary"]
 	path = bundle/other/commentary
 	url = https://github.com/tpope/vim-commentary.git
