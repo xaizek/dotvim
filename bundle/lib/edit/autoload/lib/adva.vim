@@ -6,7 +6,7 @@ function! lib#adva#AdvancedA()
     let l:indent_diff = l:prev_indent - indent(line('.'))
     let l:is_empty = len(getline('.')) == 0
     if l:indent_diff >= 0 && l:is_empty
-        return 'ddko'
+        return '"_ddko'
     elseif l:is_empty
         return 'I'
     else
