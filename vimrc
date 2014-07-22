@@ -190,6 +190,9 @@ nmap <expr> A lib#adva#AdvancedA()
 " ------------------------------------------------------------------------------
 " text paste motion
 
+nnoremap <silent> cp :set opfunc=lib#subm#SubstituteMotion<CR>g@
+nmap cpcp cp$
+
 " ------------------------------------------------------------------------------
 " expand double { ("{{") as {<cr>}
 
