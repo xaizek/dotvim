@@ -185,20 +185,10 @@ endfunction
 " ------------------------------------------------------------------------------
 " improved A normal mode key
 
-nmap <expr> A MyA()
-nnoremap ZA A
-function! MyA()
-    let l:prev_indent = indent(line('.') - 1)
-    let l:indent_diff = l:prev_indent - indent(line('.'))
-    let l:is_empty = len(getline('.')) == 0
-    if l:indent_diff >= 0 && l:is_empty
-        return 'ddko'
-    elseif l:is_empty
-        return 'I'
-    else
-        return 'ZA'
-    endif
-endfunction
+nmap <expr> A lib#adva#AdvancedA()
+
+" ------------------------------------------------------------------------------
+" text paste motion
 
 " ------------------------------------------------------------------------------
 " expand double { ("{{") as {<cr>}
