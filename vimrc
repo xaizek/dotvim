@@ -467,7 +467,7 @@ function! s:LookUp(what, with_bang)
         let l:pattern = '\C'.a:what
     endif
     try
-        execute 'vimgrep /'.l:pattern.'/' s:IfAny(GetProjectRoot().'/**/*.c') s:IfAny(GetProjectRoot().'/**/*.cpp')
+        execute 'vimgrep /'.l:pattern.'/' s:IfAnyFiles(GetProjectRoot().'/**/*.c') s:IfAnyFiles(GetProjectRoot().'/**/*.cpp')
     catch 'E480'
         redraw
         echohl WarningMsg
@@ -478,7 +478,7 @@ function! s:LookUp(what, with_bang)
     cwindow
 endfunction
 
-function! s:IfAny(glob)
+function! s:IfAnyFiles(glob)
     if !empty(glob(a:glob))
         return a:glob
     endif
