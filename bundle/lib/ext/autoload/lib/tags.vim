@@ -9,6 +9,10 @@ function! lib#tags#UpdateTags()
         return
     endif
 
+    " do not write all modified buffers on :!
+    let l:autowrite_saved = &l:autowrite
+    setlocal noautowrite
+
     let l:tagsfile = fnamemodify(l:tags, ':p')
     let l:srcdir = fnamemodify(l:tagsfile, ':h')
 
@@ -37,4 +41,6 @@ function! lib#tags#UpdateTags()
               \.'&'
     endif
     execute 'silent! lcd '.escape(l:olddir, ' ')
+
+    let &l:autowrite = l:autowrite_saved
 endfunction
