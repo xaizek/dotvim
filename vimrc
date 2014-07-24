@@ -439,11 +439,11 @@ function! <SID>UpdateTags(changedfile)
                         \.'--tag-relative=yes --fields=+iaS --extra=+q '
                         \.l:pathtoscan
         else
-            call system('ctags -R -a --tag-relative=yes -f '
-                        \.shellescape(l:tagsfile)
-                        \.' --c++-kinds=+p --fields=+iaS --extra=+q '
-                        \.l:pathtoscan
-                        \.'&')
+            execute 'silent !ctags -R -a --tag-relative=yes -f '
+                  \.shellescape(l:tagsfile)
+                  \.' --c++-kinds=+p --fields=+iaS --extra=+q '
+                  \.l:pathtoscan
+                  \.'&'
         endif
         execute 'silent! lcd '.escape(l:olddir, ' ')
     endif
