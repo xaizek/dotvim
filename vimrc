@@ -394,18 +394,8 @@ set autoindent
 set cinoptions=g0,(0,W4
 
 " run astyle on current file on ,a
-if has('win32')
-    nmap <silent> ,a :execute "silent !start /b astyle --indent=spaces=4
-            \ --convert-tabs
-            \ --add-brackets --brackets=stroustrup --align-pointer=type
-            \ --pad-header --indent-namespaces --indent-switches
-            \ --indent-preprocessor ".expand('%')<cr>:e<cr>
-else
-    nmap <silent> ,a :execute "silent !astyle --indent=spaces=4
-            \ --convert-tabs
-            \ --add-brackets --brackets=stroustrup --align-pointer=type
-            \ --pad-header --indent-namespaces --indent-switches
-            \ --indent-preprocessor ".expand('%')<cr>:e<cr>
+if executable('astyle')
+    nnoremap <silent> <leader>a :call lib#astyle#FormatFile(expand('%'))|e<cr>
 endif
 
 " automatically regenerate tags file on file write
