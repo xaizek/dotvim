@@ -621,6 +621,8 @@ nmap <silent> <Leader>of :FSHere<cr>
 nmap <silent> <Leader>oo :FSHere<cr>
 " in a new tab
 nmap <silent> <Leader>ot :call FSwitch('%', 'tabedit')<cr>
+" in a new tab opened before this one
+nmap <silent> <Leader>oT :call FSwitch('%', "<c-r>=tabpagenr()-1<cr>tabedit")<cr>
 
 " switch to the file and load it into the window on the right
 nmap <silent> <Leader>ol :FSRight<cr>
