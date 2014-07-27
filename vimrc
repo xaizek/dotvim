@@ -516,7 +516,7 @@ endif
 let g:clang_complete_copen = 1
 
 " enable autocompletion
-let g:clang_complete_auto = 1
+let g:clang_complete_auto = 0
 
 " complete macros
 let g:clang_complete_macros = 1
