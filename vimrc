@@ -772,18 +772,23 @@ let g:UltiSnipsSnippetDirectories=["ultisnips"]
 " ==============================================================================
 " misc
 
+if !has('win32')
+    " when not on Windows, use st if it's available
+    let $TERM_APP = executable('st') ? 'st' : 'xterm'
+endif
+
 " run terminal emulator in the current directory
 if has('win32')
-    map <leader>T :!start bash<cr>
+    nnoremap <leader>t :!start bash<cr>
 else
-    map <leader>T :!xterm &<cr><cr>
+    nnoremap <leader>t :!$TERM_APP &<cr><cr>
 endif
 
 " run vifm in the current directory
 if has('win32')
-    map <leader>V :!start vifm %:p<cr>
+    nnoremap <leader>V :!start vifm %:p<cr>
 else
-    map <leader>V :silent !xterm -e "vifm '%:p:h'" &<cr>
+    nnoremap <leader>V :silent !$TERM_APP -e vifm '%:p:h' &<cr>
 endif
 
 " clears marks
