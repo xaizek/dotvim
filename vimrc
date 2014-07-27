@@ -245,10 +245,12 @@ xnoremap j gj
 xnoremap k gk
 
 " use external command for formatting paragraphs
-set formatprg=par\ -w80\ T2\ \|\ sed\ 's/\ \ /\\t/g'
-"set formatprg="iconv -f UTF-8 -t WINDOWS-1251 |"
-"            \."par -w80 |"
-"            \."iconv -f WINDOWS-1251 -t UTF-8"
+if executable('par')
+    set formatprg=par\ -w80\ T2\ \|\ sed\ 's/\ \ /\\t/g'
+    " set formatprg="iconv -f UTF-8 -t WINDOWS-1251 |"
+    "             \."par -w80 |"
+    "             \."iconv -f WINDOWS-1251 -t UTF-8"
+endif
 
 " keys to insert empty lines above/below current line in normal mode
 nmap <leader>f o<esc>
