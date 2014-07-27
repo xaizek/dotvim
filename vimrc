@@ -201,7 +201,12 @@ function! s:ExpandBracket()
     let l:line = getline('.')
     let l:col = col('.') - 2
     if '{' == l:line[l:col]
-        return "\<esc>o}\<esc>\"_O"
+        " move existing code between the braces
+        if l:col == len(l:line) - 1
+            return "\<esc>o}\<esc>\"_O"
+        else
+            return "\<cr>\<esc>o}\<esc>k^"
+        endif
     endif
     return '{'
 endfunction
