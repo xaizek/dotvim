@@ -680,6 +680,8 @@ xmap gc  \\
 nmap gc  \\
 nmap gcc \\\
 
+autocmd FileType cpp set commentstring=//\ %s
+
 " ------------------------------------------------------------------------------
 " neocomplcache
 
