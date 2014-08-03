@@ -877,33 +877,20 @@ set cursorline
 nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
-nnoremap <silent> <leader>l :call <SID>Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
-nnoremap <silent> <leader>L :call <SID>Highlight('let @/="\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
-nnoremap <silent> <leader><leader>l :call <SID>Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
-nnoremap <silent> <leader><leader>L :call <SID>Highlight('let @/="', expand('<cword>'), '"') \| setlocal hls<cr>
-vnoremap <silent> <leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader><leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| setlocal hls<cr>
+nnoremap <silent> <leader>l :call lib#hl#Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader>L :call lib#hl#Highlight('let @/="\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>l :call lib#hl#Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>L :call lib#hl#Highlight('let @/="', expand('<cword>'), '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
 highlight SecondaryHighlight guibg=lightgreen guifg=black ctermbg=lightgreen ctermfg=black
 " swap marking
 nnoremap <silent> <leader>m :2match SecondaryHighlight ///<cr>
 " clear marking
 nnoremap <silent> <leader>cm :2match none<cr>
-
-function! s:Highlight(before, what, after)
-    if empty(a:what)
-        echohl WarningMsg | echo 'No string under the cursor.' | echohl None
-        return
-    end
-
-    let l:escapedWord = escape(a:what, '()[]~')
-    " Need to do this again because it will be used inside double quoted string
-    let l:escapedWord = escape(l:escapedWord, '\')
-    execute a:before.l:escapedWord.a:after
-    echo 'Highlighting: '.a:what
-endfunction
 
 " increase history size
 set history=10000
