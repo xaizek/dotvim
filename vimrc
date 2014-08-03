@@ -886,6 +886,12 @@ vnoremap <silent> <leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| se
 vnoremap <silent> <leader><leader>l :<c-u>call <SID>Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
 vnoremap <silent> <leader><leader>L :<c-u>call <SID>Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
+highlight SecondaryHighlight guibg=lightgreen guifg=black ctermbg=lightgreen ctermfg=black
+" swap marking
+nnoremap <silent> <leader>m :2match SecondaryHighlight ///<cr>
+" clear marking
+nnoremap <silent> <leader>cm :2match none<cr>
+
 function! s:Highlight(before, what, after)
     if empty(a:what)
         echohl WarningMsg | echo 'No string under the cursor.' | echohl None
