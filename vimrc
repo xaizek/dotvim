@@ -1133,6 +1133,10 @@ if !exists(":DiffOrig")
               \ | diffthis | wincmd p | diffthis | set autowrite
 endif
 
+" query title of page at URL in the current line (whole line) and insert it one
+" line above
+command! GetPageTitle call lib#url#QueryURLTitle()
+
 " if current buffer is empty, performs search of file named .src_template from
 " current directory up and loads its contents into the buffer
 function! AddBasicTemplate()
