@@ -1137,6 +1137,9 @@ endif
 " line above
 command! GetPageTitle call lib#url#QueryURLTitle()
 
+" convert end of lines in the current buffer to Unix style
+command! ToUnix call lib#eols#ToUnix()
+
 " if current buffer is empty, performs search of file named .src_template from
 " current directory up and loads its contents into the buffer
 function! AddBasicTemplate()
@@ -1288,12 +1291,6 @@ function! GetFuncBodyLimits()
         return [0, 0]
     endif
     return [l:openbracket, l:closebracket]
-endfunction
-
-function! ToUnix()
-    edit ++ff=dos
-    set ff=unix
-    w
 endfunction
 
 function! GetIncludesIn(file)
