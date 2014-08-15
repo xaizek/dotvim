@@ -1363,6 +1363,11 @@ vmap <silent> <c-end>    <nop>
 vmap <silent> <del>      <nop>
 
 " ==============================================================================
+" load plugin settings
+
+call pathogen#incubate('rcs/')
+
+" ==============================================================================
 " load machine specific local set of settings
 
 let s:vimrc_local_path = $HOME . '/.vimrc_local'
