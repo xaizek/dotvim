@@ -534,7 +534,7 @@ set linebreak
 set cursorline
 
 " toggle spell checking for current buffer
-nmap <silent> <leader>s :call <SID>ToggleSpell()<cr>
+nnoremap <silent> <leader>s :call lib#opt#ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
 nnoremap <silent> <leader>l :call lib#hl#Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
@@ -629,7 +629,7 @@ nnoremap ' `
 nnoremap ` '
 
 " map ,h to search highlight toggle
-nmap <silent> <leader>h :call <SID>ToggleHlsearch()<cr>
+nnoremap <silent> <leader>h :call lib#opt#ToggleHlsearch()<cr>
 " these lines are needed for highlight enabling
 nnoremap ,* *
 nmap * :set hlsearch<cr>,*
@@ -894,24 +894,6 @@ function! ReformatParagraphs()
     silent execute '%s/\(\S\)\n\(\S\)/\1 \2/'
     " and contiguous spaces
     silent execute '%s/ \{2,\}/ /g'
-endfunction
-
-function! <SID>ToggleHlsearch()
-    set hlsearch!
-    if &hlsearch
-        echo 'Search results highlighting is ON'
-    else
-        echo 'Search results highlighting is OFF'
-    endif
-endfunction
-
-function! <SID>ToggleSpell()
-    setlocal spell!
-    if &l:spell
-        echo 'Spell checking is ON'
-    else
-        echo 'Spell checking is OFF'
-    endif
 endfunction
 
 " runs command passing function body limits as a range
