@@ -879,15 +879,6 @@ function! AddHeaderAndFooter()
     call cursor(l:line, 0)
 endfunction
 
-function! AddSpaces()
-    "silent execute '%s/){\([^}]*\)/) {\1/'
-    silent execute '%s/){/) {/'
-    silent execute '%s/else{/else {/'
-    silent execute '%s/enum{/enum {/'
-    silent execute '%s/union{/union {/'
-    silent execute '%s/struct{/struct {/'
-endfunction
-
 " runs command preserving current cursor position and search register content
 function! <SID>PreserveAndRun(cmd)
     let l:ncol = col('.')
