@@ -1,7 +1,9 @@
-nmap <silent><buffer> ]] :call <SID>FindBegin(1)<cr>
-nmap <silent><buffer> [[ :call <SID>FindBegin(0)<cr>
-nmap <silent><buffer> ][ :call <SID>FindEnd(1)<cr>
-nmap <silent><buffer> [] :call <SID>FindEnd(0)<cr>
+setlocal omnifunc=javacomplete#Complete
+
+nnoremap <silent><buffer> ]] :call <SID>FindBegin(1)<cr>
+nnoremap <silent><buffer> [[ :call <SID>FindBegin(0)<cr>
+nnoremap <silent><buffer> ][ :call <SID>FindEnd(1)<cr>
+nnoremap <silent><buffer> [] :call <SID>FindEnd(0)<cr>
 
 function! <SID>FindBegin(forward)
     if a:forward

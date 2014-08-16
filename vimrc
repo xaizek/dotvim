@@ -260,27 +260,6 @@ nmap <leader>F O<esc>
 " programming
 
 " ------------------------------------------------------------------------------
-" for Python
-
-" highlight more things for Python-scripts
-let g:python_highlight_all=1
-
-" ------------------------------------------------------------------------------
-" for Java
-
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-
-" ------------------------------------------------------------------------------
-" some useful abbreviations for c and c++
-
-autocmd FileType c,cpp execute
-            \ 'iabbrev <buffer> #d #define'
-autocmd FileType c,cpp execute
-            \ 'iabbrev <buffer> #i #include'
-autocmd FileType c,cpp execute
-            \ 'iabbrev <buffer> #p #pragma'
-
-" ------------------------------------------------------------------------------
 " custom tag jumps
 
 " on each next <c-]> press jumps to next tag with same name
