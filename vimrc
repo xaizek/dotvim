@@ -264,29 +264,8 @@ endfunction
 " ------------------------------------------------------------------------------
 " some kind of projects
 
-autocmd BufEnter,BufWinEnter,WinEnter * call <SID>PrjDo('.in.vim')
-autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call <SID>PrjDo('.out.vim')
-
-function! <SID>PrjDo(scrfile)
-    let l:scr = findfile(a:scrfile, '.;')
-    if !empty(l:scr) && filereadable(l:scr)
-        execute 'source '.escape(l:scr, ' ')
-    endif
-endfunction
-
-function! GetProjectRoot()
-    let l:parts = split(getcwd(), '/')
-    let l:pos = index(l:parts, 'src', 0, has('win32'))
-    if l:pos >= 0
-        let l:result = join(l:parts[:l:pos], '/')
-        if !has('win32')
-            let l:result = '/'.l:result
-        endif
-    else
-        let l:result = '.'
-    endif
-    return l:result
-endfunction
+autocmd BufEnter,BufWinEnter,WinEnter * call lib#prj#Do('.in.vim')
+autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call lib#prj#Do('.out.vim')
 
 " ------------------------------------------------------------------------------
 
@@ -348,14 +327,14 @@ augroup AutoTagsGegeneration
 augroup End
 
 " search for word under the cursor in all c and cpp files of current directory
-nnoremap <leader>g :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
-nnoremap <leader>G :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
-vnoremap <leader>g :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
-vnoremap <leader>G :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
-nnoremap <leader><leader>g :execute 'vimgrep /\C'.expand('<cword>').'/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
-nnoremap <leader><leader>G :execute 'vimgrep /\C'.expand('<cword>').'/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
-vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'/**/*.c' GetProjectRoot().'/**/*.cpp \| cw'<cr>
-vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' GetProjectRoot().'/**/*.h' GetProjectRoot().'/**/*.hpp \| cw'<cr>
+nnoremap <leader>g :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader>G :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+vnoremap <leader>g :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+vnoremap <leader>G :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+nnoremap <leader><leader>g :execute 'vimgrep /\C'.expand('<cword>').'/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader><leader>G :execute 'vimgrep /\C'.expand('<cword>').'/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
 command! -nargs=1 -bang LookUp call s:LookUp(<q-args>, <q-bang>)
 
 function! s:LookUp(what, with_bang)
@@ -365,7 +344,7 @@ function! s:LookUp(what, with_bang)
         let l:pattern = '\C'.a:what
     endif
     try
-        execute 'vimgrep /'.l:pattern.'/' s:IfAnyFiles(GetProjectRoot().'/**/*.c') s:IfAnyFiles(GetProjectRoot().'/**/*.cpp')
+        execute 'vimgrep /'.l:pattern.'/' s:IfAnyFiles(lib#prj#GetRoot().'/**/*.c') s:IfAnyFiles(lib#prj#GetRoot().'/**/*.cpp')
     catch 'E480'
         redraw
         echohl WarningMsg
