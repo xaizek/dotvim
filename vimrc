@@ -800,6 +800,9 @@ command! GetPageTitle call lib#url#QueryURLTitle()
 " convert end of lines in the current buffer to Unix style
 command! ToUnix call lib#eols#ToUnix()
 
+" join lines of each paragraph and removes adjacent spaces
+command! ReformatParagraphs call lib#par#ReformatParagraphs()
+
 " if current buffer is empty, performs search of file named .src_template from
 " current directory up and loads its contents into the buffer
 function! AddBasicTemplate()
@@ -887,13 +890,6 @@ function! <SID>PreserveAndRun(cmd)
     execute a:cmd
     let @/ = l:search
     call cursor(l:nline, l:ncol)
-endfunction
-
-function! ReformatParagraphs()
-    " remove end of lines
-    silent execute '%s/\(\S\)\n\(\S\)/\1 \2/'
-    " and contiguous spaces
-    silent execute '%s/ \{2,\}/ /g'
 endfunction
 
 " runs command passing function body limits as a range
