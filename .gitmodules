@@ -40,3 +40,6 @@
 [submodule "bundle/other/startify"]
 	path = bundle/other/startify
 	url = https://github.com/mhinz/vim-startify.git
+[submodule "bundle/other/extradite"]
+	path = bundle/other/extradite
+	url = https://github.com/int3/vim-extradite.git
