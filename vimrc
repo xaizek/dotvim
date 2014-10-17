@@ -11,8 +11,9 @@ else
     language en_US.utf-8
 endif
 
-" use comma key as <leader>
-let mapleader=','
+" use comma key as both <leader> and <localleader>
+let mapleader = ','
+let maplocalleader = ','
 
 let $MYVIMRC=$HOME.'/.vim/vimrc'
 
