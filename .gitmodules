@@ -43,3 +43,6 @@
 [submodule "bundle/other/extradite"]
 	path = bundle/other/extradite
 	url = https://github.com/int3/vim-extradite.git
+[submodule "bundle/other/preamble"]
+	path = bundle/other/preamble
+	url = https://github.com/xaizek/preamble.vim.git
