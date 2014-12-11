@@ -28,6 +28,9 @@ endif
 " ==============================================================================
 " look&feel
 
+" fill closed fold line with spaces
+set fillchars-=fold:-
+
 " enable line numbers
 set number
 " number of columns for line number
