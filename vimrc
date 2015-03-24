@@ -90,6 +90,7 @@ else
     " color schemes (good ones for terminal: darkblue, desert, pablo, slate)
     if !has('dos32')
         colorscheme lucius
+        set background=dark
     endif
 endif
 
