@@ -621,6 +621,7 @@ nnoremap <leader>1 :tab drop $MYVIMRC<cr>
 nnoremap <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
 nnoremap <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
 nnoremap <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
+nnoremap <leader>- :tab drop $HOME/.vifm/vifmrc_local<cr>
 
 " edit visual selection in new tab
 xmap ,t y:tabe<cr>Vp
