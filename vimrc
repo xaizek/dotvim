@@ -506,7 +506,7 @@ set scrolloff=4
 set showcmd
 
 " set slepp check languages
-set spelllang=ru,en
+set spelllang=en,ru
 
 " show at most 20 suggestions on z=
 set spellsuggest+=20
