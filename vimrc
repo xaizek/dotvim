@@ -607,9 +607,9 @@ autocmd BufReadPost *
      \| endif
 
 " copy&paste to system's clipboard
-nmap <leader>y "+y
-nmap <leader>Y "+Y
-nmap <leader>p "+p
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+nnoremap <leader>p "+p
 " conflicts with ProtoDef plugin
 " nmap <leader>P "+P
 
@@ -617,10 +617,10 @@ nmap <leader>p "+p
 set cedit=<c-g>
 
 " some shortcuts
-map <leader>1 :tab drop $MYVIMRC<cr>
-map <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
-map <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
-map <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
+nnoremap <leader>1 :tab drop $MYVIMRC<cr>
+nnoremap <leader>2 :tab drop $HOME/.vim/crib.txt<cr>
+nnoremap <leader>3 :tab drop $HOME/.vim/useful.txt<cr>
+nnoremap <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
 
 " edit visual selection in new tab
 xmap ,t y:tabe<cr>Vp
