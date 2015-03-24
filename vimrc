@@ -368,7 +368,7 @@ function! s:IfAnyFiles(glob)
 endfunction
 
 " introduce variable
-nnoremap <leader>v O<c-r>.<space>=<space><c-r>";<esc>I
+nnoremap <leader>v O<c-r>.<esc>^m'A<space>=<space><c-r>";<esc>`'=''I
 
 " ==============================================================================
 " misc
