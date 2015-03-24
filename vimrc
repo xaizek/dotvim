@@ -465,8 +465,8 @@ set statusline=%-20(%t%m%r%w%)
 set statusline+=\|\%23([%{&ff}][%{&fenc}]%y%)
 " |char[hexchar] \[vcol-\]col,line/total lines
 set statusline+=\ \|\ %4(%b%)[%6(0x%B%)]%=%c%V,%l/%L
-" |percentage of file
-set statusline+=\ \|%10p%%
+" | percentage of file
+set statusline+=\ \|\ %P
 
 " break lines on whitespace
 set linebreak
