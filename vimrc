@@ -374,8 +374,8 @@ nnoremap <leader>v O<c-r>.<esc>^m'A<space>=<space><c-r>";<esc>`'=''I
 " misc
 
 if !has('win32')
-    " when not on Windows, use st if it's available
-    let $TERM_APP = executable('st') ? 'st' : 'xterm'
+    " when not on Windows use xterm
+    let $TERM_APP = 'xterm'
 endif
 
 " run terminal emulator in the current directory
