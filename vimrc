@@ -4,8 +4,17 @@ set encoding=utf-8
 
 scriptencoding utf-8
 
-" force using of English locale
+" handy variables for OS checks
 if has('win32') || has('dos32')
+    let s:win = 1
+    let s:dos = has('dos32')
+elseif has('unix')
+    let s:win = 0
+    let s:dos = 0
+endif
+
+" force using of English locale
+if s:win
     language english
 else
     language en_US.utf-8
@@ -62,7 +71,7 @@ autocmd InsertEnter * hi Cursor guibg=#ff0000
 
 if has("gui_running")
     " font
-    if has('win32')
+    if s:win
         set guifont=Lucida_Console:h10:cRUSSIAN::
         if &lines < 50
             set lines=50
@@ -88,7 +97,7 @@ else
     set mouse="a"
 
     " color schemes (good ones for terminal: darkblue, desert, pablo, slate)
-    if !has('dos32')
+    if !s:dos
         colorscheme lucius
         set background=dark
     endif
@@ -373,20 +382,20 @@ nnoremap <leader>v O<c-r>.<esc>^m'A<space>=<space><c-r>";<esc>`'=''I
 " ==============================================================================
 " misc
 
-if !has('win32')
+if !s:win
     " when not on Windows use xterm
     let $TERM_APP = 'xterm'
 endif
 
 " run terminal emulator in the current directory
-if has('win32')
+if s:win
     nnoremap <leader>t :!start bash<cr>
 else
     nnoremap <leader>t :!$TERM_APP &<cr><cr>
 endif
 
 " run vifm in the current directory
-if has('win32')
+if s:win
     nnoremap <leader>V :!start vifm %:p<cr>
 else
     nnoremap <leader>V :silent !$TERM_APP -e vifm '%:p:h' &<cr>
@@ -552,7 +561,7 @@ autocmd BufEnter,BufWinEnter *
             \ if &filetype != 'fugitiveblame' | silent! execute 'lcd' fnamemodify(expand('<afile>'), ':p:h') | endif
 
 " create tags on Shift-F12 key
-if has('win32')
+if s:win
     map <silent> <s-f12> :exe ":silent !start /b ctags -R -a --c++-kinds=+p
                 \ --fields=+iaS --extra=+q ."<cr>
 else
@@ -628,7 +637,7 @@ nnoremap <leader>- :tab drop $HOME/.vifm/vifmrc_local<cr>
 xmap ,t y:tabe<cr>Vp
 
 " some additional paths for file searches
-if has('win32')
+if s:win
     set path+=E:/programming/compilers/MinGW/include/
 else
     set path+=/usr/local/include
@@ -710,7 +719,7 @@ set imsearch=0
 inoremap <c-l> <c-^>
 
 " for work of normal mode commands
-if has('win32')
+if s:win
     language ctype Russian_Russia.1251
 else
     language ctype ru_RU.utf-8
