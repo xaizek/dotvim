@@ -392,9 +392,10 @@ else
     nnoremap <leader>V :silent !$TERM_APP -e vifm '%:p:h' &<cr>
 endif
 
-" clears marks
-nmap <leader>m
-            \ :call setqflist([])\|doautocmd QuickFixCmdPost * make\|cwindow<cr>
+" clears error list and marks
+nnoremap <leader>ce : call setqflist([])
+                  \\| doautocmd QuickFixCmdPost make
+                  \\| cwindow<cr>
 
 " automatically reread file changed by external application
 set autoread
