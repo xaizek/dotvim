@@ -793,15 +793,23 @@ endfunction
 
 function! AddHeaderGuard()
     let l:line = line('.')
-    let l:filename = toupper(expand("%:t:r"))
-    let l:fileext = toupper(expand("%:t:e"))
+    let l:filename = expand("%:t:r")
+    let l:fileext = expand("%:t:e")
     let l:was_empty = line2byte(line('$') + 1) == -1
 
     if strlen(l:filename) == 0
         return
     endif
 
-    let l:header_guard = "__".l:filename."_".l:fileext."__"
+    let l:prefix = exists('b:project_name') ? b:project_name.'__' : ''
+    if exists('b:project_root')
+        let l:relpath = expand("%:p:h")[len(b:project_root) + 1:].'/'
+        if !empty(l:relpath) && l:relpath != '/'
+            let l:prefix .= l:relpath
+        endif
+    endif
+    let l:prefix = substitute(l:prefix, '/\|\\', '__', 'g')
+    let l:header_guard = toupper(l:prefix.l:filename.'_'.l:fileext.'__')
 
     call append(0, "#ifndef ".l:header_guard)
     call append(1, "#define ".l:header_guard)
