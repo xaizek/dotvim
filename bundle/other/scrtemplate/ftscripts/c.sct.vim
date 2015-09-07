@@ -1,8 +1,11 @@
 let s:filename = expand('<afile>')
 let s:ext = fnamemodify(s:filename, ':e')
 
+" for header files
 if s:ext == 'h'
-    " for header files
+    " let configuration set file specific variables
+    call lib#prj#Do('.in.vim')
+
     call AddHeaderGuard()
     finish
 endif
