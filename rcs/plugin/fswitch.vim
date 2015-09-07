@@ -16,19 +16,20 @@ endfunction
 augroup fswitch
     autocmd!
     autocmd! BufEnter,BufRead *.h call AppendCreate('b:fswitchdst', '"c"')
+                              \ | call AppendCreate('b:fswitchdst', '"cc"')
                               \ | call AppendCreate('b:fswitchdst', '"cpp"')
                               \ | call AppendCreate('b:fswitchlocs', '"."')
-    autocmd! BufEnter,BufRead *.c let b:fswitchdst = 'h'
-                              \ | let b:fswitchlocs = '.'
+    autocmd! BufEnter,BufRead *.c,*.cc let b:fswitchdst = 'h'
+                                   \ | let b:fswitchlocs = '.'
     autocmd! BufEnter,BufRead *.hpp let b:fswitchdst = 'cpp'
-                              \ | let b:fswitchlocs = '.'
+                                \ | let b:fswitchlocs = '.'
     autocmd! BufEnter,BufRead *.cpp let b:fswitchdst = 'hpp,h'
                                 \ | let b:fswitchlocs = '.,../include'
     autocmd! BufEnter,BufRead *.xaml let b:fswitchdst = 'xaml.cs'
-                              \ | let b:fswitchlocs = '.'
+                                 \ | let b:fswitchlocs = '.'
     autocmd! BufEnter,BufRead *.xaml.cs let b:fswitchdst = 'xaml'
-                              \ | let b:fswitchfnames = '/\.xaml//'
-                              \ | let b:fswitchlocs = '.'
+                                    \ | let b:fswitchfnames = '/\.xaml//'
+                                    \ | let b:fswitchlocs = '.'
 augroup end
 
 " switch to the file and load it into the current window
