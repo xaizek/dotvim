@@ -109,6 +109,7 @@ function! ShowErrorAtCursor()
             continue
         endif
         redraw | echomsg l:d.text
+        break
     endfor
     echo
 endfunction
