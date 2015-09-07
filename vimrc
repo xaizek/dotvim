@@ -326,8 +326,9 @@ set tags=tags;/
 " save indentation when going to next line
 set autoindent
 
-" indentation rules
-set cinoptions=g0,(0,W4
+" indentation rules:
+"     N-s - do not indent content of namespace
+set cinoptions=g0,(0,W4,N-s
 
 " run astyle on current file on ,a
 if executable('astyle')
