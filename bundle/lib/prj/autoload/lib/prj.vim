@@ -7,6 +7,10 @@ function! lib#prj#Do(scrfile)
 endfunction
 
 function! lib#prj#GetRoot()
+    if exists('b:project_root')
+        return b:project_root
+    endif
+
     let l:parts = split(getcwd(), '/')
     let l:pos = index(l:parts, 'src', 0, has('win32'))
     if l:pos >= 0
