@@ -6,7 +6,12 @@ function! lib#adva#AdvancedA()
     let l:indent_diff = l:prev_indent - indent(line('.'))
     let l:is_empty = len(getline('.')) == 0
     if l:indent_diff >= 0 && l:is_empty
-        return '"_ddko'
+        if line('$') == line('.')
+            " no need to go up after removing the last line
+            return '"_ddo'
+        else
+            return '"_ddko'
+        endif
     elseif l:is_empty
         return 'I'
     else
