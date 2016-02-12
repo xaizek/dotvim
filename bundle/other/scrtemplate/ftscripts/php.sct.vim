@@ -1,5 +1,7 @@
+call AddHeaderAndFooter()
+
 0put = '<?php'
 $put = ''
 $put = ''
 $put = '?>'
-normal 3G
+normal GG2k
