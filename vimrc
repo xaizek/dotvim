@@ -579,6 +579,9 @@ iabbrev td <c-r>=strftime("%H:%M %d.%m.%Y")<cr>
 iabbrev dt <c-r>=strftime("%d.%m.%Y %H:%M")<cr>
 iabbrev dd <c-r>=strftime("%d.%m.%Y")<cr>
 
+" quick insertion of /* <cursor>. */ comments
+iabbrev //* /*. */<c-o>4h
+
 " swap ' and ` keys
 nnoremap ' `
 nnoremap ` '
