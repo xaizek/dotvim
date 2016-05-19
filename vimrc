@@ -332,7 +332,7 @@ set cinoptions=g0,(0,W4,N-s
 
 " run astyle on current file on ,a
 if executable('astyle')
-    nnoremap <silent> <leader>a :call lib#astyle#FormatFile(expand('%'))|e<cr>
+    nnoremap <silent> <leader>a :call lib#astyle#FormatFile(expand('%'))<bar>e<cr>
 endif
 
 " automatically regenerate tags file on file write
