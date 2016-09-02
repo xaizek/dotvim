@@ -557,9 +557,17 @@ nmap <leader>w :set wrap!<cr>
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " use current file's directory as working directory
-" set autochdir
-autocmd BufEnter,BufWinEnter *
-            \ if &filetype != 'fugitiveblame' | silent! execute 'lcd' fnamemodify(expand('<afile>'), ':p:h') | endif
+" done in this way because 'autochdir' does't always work
+autocmd BufEnter,BufWinEnter,BufRead,BufCreate * call <SID>SetLocalPath()
+function! s:SetLocalPath()
+    let l:path = fnamemodify(expand('<afile>'), ':p:h')
+    " don't change directory on editing certain files
+    if &filetype != 'fugitiveblame' &&
+        \ l:path !~ glob2regpat('/tmp/bash-fc-*') &&
+        \ l:path !~ glob2regpat('/tmp/vifm.*')
+        silent! execute 'lcd' l:path
+    endif
+endfunction
 
 " create tags on Shift-F12 key
 if s:win
