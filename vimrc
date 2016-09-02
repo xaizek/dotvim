@@ -335,6 +335,12 @@ if executable('astyle')
     nnoremap <silent> <leader>a :call lib#astyle#FormatFile(expand('%'))<bar>e<cr>
 endif
 
+" get rid of compiler notes and make failure report on :make
+let &errorformat = '%-G%.%#:%.%#: note: %m,'
+                 \.'%-G%.%#:%.%#:%.%#: note: %m,'
+                 \.'%-G%.%#: recipe for target%.%#failed,'
+                 \.&errorformat
+
 " automatically regenerate tags file on file write
 augroup AutoTagsGegeneration
     autocmd!
