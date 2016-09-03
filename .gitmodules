@@ -46,3 +46,6 @@
 [submodule "bundle/other/preamble"]
 	path = bundle/other/preamble
 	url = https://github.com/xaizek/preamble.vim.git
+[submodule "bundle/other/includefixer"]
+	path = bundle/other/includefixer
+	url = git@github.com:xaizek/includefixer.git
