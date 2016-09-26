@@ -6,6 +6,16 @@ function! lib#prj#Do(scrfile)
     endif
 endfunction
 
+command! LibPrjDoNext call lib#prj#DoNext(expand('<sfile>'))
+function! lib#prj#DoNext(scrfile)
+    let l:scrfile = fnamemodify(a:scrfile, ':t')
+    let l:findspec = fnamemodify(a:scrfile, ':p:h:h').';'
+    let l:scr = findfile(l:scrfile, l:findspec)
+    if !empty(l:scr) && filereadable(l:scr)
+        execute 'source '.escape(l:scr, ' ')
+    endif
+endfunction
+
 function! lib#prj#GetRoot()
     if exists('b:project_root')
         return b:project_root
