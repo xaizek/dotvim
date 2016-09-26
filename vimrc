@@ -430,7 +430,7 @@ set keywordprg=
 set wildignore=*.~cpp,*.~hpp,*.~h,*.obj,*.swp,*.o,*.hi,*.exe,*.un~,*.class,*.d
              \,*.gch,tags,a.out
 
-" persistant undo
+" persistent undo
 set undofile
 
 set ttyfast
