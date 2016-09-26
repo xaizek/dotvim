@@ -12,7 +12,6 @@
 " so it is easy to understand what each part does.
 
 
-set background=dark
 hi clear
 if exists("syntax_on")
     syntax reset
