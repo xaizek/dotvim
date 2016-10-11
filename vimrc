@@ -507,6 +507,16 @@ vnoremap <silent> <leader><leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, 
 " close previously active window
 nnoremap <silent> <c-w>a <c-w>p:hide<cr>
 
+" close window to the left/down/up/right
+nnoremap <silent> <c-k>h     <c-w>h<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k><c-h> <c-w>h<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k>j     <c-w>j<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k><c-j> <c-w>j<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k>k     <c-w>k<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k><c-k> <c-w>k<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k>l     <c-w>l<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+nnoremap <silent> <c-k><c-l> <c-w>l<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
+
 highlight SecondaryHighlight guibg=lightgreen guifg=black ctermbg=lightgreen ctermfg=black
 " swap marking
 nnoremap <silent> <leader>m :2match SecondaryHighlight ///<cr>
