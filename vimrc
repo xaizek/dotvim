@@ -504,6 +504,9 @@ vnoremap <silent> <leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| 
 vnoremap <silent> <leader><leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
 vnoremap <silent> <leader><leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
+" close previously active window
+nnoremap <silent> <c-w>a <c-w>p:hide<cr>
+
 highlight SecondaryHighlight guibg=lightgreen guifg=black ctermbg=lightgreen ctermfg=black
 " swap marking
 nnoremap <silent> <leader>m :2match SecondaryHighlight ///<cr>
