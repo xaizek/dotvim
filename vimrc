@@ -654,8 +654,13 @@ nnoremap <leader>p "+p
 " conflicts with ProtoDef plugin
 " nmap <leader>P "+P
 
-" to edit command line in a buffer
-set cedit=<c-g>
+" to edit command line in a buffer (setting 'cedit' to <c-g> makes original
+" function of <c-g> unavailable)
+cnoremap <c-g> <c-f>
+
+" go to next/previous incremental search match
+cnoremap <tab> <c-g>
+cnoremap <s-tab> <c-t>
 
 " some shortcuts
 nnoremap <leader>1 :tab drop $MYVIMRC<cr>
