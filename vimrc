@@ -659,8 +659,12 @@ nnoremap <leader>p "+p
 cnoremap <c-g> <c-f>
 
 " go to next/previous incremental search match
-cnoremap <tab> <c-g>
-cnoremap <s-tab> <c-t>
+cnoremap <expr> <tab>
+       \ feedkeys(index(['/', '?'], getcmdtype()) >= 0 ? "<c-g>" : "<tab>",
+       \          'tn') ? '' : ''
+cnoremap <expr> <s-tab>
+       \ feedkeys(index(['/', '?'], getcmdtype()) >= 0 ? "<c-t>" : "<s-tab>",
+       \          'tn') ? '' : ''
 
 " some shortcuts
 nnoremap <leader>1 :tab drop $MYVIMRC<cr>
