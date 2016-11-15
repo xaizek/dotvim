@@ -751,12 +751,20 @@ set shiftround
 
 " this is needed for normal work with non-English languages in insert mode
 set keymap=russian-jcukenwin
-" latin layout by default in insert mode
+" start with latin layout
 set iminsert=0
-" use latin layout by default for search
-set imsearch=0
+" use 'iminsert' value for search settings
+set imsearch=-1
 " switch layout on Ctrl-L key
 inoremap <c-l> <c-^>
+cnoremap <c-l> <c-^><c-l>
+
+" reset to latin layout on entering ('iminsert' can be changed on command-line
+" as well) and leaving insert mode
+augroup imreset
+    autocmd!
+    autocmd InsertEnter,InsertLeave * set iminsert=0
+augroup end
 
 " for work of normal mode commands
 if s:win
