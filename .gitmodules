@@ -49,3 +49,6 @@
 [submodule "bundle/other/includefixer"]
 	path = bundle/other/includefixer
 	url = git@github.com:xaizek/includefixer.git
+[submodule "bundle/other/undotree"]
+	path = bundle/other/undotree
+	url = https://github.com/mbbill/undotree.git
