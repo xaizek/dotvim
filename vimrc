@@ -99,9 +99,11 @@ else
     " color schemes (good ones for terminal: darkblue, desert, pablo, slate)
     if !s:dos
         colorscheme lucius
-        set background=dark
     endif
 endif
+
+" inform Vim about terminal color scheme
+set background=dark
 
 " window size (will only make it bigger)
 if &columns < 85
