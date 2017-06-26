@@ -505,7 +505,7 @@ vnoremap <silent> <leader><leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @
 vnoremap <silent> <leader><leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
 " close previously active window
-nnoremap <silent> <c-w>a <c-w>p:hide<cr>
+nnoremap <silent> <c-k>o <c-w>p:hide<cr>
 
 " close window to the left/down/up/right
 nnoremap <silent> <c-k>h     <c-w>h<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
