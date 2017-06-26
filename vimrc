@@ -429,6 +429,9 @@ set shortmess+=atIA
 " show in vim help on K key
 set keywordprg=
 
+" builtin grep is good enough, no need to use external tools
+set grepprg=internal
+
 " ignore some not useful matches on command-line completion
 set wildignore=*.~cpp,*.~hpp,*.~h,*.obj,*.swp,*.o,*.hi,*.exe,*.un~,*.class,*.d
              \,*.gch,tags,a.out
