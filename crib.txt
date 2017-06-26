@@ -57,3 +57,9 @@ z= — show list of alternatives for incorrect word
 A note for ctags:
     Use \ to escape new line in function definitions or it will not work
     right.
+
+Display a fancy output based on your search of someWord:
+:g/set/z#.1|echo"==========="
+
+Ctrl-G and Ctrl-T in increment search can be used to move to the next and
+previous match.
