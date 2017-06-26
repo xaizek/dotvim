@@ -114,6 +114,9 @@ set tabline=%!lib#tabs#TabLine()
 " show tab line always
 set showtabline=2
 
+" don't pause after <esc>
+set ttimeoutlen=0
+
 " don't use conceal feature in cpp and c files
 autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 
