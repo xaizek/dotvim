@@ -574,6 +574,7 @@ nnoremap <space> za
 
 " insert from system clipboard on Shift-Insert (for consistency with terminals)
 inoremap <s-insert> <c-r>*
+cnoremap <s-insert> <c-r>*
 
 " toggle line wrapping on <leader>w
 nmap <leader>w :set wrap!<cr>
