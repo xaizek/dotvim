@@ -27,7 +27,7 @@
 	url = https://github.com/AndrewRadev/linediff.vim.git
 [submodule "bundle/textobj/arg"]
 	path = bundle/textobj/arg
-	url = https://github.com/vim-scripts/argtextobj.vim.git
+	url = https://github.com/inkarkat/argtextobj.vim.git
 [submodule "bundle/other/firsteffectiveline"]
 	path = bundle/other/firsteffectiveline
 	url = https://github.com/vim-scripts/FirstEffectiveLine.vim.git
