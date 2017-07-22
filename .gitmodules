@@ -48,7 +48,7 @@
 	url = https://github.com/xaizek/preamble.vim.git
 [submodule "bundle/other/includefixer"]
 	path = bundle/other/includefixer
-	url = git@github.com:xaizek/includefixer.git
+	url = https://github.com/xaizek/includefixer.git
 [submodule "bundle/other/undotree"]
 	path = bundle/other/undotree
 	url = https://github.com/mbbill/undotree.git
