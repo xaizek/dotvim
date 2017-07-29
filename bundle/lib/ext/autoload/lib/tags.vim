@@ -34,7 +34,9 @@ function! lib#tags#UpdateTags()
                     \.'--tag-relative=yes --fields=+iaS --extra=+q '
                     \.l:pathtoscan
     else
-        execute 'silent !ctags -R -a --tag-relative=yes -f '
+        execute 'silent !flock '
+              \.shellescape(l:tagsfile)
+              \.' ctags -R -a --tag-relative=yes -f '
               \.shellescape(l:tagsfile)
               \.' --c++-kinds=+p --fields=+iaS --extra=+q '
               \.l:pathtoscan
