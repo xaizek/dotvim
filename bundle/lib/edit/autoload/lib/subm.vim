@@ -1,6 +1,6 @@
 " substitute {motion} text with content of default register
 function! lib#subm#SubstituteMotion(type, ...)
-    let l:reg = b:changepaste_buffer
+    let l:reg = g:changepaste_buffer
     if a:0  " Invoked from Visual mode, use '< and '> marks.
         silent exe "normal! `<" . a:type . "`>\"_c\<c-r>" . l:reg . "\<esc>"
     elseif a:type == 'line'
