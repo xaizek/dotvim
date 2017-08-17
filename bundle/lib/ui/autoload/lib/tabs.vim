@@ -31,7 +31,7 @@ endfunction
 function! lib#tabs#TabLabel(n)
     let buflist = tabpagebuflist(a:n)
     let winnr = tabpagewinnr(a:n)
-    let l = expand('#'.buflist[winnr - 1].':t')
+    let l = pathshorten(expand('#'.buflist[winnr - 1].':p:~'))
     if l == ""
         let l = "No Name"
     endif
