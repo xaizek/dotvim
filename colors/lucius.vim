@@ -36,7 +36,7 @@ hi Normal           ctermfg=253             ctermbg=235
 " -------------
 " any comment
 hi Comment          guifg=#909090                                   gui=none
-hi Comment          ctermfg=240                                     cterm=none
+hi Comment          ctermfg=247                                     cterm=none
 
 
 " Constant Group
@@ -185,7 +185,7 @@ hi Todo             ctermfg=228             ctermbg=NONE            cterm=underl
 " --------
 " word not recognized
 hi SpellBad         guisp=#ee0000                                   gui=undercurl
-hi SpellBad                                 ctermbg=9               cterm=undercurl
+hi SpellBad                                 ctermbg=52              cterm=undercurl
 " word not capitalized
 hi SpellCap         guisp=#eeee00                                   gui=undercurl
 hi SpellCap                                 ctermbg=12              cterm=undercurl
