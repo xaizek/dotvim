@@ -26,6 +26,11 @@ let maplocalleader = ','
 
 let $MYVIMRC=$HOME.'/.vim/vimrc'
 
+if has('gui_running')
+    " use 256 colors in :terminal
+    let $TERM = 'xterm-256color'
+endif
+
 " ==============================================================================
 " for Pathogen plugin
 
