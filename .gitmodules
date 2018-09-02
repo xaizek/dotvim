@@ -55,3 +55,6 @@
 [submodule "bundle/other/headerguard"]
 	path = bundle/other/headerguard
 	url = https://github.com/drmikehenry/vim-headerguard.git
+[submodule "bundle/other/committia"]
+	path = bundle/other/committia
+	url = https://github.com/rhysd/committia.vim.git
