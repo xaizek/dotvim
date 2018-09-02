@@ -855,37 +855,40 @@ function! Center()
 endfunction
 
 function! AddHeaderGuard()
-    let l:line = line('.')
+    HeaderguardAdd
+
+    " put cursor between elements of header guard
+    call cursor(line('$'), 0)
+    call cursor(search('^#endif', 'bcn') - 2, 0)
+endfunction
+
+function! HeaderguardName()
     let l:filename = expand("%:t:r")
     let l:fileext = expand("%:t:e")
-    let l:was_empty = line2byte(line('$') + 1) == -1
-
-    if strlen(l:filename) == 0
-        return
-    endif
 
     let l:prefix = exists('b:project_name') ? b:project_name.'__' : ''
     if exists('b:project_root')
-        let l:relpath = expand("%:p:h")[len(b:project_root) + 1:].'/'
+        let l:dir = expand("%:p:h")
+        let l:root = fnamemodify(b:project_root, ':p')
+        while l:dir[:len(l:root) - 1] != l:root
+            let l:root = fnamemodify(l:root, ':h')
+        endwhile
+        let l:relpath = l:dir[len(l:root) + 1:].'/'
         if !empty(l:relpath) && l:relpath != '/'
             let l:prefix .= l:relpath
         endif
     endif
     let l:prefix = substitute(l:prefix, '/\|\\', '__', 'g')
     let l:header_guard = toupper(l:prefix.l:filename.'_'.l:fileext.'__')
+    return l:header_guard
+endfunction
 
-    call append(0, "#ifndef ".l:header_guard)
-    call append(1, "#define ".l:header_guard)
-    call append(2, '')
-    if l:was_empty
-        call append(3, '')
+function! HeaderguardLine3()
+    if &l:filetype == 'c'
+        return '#endif /* ' . g:HeaderguardName() . ' */'
+    else
+        return '#endif // ' . g:HeaderguardName()
     endif
-
-    let l:last_line = line('$')
-    call append(l:last_line, "#endif // ".l:header_guard)
-    " call append(l:last_line, "#endif")
-
-    call cursor(l:line + 3, 0)
 endfunction
 
 function! AddHeaderAndFooter()
