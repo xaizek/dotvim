@@ -869,7 +869,7 @@ function! HeaderguardName()
     let l:prefix = exists('b:project_name') ? b:project_name.'__' : ''
     if exists('b:project_root')
         let l:dir = expand("%:p:h")
-        let l:root = fnamemodify(b:project_root, ':p')
+        let l:root = fnamemodify(b:project_root, ':p:h')
         while l:dir[:len(l:root) - 1] != l:root
             let l:root = fnamemodify(l:root, ':h')
         endwhile
