@@ -9,12 +9,17 @@ function! lib#tags#UpdateTags()
         return
     endif
 
+    let l:tagsfile = fnamemodify(l:tags, ':p')
+    let l:srcdir = fnamemodify(l:tagsfile, ':h')
+
+    " account for fake paths like fugitive:///...
+    if !filereadable(l:srcdir)
+        return
+    endif
+
     " do not write all modified buffers on :!
     let l:autowrite_saved = &l:autowrite
     setlocal noautowrite
-
-    let l:tagsfile = fnamemodify(l:tags, ':p')
-    let l:srcdir = fnamemodify(l:tagsfile, ':h')
 
     let l:olddir = getcwd()
     execute 'silent! lcd '.escape(l:srcdir, ' ')

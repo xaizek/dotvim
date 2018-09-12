@@ -896,7 +896,7 @@ function! AddHeaderAndFooter()
 
     " add file header
     let l:header = findfile('.src_header', '.;')
-    if !empty(l:header)
+    if !empty(l:header) && filereadable(l:header)
         let l:file = readfile(l:header)
         let l:line += len(l:file)
         call append(0, l:file)
@@ -904,7 +904,7 @@ function! AddHeaderAndFooter()
 
     " add file footer
     let l:footer = findfile('.src_footer', '.;')
-    if !empty(l:footer)
+    if !empty(l:footer) && filereadable(l:footer)
         call append(line('$'), readfile(l:footer))
     endif
 
