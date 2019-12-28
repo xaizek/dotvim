@@ -172,7 +172,7 @@ nmap <expr> A lib#adva#AdvancedA()
 " text paste motion
 
 " replace text captured by a {motion} with contents of a register
-nnoremap <silent> cp :let g:changepaste_buffer = v:register
+nnoremap <silent> cp :let g:substitutemotion_reg = v:register
               \ <bar> set opfunc=lib#subm#SubstituteMotion<CR>g@
 
 " ------------------------------------------------------------------------------

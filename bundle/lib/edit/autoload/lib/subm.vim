@@ -1,6 +1,6 @@
 " substitute {motion} text with contents of a register
 function! lib#subm#SubstituteMotion(type, ...)
-    let l:reg = g:changepaste_buffer
+    let l:reg = g:substitutemotion_reg
     if a:0
         " visual mode, use '< and '> marks
         silent exe "normal! `<" . a:type . "`>\"_c\<c-r>" . l:reg . "\<esc>"
