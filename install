@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # install vimrc
-if [ x"$OS" != x'Windows_NT' ]; then
+if [ "$OS" != 'Windows_NT' ]; then
     if [ -f ~/.vimrc ]; then
-        echo 'Skipped installing vimrc as ~/.vimrc already exists'
+        echo 'Skipped installing vimrc because ~/.vimrc already exists'
     else
         if ! ln -s ~/.vim/vimrc ~/.vimrc; then
             echo "Couldn't link ~/.vimrc to ~/.vim/vimrc"
@@ -11,7 +11,7 @@ if [ x"$OS" != x'Windows_NT' ]; then
     fi
 else
     if [ -f ~/_vimrc ]; then
-        echo 'Skipped installing vimrc as ~/_vimrc already exists'
+        echo 'Skipped installing vimrc because ~/_vimrc already exists'
     else
         if ! ( echo 'set runtimepath+=~/.vim/' > ~/_vimrc &&
                echo 'source ~/.vim/vimrc' >> ~/_vimrc ) ; then
