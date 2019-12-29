@@ -352,12 +352,6 @@ let &errorformat = '%-G%.%#:%.%#: note: %m,'
                  \.'%-G%.%#: recipe for target%.%#failed,'
                  \.&errorformat
 
-" automatically regenerate tags file on file write
-augroup AutoTagsGegeneration
-    autocmd!
-    autocmd! BufWritePost *.c,*.cpp,*.h,*.hpp call lib#tags#UpdateTags()
-augroup End
-
 " search for word under the cursor in all c and cpp files of current directory
 nnoremap <leader>g :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
 nnoremap <leader>G :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>

@@ -58,3 +58,6 @@
 [submodule "bundle/other/committia"]
 	path = bundle/other/committia
 	url = https://github.com/rhysd/committia.vim.git
+[submodule "bundle/other/gutentags"]
+	path = bundle/other/gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
