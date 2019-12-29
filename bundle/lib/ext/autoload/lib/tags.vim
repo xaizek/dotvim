@@ -13,7 +13,8 @@ function! lib#tags#UpdateTags()
     let l:srcdir = fnamemodify(l:tagsfile, ':h')
 
     " account for fake paths like fugitive:///...
-    if !filereadable(l:srcdir)
+    if !filereadable(l:tagsfile)
+    " if !isdirectory(l:srcdir)
         return
     endif
 
@@ -46,6 +47,12 @@ function! lib#tags#UpdateTags()
               \.' --c++-kinds=+p --fields=+iaS --extra=+q '
               \.l:pathtoscan
               \.'&'
+        " let l:tmp_tags = tempname()
+        " execute 'silent !(ctags -R -a --tag-relative=yes -f '
+        "       \.shellescape(l:tmp_tags)
+        "       \.' --c++-kinds=+p --fields=+iaS --extra=+q '
+        "       \.l:pathtoscan
+        "       \.' && mv '.shellescape(l:tmp_tags).' '.shellescape(l:tagsfile).')&'
     endif
     execute 'silent! lcd '.escape(l:olddir, ' ')
 
