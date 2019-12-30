@@ -61,3 +61,9 @@
 [submodule "bundle/other/gutentags"]
 	path = bundle/other/gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule "bundle/textobj/user"]
+	path = bundle/textobj/user
+	url = git://github.com/kana/vim-textobj-user.git
+[submodule "bundle/textobj/function"]
+	path = bundle/textobj/function
+	url = git://github.com/kana/vim-textobj-function.git
