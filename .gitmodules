@@ -70,3 +70,6 @@
 [submodule "bundle/other/surround"]
 	path = bundle/other/surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/other/securemodelines"]
+	path = bundle/other/securemodelines
+	url = https://github.com/ypcrts/securemodelines.git
