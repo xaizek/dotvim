@@ -67,3 +67,6 @@
 [submodule "bundle/textobj/function"]
 	path = bundle/textobj/function
 	url = git://github.com/kana/vim-textobj-function.git
+[submodule "bundle/other/surround"]
+	path = bundle/other/surround
+	url = https://github.com/tpope/vim-surround.git
