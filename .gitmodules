@@ -73,3 +73,6 @@
 [submodule "bundle/other/securemodelines"]
 	path = bundle/other/securemodelines
 	url = https://github.com/ypcrts/securemodelines.git
+[submodule "bundle/other/tabular"]
+	path = bundle/other/tabular
+	url = git://github.com/godlygeek/tabular.git
