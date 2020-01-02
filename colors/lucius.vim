@@ -219,7 +219,7 @@ hi CursorLine       cterm=NONE              ctermbg=236             cterm=none
 hi Directory        guifg=#c0e0b0                                   gui=none
 hi Directory        ctermfg=151                                     cterm=none
 " error messages on the command line
-hi ErrorMsg         guifg=#ee0000           guibg=NONE              gui=none
+hi ErrorMsg         guifg=#ee3030           guibg=NONE              gui=bold
 hi ErrorMsg         ctermfg=196             ctermbg=NONE            cterm=none
 " column separating vertically split windows
 hi VertSplit        guifg=#777777           guibg=#363946           gui=none
