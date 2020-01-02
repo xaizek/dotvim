@@ -1,3 +1,16 @@
+gm -- middle of screen line
+g_ -- last non-space line character
++/- -- first character of next/previous line
+nH -- {n} lines after top line
+nL -- {n} lines before last line
+z<cr> == zt
+z. == zz
+z- == zb
+g*/g# -- embedded versions of */#
+[i - list first occurrence of a word.
+[I - list all occurrences of a word.
+g;/g, -- move backwards/forwards in changelist.
+
 <c-a> - in insert mode pastes previously typed text.
 <c-w> - in insert mode deletes a word before the cursor.
 <c-r><c-w> - copy word under the cursor to command line.
@@ -6,6 +19,9 @@
 <c-x><c-l> - line-completion.
 helptags <path to doc/> - regenerates docs tags.
 :perldo - perl-style regexps.
+<c-c> in q: buffer pastes line onto command-line.
+<c-b>,<c-e> on command-line: to beginning/end of line
+<c-w> } - tag preview
 
 zi - toggle folding on/off
 
@@ -14,7 +30,6 @@ zi - toggle folding on/off
 [{/]} - inner block's { and }
 in such commands [ and ] define direction.
 
-[I - list all occurrences of variable.
 <count>[<tab> - go to <count> line in the [I list.
 gt, gT - next/previous tab.
 J - concatenate current and next line.
@@ -42,6 +57,8 @@ gi - go to place where the last insert operation was made.
 gJ - join lines not inserting space between them
 
 ]p - same as p key, but re-indents line after pasting it
+[p - same as P key, but re-indents line after pasting it
+gp/gP - same as p/P, but puts cursor at the end of pasted text
 
 / - case sensitivity
     \ñ - ignore case
@@ -63,3 +80,18 @@ Display a fancy output based on your search of someWord:
 
 Ctrl-G and Ctrl-T in increment search can be used to move to the next and
 previous match.
+
+gw{motion} -- format keeping cursor where it is.
+
+:help accepts literal keys, example: :help <c-v><c-t>
+
+<c-w>r/R -- rotate windows.
+
+:options -- open buffer with verbose dump of options
+
+:let g: -- show global variables
+:let g:var -- show global variable
+
+:left/:center/:right -- align line.
+
+Ctrl-X + Ctrl-C does command-line completion in a buffer.
