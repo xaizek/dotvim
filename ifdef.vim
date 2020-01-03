@@ -189,7 +189,7 @@ function! s:CIfDef(force)
   syn cluster ifdefClusterCommon contains=TOP,cPreCondit
   syn cluster ifdefClusterNeutral contains=@ifdefClusterCommon,ifdefDefined,ifdefUndefined,ifdefNeutral.*,ifdefInNeutralIf
   syn cluster ifdefClusterDefined contains=@ifdefClusterCommon,ifdefDefined,ifdefUndefined,ifdefNeutral.*,ifdefInNeutralIf
-  syn cluster ifdefClusterUndefined contains=ifdefInUndefinedComment,ifdefInUndefinedIf
+  syn cluster ifdefClusterUndefined contains=cCppString,ifdefInUndefinedComment,ifdefInUndefinedIf
 
   syn region ifdefCommentAtEnd contained start=+//+ end='$' skip='\\$' contains=cSpaceError
   syn region ifdefCommentAtEnd contained extend start=+/\*+ end='\*/' contains=cSpaceError nextgroup=ifdefCommentAtEnd
