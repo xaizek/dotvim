@@ -1,7 +1,7 @@
 " Vim filetype plugin file for changelogs.
 " Remaps [[ and ]] keys to go to next and previous section appropriately.
 " Maintainer:   xaizek
-" Last Change:  08 Oct 2015
+" Last Change:  28 Oct 2018
 
 nnoremap <silent><buffer> [[ :call cursor(<SID>GoToSection(0), 1)<cr>
 nnoremap <silent><buffer> ]] :call cursor(<SID>GoToSection(1), 1)<cr>
@@ -13,6 +13,7 @@ vnoremap <silent><buffer> ]] <esc>:let t = <SID>GoToSection(1)
 " Moves cursor to next or previous section depending on value of the
 " searchForward argument.
 function! s:GoToSection(searchForward)
+    call cursor(line('.'), 1)
     let l:backwardFlag = a:searchForward ? '' : 'b'
     let l:position = search('^\S', 'nW'.l:backwardFlag)
     if l:position == 0
