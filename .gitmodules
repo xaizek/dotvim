@@ -76,3 +76,6 @@
 [submodule "bundle/other/tabular"]
 	path = bundle/other/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule "bundle/other/easydir"]
+	path = bundle/other/easydir
+	url = https://github.com/xaizek/vim-easydir.git
