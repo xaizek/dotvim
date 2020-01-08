@@ -166,14 +166,14 @@ endfunction
 " ------------------------------------------------------------------------------
 " improved A normal mode key
 
-nmap <expr> A lib#adva#AdvancedA()
+nmap <expr> A libedit#adva#AdvancedA()
 
 " ------------------------------------------------------------------------------
 " text paste motion
 
 " replace text captured by a {motion} with contents of a register
 nnoremap <silent> cp :let g:substitutemotion_reg = v:register
-              \ <bar> set opfunc=lib#subm#SubstituteMotion<CR>g@
+              \ <bar> set opfunc=libedit#subm#SubstituteMotion<CR>g@
 
 " ------------------------------------------------------------------------------
 " expand double { ("{{") as {<cr>}
@@ -807,13 +807,13 @@ endif
 
 " query title of page at URL in the current line (whole line) and insert it one
 " line above
-command! GetPageTitle call lib#url#QueryURLTitle()
+command! GetPageTitle call libedit#url#QueryURLTitle()
 
 " convert end of lines in the current buffer to Unix style
-command! ToUnix call lib#eols#ToUnix()
+command! ToUnix call libedit#eols#ToUnix()
 
 " join lines of each paragraph and removes adjacent spaces
-command! ReformatParagraphs call lib#par#ReformatParagraphs()
+command! ReformatParagraphs call libedit#par#ReformatParagraphs()
 
 " if current buffer is empty, performs search of file named .src_template from
 " current directory up and loads its contents into the buffer
