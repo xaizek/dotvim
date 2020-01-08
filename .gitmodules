@@ -76,3 +76,6 @@
 [submodule "pack/other/start/endwise"]
 	path = pack/other/start/endwise
 	url = git://github.com/tpope/vim-endwise.git
+[submodule "pack/apps/opt/vifm"]
+	path = pack/apps/opt/vifm
+	url = https://github.com/vifm/vifm.vim.git
