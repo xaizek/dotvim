@@ -289,8 +289,8 @@ endfunction
 " ------------------------------------------------------------------------------
 " some kind of projects
 
-autocmd BufEnter,BufWinEnter,WinEnter * call lib#prj#Do('.in.vim')
-autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call lib#prj#Do('.out.vim')
+autocmd BufEnter,BufWinEnter,WinEnter * call libprj#prj#Do('.in.vim')
+autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call libprj#prj#Do('.out.vim')
 
 " ------------------------------------------------------------------------------
 
@@ -353,14 +353,14 @@ let &errorformat = '%-G%.%#:%.%#: note: %m,'
                  \.&errorformat
 
 " search for word under the cursor in all c and cpp files of current directory
-nnoremap <leader>g :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
-nnoremap <leader>G :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
-vnoremap <leader>g :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
-vnoremap <leader>G :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
-nnoremap <leader><leader>g :execute 'vimgrep /\C'.expand('<cword>').'/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
-nnoremap <leader><leader>G :execute 'vimgrep /\C'.expand('<cword>').'/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
-vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' lib#prj#GetRoot().'/**/*.c' lib#prj#GetRoot().'/**/*.cpp \| cw'<cr>
-vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' lib#prj#GetRoot().'/**/*.h' lib#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+nnoremap <leader>g :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' libprj#prj#GetRoot().'/**/*.c' libprj#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader>G :execute 'vimgrep /\C\<'.expand('<cword>').'\>/' libprj#prj#GetRoot().'/**/*.h' libprj#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+vnoremap <leader>g :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' libprj#prj#GetRoot().'/**/*.c' libprj#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+vnoremap <leader>G :<c-u>execute 'vimgrep /\C\<'.@*.'\>/' libprj#prj#GetRoot().'/**/*.h' libprj#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+nnoremap <leader><leader>g :execute 'vimgrep /\C'.expand('<cword>').'/' libprj#prj#GetRoot().'/**/*.c' libprj#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+nnoremap <leader><leader>G :execute 'vimgrep /\C'.expand('<cword>').'/' libprj#prj#GetRoot().'/**/*.h' libprj#prj#GetRoot().'/**/*.hpp \| cw'<cr>
+vnoremap <leader><leader>g :<c-u>execute 'vimgrep /\C'.@*.'/' libprj#prj#GetRoot().'/**/*.c' libprj#prj#GetRoot().'/**/*.cpp \| cw'<cr>
+vnoremap <leader><leader>G :<c-u>execute 'vimgrep /\C'.@*.'/' libprj#prj#GetRoot().'/**/*.h' libprj#prj#GetRoot().'/**/*.hpp \| cw'<cr>
 command! -nargs=1 -bang LookUp call s:LookUp(<q-args>, <q-bang>)
 
 function! s:LookUp(what, with_bang)
@@ -370,7 +370,7 @@ function! s:LookUp(what, with_bang)
         let l:pattern = '\C'.a:what
     endif
     try
-        execute 'vimgrep /'.l:pattern.'/' s:IfAnyFiles(lib#prj#GetRoot().'/**/*.c') s:IfAnyFiles(lib#prj#GetRoot().'/**/*.cpp')
+        execute 'vimgrep /'.l:pattern.'/' s:IfAnyFiles(libprj#prj#GetRoot().'/**/*.c') s:IfAnyFiles(libprj#prj#GetRoot().'/**/*.cpp')
     catch 'E480'
         redraw
         echohl WarningMsg

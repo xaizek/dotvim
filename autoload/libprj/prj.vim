@@ -1,13 +1,13 @@
 " sources configuration file for a project
-function! lib#prj#Do(scrfile)
+function! libprj#prj#Do(scrfile)
     let l:scr = findfile(a:scrfile, '.;')
     if !empty(l:scr) && filereadable(l:scr)
         execute 'source '.escape(l:scr, ' ')
     endif
 endfunction
 
-command! LibPrjDoNext call lib#prj#DoNext(expand('<sfile>'))
-function! lib#prj#DoNext(scrfile)
+command! LibPrjDoNext call libprj#prj#DoNext(expand('<sfile>'))
+function! libprj#prj#DoNext(scrfile)
     let l:scrfile = fnamemodify(a:scrfile, ':t')
     let l:findspec = fnamemodify(a:scrfile, ':p:h:h').';'
     let l:scr = findfile(l:scrfile, l:findspec)
@@ -16,7 +16,7 @@ function! lib#prj#DoNext(scrfile)
     endif
 endfunction
 
-function! lib#prj#GetRoot()
+function! libprj#prj#GetRoot()
     if exists('b:project_root')
         return b:project_root
     endif
