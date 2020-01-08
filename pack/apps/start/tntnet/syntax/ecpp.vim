@@ -106,6 +106,6 @@ endif
 
 let b:current_syntax = "ecpp"
 
-if main_syntax == 'ecpp'
+if exists("main_syntax") && main_syntax == 'ecpp'
 	unlet main_syntax
 endif
