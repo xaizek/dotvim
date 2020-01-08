@@ -32,11 +32,13 @@ if has('gui_running')
 endif
 
 " ==============================================================================
-" for Pathogen plugin
+" for plugins
 
 if &loadplugins == 1
-    filetype off
-    execute pathogen#infect('bundle/*/{}')
+    " plugin settings
+    set runtimepath+=~/.vim/rcs
+    " local development versions of plugins
+    set runtimepath+=~/repos/vifm/data/vim/
 endif
 
 " ==============================================================================
@@ -1013,11 +1015,6 @@ vmap <silent> <pagedown> <nop>
 vmap <silent> <c-home>   <nop>
 vmap <silent> <c-end>    <nop>
 vmap <silent> <del>      <nop>
-
-" ==============================================================================
-" load plugin settings
-
-call pathogen#incubate('rcs/')
 
 " ==============================================================================
 " load machine specific local set of settings
