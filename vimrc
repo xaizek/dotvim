@@ -116,7 +116,7 @@ if &columns < 85
 endif
 
 " customize tab line
-set tabline=%!lib#tabs#TabLine()
+set tabline=%!libui#tabs#TabLine()
 
 " show tab line always
 set showtabline=2

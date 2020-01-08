@@ -1,5 +1,5 @@
 " formats tab line
-function! lib#tabs#TabLine()
+function! libui#tabs#TabLine()
     let s = ''
     for i in range(tabpagenr('$'))
         " select the highlighting
@@ -13,7 +13,7 @@ function! lib#tabs#TabLine()
         let s .= '%' . (i + 1) . 'T'
 
         " the label is made by TabLabel()
-        let s .= ' %{lib#tabs#TabLabel(' . (i + 1) . ')} '
+        let s .= ' %{libui#tabs#TabLabel(' . (i + 1) . ')} '
     endfor
 
     " after the last tab fill with TabLineFill and reset tab page nr
@@ -28,7 +28,7 @@ function! lib#tabs#TabLine()
 endfunction
 
 " formats tab label
-function! lib#tabs#TabLabel(n)
+function! libui#tabs#TabLabel(n)
     let buflist = tabpagebuflist(a:n)
     let winnr = tabpagewinnr(a:n)
     let l = pathshorten(expand('#'.buflist[winnr - 1].':p:~'))
