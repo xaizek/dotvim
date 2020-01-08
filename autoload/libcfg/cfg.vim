@@ -7,7 +7,7 @@ endfunction
 function! libcfg#cfg#CreateVimStorageDir(name)
     let l:path = libcfg#cfg#GetVimStorageDir().'/'.a:name
 
-    call lib#fs#EnsureDirExists(l:path)
+    call libfs#fs#EnsureDirExists(l:path)
 
     return l:path
 endfunction
