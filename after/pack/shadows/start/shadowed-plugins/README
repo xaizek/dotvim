@@ -1,0 +1,2 @@
+Shadow plugins are those which are loaded on startup, but only if they
+weren't loaded yet (another local version).
