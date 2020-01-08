@@ -466,15 +466,15 @@ set autowrite
 set backup
 
 " directory where to store backup files
-let s:backup_dir = lib#cfg#CreateVimStorageDir('bak')
+let s:backup_dir = libcfg#cfg#CreateVimStorageDir('bak')
 execute 'set backupdir='.s:backup_dir.'/,.,~/tmp,~/'
 
 " directory where to store swap files
-let s:swap_dir = lib#cfg#CreateVimStorageDir('swap')
+let s:swap_dir = libcfg#cfg#CreateVimStorageDir('swap')
 execute 'set directory='.s:swap_dir.'/'
 
 " directory where to store persistent undo files
-let s:undo_dir = lib#cfg#CreateVimStorageDir('undo')
+let s:undo_dir = libcfg#cfg#CreateVimStorageDir('undo')
 execute 'set undodir='.s:undo_dir.'/,.'
 
 " don't break lines on input automatically
@@ -500,7 +500,7 @@ set linebreak
 set cursorline
 
 " toggle spell checking for current buffer
-nnoremap <silent> <leader>s :call lib#opt#ToggleSpell()<cr>
+nnoremap <silent> <leader>s :call libcfg#opt#ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
 nnoremap <silent> <leader>l :call lib#hl#Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
@@ -623,7 +623,7 @@ nnoremap ' `
 nnoremap ` '
 
 " map ,h to search highlight toggle
-nnoremap <silent> <leader>h :call lib#opt#ToggleHlsearch()<cr>
+nnoremap <silent> <leader>h :call libcfg#opt#ToggleHlsearch()<cr>
 " these lines are needed for highlight enabling
 nnoremap ,* *
 nmap * :set hlsearch<cr>,*

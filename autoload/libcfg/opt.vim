@@ -1,5 +1,5 @@
 " toggles 'hlsearch' option and prints out its new state
-function! lib#opt#ToggleHlsearch()
+function! libcfg#opt#ToggleHlsearch()
     set hlsearch!
     if &hlsearch
         echo 'Search results highlighting is ON'
@@ -9,7 +9,7 @@ function! lib#opt#ToggleHlsearch()
 endfunction
 
 " toggles 'spell' option and prints out its new state
-function! lib#opt#ToggleSpell()
+function! libcfg#opt#ToggleSpell()
     setlocal spell!
     if &l:spell
         echo 'Spell checking is ON'
