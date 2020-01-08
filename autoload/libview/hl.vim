@@ -1,4 +1,4 @@
-function! lib#hl#Highlight(before, what, after)
+function! libview#hl#Highlight(before, what, after)
     if empty(a:what)
         echohl WarningMsg | echo 'No string under the cursor.' | echohl None
         return

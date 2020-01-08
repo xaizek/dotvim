@@ -503,14 +503,14 @@ set cursorline
 nnoremap <silent> <leader>s :call libcfg#opt#ToggleSpell()<cr>
 
 " highlight current word (case sensitive)
-nnoremap <silent> <leader>l :call lib#hl#Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
-nnoremap <silent> <leader>L :call lib#hl#Highlight('let @/="\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
-nnoremap <silent> <leader><leader>l :call lib#hl#Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
-nnoremap <silent> <leader><leader>L :call lib#hl#Highlight('let @/="', expand('<cword>'), '"') \| setlocal hls<cr>
-vnoremap <silent> <leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader><leader>l :<c-u>call lib#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
-vnoremap <silent> <leader><leader>L :<c-u>call lib#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
+nnoremap <silent> <leader>l :call libview#hl#Highlight('let @/="\\C\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader>L :call libview#hl#Highlight('let @/="\\<', expand('<cword>'), '\\>"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>l :call libview#hl#Highlight('let @/="\\C', expand('<cword>'), '"') \| setlocal hls<cr>
+nnoremap <silent> <leader><leader>L :call libview#hl#Highlight('let @/="', expand('<cword>'), '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>l :<c-u>call libview#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader>L :<c-u>call libview#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>l :<c-u>call libview#hl#Highlight('let @/="\\C', @*, '"') \| setlocal hls<cr>
+vnoremap <silent> <leader><leader>L :<c-u>call libview#hl#Highlight('let @/="', @*, '"') \| setlocal hls<cr>
 
 " close previously active window
 nnoremap <silent> <c-k>o <c-w>p:hide<cr>
