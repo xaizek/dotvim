@@ -1,15 +1,15 @@
-function! lib#xml#ExpandOneLineXML()
+function! onelinexml#ExpandOneLineXML()
     substitute/>/>\r/g
     %substitute/\S\zs</\r</
     normal gg=GGdd
 endfunction
 
-function! lib#xml#FoldToOneLineXML()
+function! onelinexml#FoldToOneLineXML()
     %substitute/^\s\+//
     %substitute/\n//
 endfunction
 
-function! lib#xml#ToggleOneLineXML()
+function! onelinexml#ToggleOneLineXML()
     if line('$') == 1
         call lib#xml#ExpandOneLineXML()
     else
