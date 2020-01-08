@@ -1,4 +1,4 @@
-function! lib#astyle#FormatFile(path)
+function! libext#astyle#FormatFile(path)
     let l:prefix = has('win32') ? 'start /b ' : ''
     execute "silent !".l:prefix."astyle --indent=spaces=4
                                       \ --convert-tabs

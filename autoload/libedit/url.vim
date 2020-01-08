@@ -2,6 +2,6 @@
 " line above
 function! libedit#url#QueryURLTitle()
     let l:url = getline('.')
-    let l:title = lib#curl#GetPageTitle(l:url)
+    let l:title = libext#curl#GetPageTitle(l:url)
     call append(line('.') - 1, l:title)
 endfunction
