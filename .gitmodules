@@ -1,8 +1,8 @@
 [submodule "pack/completion/opt/clang_complete"]
 	path = pack/completion/opt/clang_complete
 	url = git://github.com/Rip-Rip/clang_complete.git
-[submodule "pack/completion/start/inccomplete"]
-	path = pack/completion/start/inccomplete
+[submodule "pack/completion/opt/inccomplete"]
+	path = pack/completion/opt/inccomplete
 	url = https://github.com/xaizek/vim-inccomplete.git
 [submodule "pack/other/start/repeat"]
 	path = pack/other/start/repeat
@@ -40,14 +40,14 @@
 [submodule "pack/other/start/preamble"]
 	path = pack/other/start/preamble
 	url = https://github.com/xaizek/preamble.vim.git
-[submodule "pack/other/start/includefixer"]
-	path = pack/other/start/includefixer
+[submodule "pack/other/opt/includefixer"]
+	path = pack/other/opt/includefixer
 	url = https://github.com/xaizek/includefixer.git
 [submodule "pack/other/start/undotree"]
 	path = pack/other/start/undotree
 	url = https://github.com/mbbill/undotree.git
-[submodule "pack/other/start/headerguard"]
-	path = pack/other/start/headerguard
+[submodule "pack/other/opt/headerguard"]
+	path = pack/other/opt/headerguard
 	url = https://github.com/drmikehenry/vim-headerguard.git
 [submodule "pack/other/start/committia"]
 	path = pack/other/start/committia
@@ -67,8 +67,8 @@
 [submodule "pack/other/start/securemodelines"]
 	path = pack/other/start/securemodelines
 	url = https://github.com/ypcrts/securemodelines.git
-[submodule "pack/other/start/tabular"]
-	path = pack/other/start/tabular
+[submodule "pack/other/opt/tabular"]
+	path = pack/other/opt/tabular
 	url = git://github.com/godlygeek/tabular.git
 [submodule "pack/other/start/easydir"]
 	path = pack/other/start/easydir
