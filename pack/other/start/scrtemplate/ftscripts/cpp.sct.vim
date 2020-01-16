@@ -4,7 +4,7 @@ let s:hdrexts = ['h', 'hpp', 'hxx', 'hh']
 
 if index(s:hdrexts, s:ext) != -1
     " let configuration set file specific variables
-    call lib#prj#Do('.in.vim')
+    call libprj#prj#Do('.in.vim')
 
     " for header files
     call AddBasicTemplate()

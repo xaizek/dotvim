@@ -4,7 +4,7 @@ let s:ext = fnamemodify(s:filename, ':e')
 " for header files
 if s:ext == 'h'
     " let configuration set file specific variables
-    call lib#prj#Do('.in.vim')
+    call libprj#prj#Do('.in.vim')
 
     call AddHeaderGuard()
     finish
