@@ -779,9 +779,9 @@ augroup end
 
 " for work of normal mode commands
 if s:win
-    language ctype Russian_Russia.1251
+    silent! language ctype Russian_Russia.1251
 else
-    language ctype ru_RU.utf-8
+    silent! language ctype ru_RU.utf-8
 endif
 
 " ==============================================================================
