@@ -633,11 +633,6 @@ nmap # :set hlsearch<cr>,#
 set ignorecase
 set smartcase
 
-" jj - <esc>
-imap jj <esc>
-" cmap jj <c-c>
-smap jj <esc>
-
 " don't loose selection in visual mode on < and >
 vnoremap < <gv
 vnoremap > >gv
