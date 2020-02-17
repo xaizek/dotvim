@@ -677,7 +677,7 @@ nnoremap <leader>0 :tab drop $HOME/.vifm/vifmrc<cr>
 nnoremap <leader>- :tab drop $HOME/.vifm/vifmrc_local<cr>
 
 " edit visual selection in new tab
-xmap ,t y:tabe<cr>Vp
+xnoremap ,t y:tabe<cr>Vp
 
 " some additional paths for file searches
 if s:win
