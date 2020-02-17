@@ -149,7 +149,7 @@ autocmd BufReadPost,BufEnter,BufWinEnter,WinEnter  *
             \ elseif !&modifiable |
             \ elseif &readonly |
             \ else |
-            \     nmap <buffer> <expr> <cr> MyEnter() |
+            \     nnoremap <buffer> <expr> <cr> MyEnter() |
             \ endif
 function! MyEnter()
     if &filetype == 'qf'
@@ -168,7 +168,7 @@ endfunction
 " ------------------------------------------------------------------------------
 " improved A normal mode key
 
-nmap <expr> A libedit#adva#AdvancedA()
+nnoremap <expr> A libedit#adva#AdvancedA()
 
 " ------------------------------------------------------------------------------
 " text paste motion
@@ -237,8 +237,8 @@ if executable('par')
 endif
 
 " keys to insert empty lines above/below current line in normal mode
-nmap <leader>f o<esc>
-nmap <leader>F O<esc>
+nnoremap <leader>f o<esc>
+nnoremap <leader>F O<esc>
 
 " ==============================================================================
 " programming
@@ -247,7 +247,7 @@ nmap <leader>F O<esc>
 " custom tag jumps
 
 " on each next <c-]> press jumps to next tag with same name
-nmap <silent> <c-]> :silent! call <SID>CallTagJump()<cr>
+nnoremap <silent> <c-]> :silent! call <SID>CallTagJump()<cr>
 
 function! <SID>CallTagJump()
     if &ft == 'help'
@@ -316,12 +316,12 @@ autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call libprj#prj#Do('.out.vim')
 " imap <c-space> <c-x><c-u>
 
 " rename operations on <leader>r
-nmap <leader>rr mr:silent! %s/\C\<<c-r><c-w>\>//g\|normal 'r<left><left><left>
-            \<left><left><left><left><left><left><left><left><left>
-nmap <leader>rf :silent! call ExecInFuncBody('s/\C\<<c-r><c-w>\>//g')<left>
+nnoremap <leader>rr mr:silent! %s/\C\<<c-r><c-w>\>//g\|normal 'r<left><left>
+            \<left><left><left><left><left><left><left><left><left><left>
+nnoremap <leader>rf :silent! call ExecInFuncBody('s/\C\<<c-r><c-w>\>//g')<left>
             \<left><left><left>
-nmap <leader>rt :silent! tabdo %s/\C\<<c-r><c-w>\>//g<left><left>
-nmap <leader>rb :silent! bufdo %s/\C\<<c-r><c-w>\>//g<left><left>
+nnoremap <leader>rt :silent! tabdo %s/\C\<<c-r><c-w>\>//g<left><left>
+nnoremap <leader>rb :silent! bufdo %s/\C\<<c-r><c-w>\>//g<left><left>
 
 " show/hide QuickFix window
 "nmap <leader>c :copen<cr>
@@ -558,13 +558,13 @@ set splitbelow
 filetype plugin indent on
 
 " correct Y key
-nmap Y y$
+nnoremap Y y$
 
 " map _= to buffer indentation
-nmap <silent> _= :call <SID>PreserveAndRun('normal gg=G')<cr>
+nnoremap <silent> _= :call <SID>PreserveAndRun('normal gg=G')<cr>
 
 " map _$ to removing all ending whitespaces
-nmap <silent> _$ :call <SID>PreserveAndRun('%s/\s\+$//e')<cr>
+nnoremap <silent> _$ :call <SID>PreserveAndRun('%s/\s\+$//e')<cr>
 
 " use Ctrl-N/P to switch between tabs
 nnoremap <c-n> gt
@@ -578,7 +578,7 @@ inoremap <s-insert> <c-r>*
 cnoremap <s-insert> <c-r>*
 
 " toggle line wrapping on <leader>w
-nmap <leader>w :set wrap!<cr>
+nnoremap <leader>w :set wrap!<cr>
 
 " automatically reread Vim's configuration after writing it
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
@@ -625,9 +625,9 @@ nnoremap ` '
 nnoremap <silent> <leader>h :call libcfg#opt#ToggleHlsearch()<cr>
 " these lines are needed for highlight enabling
 nnoremap ,* *
-nmap * :set hlsearch<cr>,*
+nnoremap * :set hlsearch<cr>,*
 nnoremap ,# #
-nmap # :set hlsearch<cr>,#
+nnoremap # :set hlsearch<cr>,#
 
 " smart case policy on search
 set ignorecase
@@ -974,39 +974,39 @@ endfunction
 " ==============================================================================
 " don't let me use "wrong" keys
 
-imap <silent> <up>       <nop>
-imap <silent> <down>     <nop>
-imap <silent> <left>     <nop>
-imap <silent> <right>    <nop>
-imap <silent> <home>     <nop>
-imap <silent> <end>      <nop>
-imap <silent> <pageup>   <nop>
-imap <silent> <pagedown> <nop>
-imap <silent> <c-home>   <nop>
-imap <silent> <c-end>    <nop>
-imap <silent> <del>      <nop>
-nmap <silent> <up>       <nop>
-nmap <silent> <down>     <nop>
-nmap <silent> <left>     <nop>
-nmap <silent> <right>    <nop>
-nmap <silent> <home>     <nop>
-nmap <silent> <end>      <nop>
-nmap <silent> <pageup>   <nop>
-nmap <silent> <pagedown> <nop>
-nmap <silent> <c-home>   <nop>
-nmap <silent> <c-end>    <nop>
-nmap <silent> <del>      <nop>
-vmap <silent> <up>       <nop>
-vmap <silent> <down>     <nop>
-vmap <silent> <left>     <nop>
-vmap <silent> <right>    <nop>
-vmap <silent> <home>     <nop>
-vmap <silent> <end>      <nop>
-vmap <silent> <pageup>   <nop>
-vmap <silent> <pagedown> <nop>
-vmap <silent> <c-home>   <nop>
-vmap <silent> <c-end>    <nop>
-vmap <silent> <del>      <nop>
+inoremap <silent> <up>       <nop>
+inoremap <silent> <down>     <nop>
+inoremap <silent> <left>     <nop>
+inoremap <silent> <right>    <nop>
+inoremap <silent> <home>     <nop>
+inoremap <silent> <end>      <nop>
+inoremap <silent> <pageup>   <nop>
+inoremap <silent> <pagedown> <nop>
+inoremap <silent> <c-home>   <nop>
+inoremap <silent> <c-end>    <nop>
+inoremap <silent> <del>      <nop>
+nnoremap <silent> <up>       <nop>
+nnoremap <silent> <down>     <nop>
+nnoremap <silent> <left>     <nop>
+nnoremap <silent> <right>    <nop>
+nnoremap <silent> <home>     <nop>
+nnoremap <silent> <end>      <nop>
+nnoremap <silent> <pageup>   <nop>
+nnoremap <silent> <pagedown> <nop>
+nnoremap <silent> <c-home>   <nop>
+nnoremap <silent> <c-end>    <nop>
+nnoremap <silent> <del>      <nop>
+vnoremap <silent> <up>       <nop>
+vnoremap <silent> <down>     <nop>
+vnoremap <silent> <left>     <nop>
+vnoremap <silent> <right>    <nop>
+vnoremap <silent> <home>     <nop>
+vnoremap <silent> <end>      <nop>
+vnoremap <silent> <pageup>   <nop>
+vnoremap <silent> <pagedown> <nop>
+vnoremap <silent> <c-home>   <nop>
+vnoremap <silent> <c-end>    <nop>
+vnoremap <silent> <del>      <nop>
 
 " ==============================================================================
 " load machine specific local set of settings
