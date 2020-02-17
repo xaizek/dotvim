@@ -526,7 +526,7 @@ nnoremap <silent> <c-k><c-l> <c-w>l<c-w>p:<c-r>=winnr('#')<cr>hide<cr>
 
 highlight SecondaryHighlight guibg=lightgreen guifg=black ctermbg=lightgreen ctermfg=black
 " swap marking
-nnoremap <silent> <leader>m :2match SecondaryHighlight ///<cr>
+nnoremap <silent> <leader>m :2match SecondaryHighlight /<c-r>//<cr>
 " clear marking
 nnoremap <silent> <leader>cm :2match none<cr>
 
