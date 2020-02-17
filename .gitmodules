@@ -72,7 +72,7 @@
 	url = git://github.com/godlygeek/tabular.git
 [submodule "pack/other/start/easydir"]
 	path = pack/other/start/easydir
-	url = https://github.com/xaizek/vim-easydir.git
+	url = https://github.com/duggiefresh/vim-easydir.git
 [submodule "pack/other/start/endwise"]
 	path = pack/other/start/endwise
 	url = git://github.com/tpope/vim-endwise.git
