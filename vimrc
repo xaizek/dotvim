@@ -679,15 +679,6 @@ nnoremap <leader>- :tab drop $HOME/.vifm/vifmrc_local<cr>
 " edit visual selection in new tab
 xnoremap ,t y:tabe<cr>Vp
 
-" some additional paths for file searches
-if s:win
-    set path+=E:/programming/compilers/MinGW/include/
-else
-    set path+=/usr/local/include
-"    set path+=/mnt/data/X-files/Prj(MK)/
-"    set path+=/mnt/data/X-files/Prj(MK)/stdclib/inc/
-endif
-
 " line movement commands (up and down)
 nnoremap <a-j> mz:m+<cr>`z==
 nnoremap <a-k> mz:m-2<cr>`z==
