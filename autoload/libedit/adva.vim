@@ -1,5 +1,3 @@
-nnoremap ZA A
-
 " A that considers indentation level
 function! libedit#adva#AdvancedA()
     let l:prev_indent = indent(line('.') - 1)
@@ -15,6 +13,6 @@ function! libedit#adva#AdvancedA()
     elseif l:is_empty
         return 'I'
     else
-        return 'ZA'
+        return 'A'
     endif
 endfunction
