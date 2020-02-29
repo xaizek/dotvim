@@ -26,6 +26,11 @@ let maplocalleader = ','
 
 let $MYVIMRC=$HOME.'/.vim/vimrc'
 
+if s:win
+    set packpath^=~/.vim
+    set packpath+=~/.vim/after
+endif
+
 if has('gui_running')
     " use 256 colors in :terminal
     let $TERM = 'xterm-256color'
