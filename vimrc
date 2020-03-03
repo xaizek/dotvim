@@ -628,11 +628,9 @@ nnoremap ` '
 
 " map ,h to search highlight toggle
 nnoremap <silent> <leader>h :call libcfg#opt#ToggleHlsearch()<cr>
-" these lines are needed for highlight enabling
-nnoremap ,* *
-nnoremap * :set hlsearch<cr>,*
-nnoremap ,# #
-nnoremap # :set hlsearch<cr>,#
+" automatically enable highlighting of search results on * and #
+nnoremap * :set hlsearch<cr>*
+nnoremap # :set hlsearch<cr>#
 
 " smart case policy on search
 set ignorecase
