@@ -495,13 +495,13 @@ set laststatus=2
 
 " status bar customization
 " bufname[modified][readonly][preview]
-set statusline=%-20(%t%m%r%w%)
+set statusline=%-10.60(%{pathshorten(expand('%:p:~'))}%m%r%w%)
 " |[ff][fenc][ft]
-set statusline+=\ \|\%23([%{&ff}][%{&fenc}]%y%)
+set statusline+=\ \|\ \%15.23([%{&ff}][%{&fenc}]%y%)
 " |char[hexchar] \[vcol-\]col,line/total lines
-set statusline+=\ \|\ %4(%b%)[%6(0x%B%)]%=%c%V,%l/%L
+set statusline+=\ \|\ %3.4(%b%):%4.6(0x%02B%)\ %=%c%V,%l/%L
 " | percentage of file
-set statusline+=\ \|\ %P
+set statusline+=\|%3.4(%P%)
 
 " break lines on whitespace
 set linebreak
