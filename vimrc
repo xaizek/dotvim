@@ -575,6 +575,9 @@ nnoremap <silent> _$ :call <SID>PreserveAndRun('%s/\s\+$//e')<cr>
 nnoremap <c-n> gt
 nnoremap <c-p> gT
 
+" move tab to [count] tab position, if [count] is present
+noremap <expr> gT libaction#CountTabMove()
+
 " show/hide folds on space
 nnoremap <space> za
 
