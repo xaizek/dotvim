@@ -146,16 +146,18 @@ autocmd FileType cpp,c set concealcursor=in|set conceallevel=0
 " modification for Enter key in normal mode
 
 " break current line into two on Enter key (except some windows)
-autocmd BufReadPost,BufEnter,BufWinEnter,WinEnter  *
-            \ if &filetype == 'qf' |
-            \ elseif &filetype == 'vifm-cmdedit' |
-            \ elseif &filetype == 'vifm-edit' |
-            \ elseif bufname("%") == '__TagBar__' |
-            \ elseif !&modifiable |
-            \ elseif &readonly |
-            \ else |
-            \     nnoremap <buffer> <expr> <cr> MyEnter() |
-            \ endif
+augroup MyEnter
+    autocmd! BufReadPost,BufEnter,BufWinEnter,WinEnter  *
+                \ if &filetype == 'qf' |
+                \ elseif &filetype == 'vifm-cmdedit' |
+                \ elseif &filetype == 'vifm-edit' |
+                \ elseif bufname("%") == '__TagBar__' |
+                \ elseif !&modifiable |
+                \ elseif &readonly |
+                \ else |
+                \     nnoremap <buffer> <expr> <cr> MyEnter() |
+                \ endif
+augroup end
 function! MyEnter()
     if &filetype == 'qf'
         return "\<cr>"
@@ -296,8 +298,12 @@ endfunction
 " ------------------------------------------------------------------------------
 " some kind of projects
 
-autocmd BufEnter,BufWinEnter,WinEnter * call libprj#prj#Do('.in.vim')
-autocmd BufLeave,BufWinLeave,WinLeave,BufDelete * call libprj#prj#Do('.out.vim')
+augroup libprj
+    autocmd! BufEnter,BufWinEnter,WinEnter *
+           \ call libprj#prj#Do('.in.vim')
+    autocmd! BufLeave,BufWinLeave,WinLeave,BufDelete *
+           \ call libprj#prj#Do('.out.vim')
+augroup end
 
 " ------------------------------------------------------------------------------
 
