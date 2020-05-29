@@ -498,8 +498,12 @@ set laststatus=2
 set statusline=%-10.60(%{pathshorten(expand('%:p:~'))}%m%r%w%)
 " |[ff][fenc][ft]
 set statusline+=\ \|\ \%15.23([%{&ff}][%{&fenc}]%y%)
-" |char[hexchar] \[vcol-\]col,line/total lines
-set statusline+=\ \|\ %3.4(%b%):%4.6(0x%02B%)\ %=%c%V,%l/%L
+" |char:hexchar
+set statusline+=\ \|\ %3.4(%b%):%4.6(0x%02B%)\ 
+" filler
+set statusline+=%=
+" \[vcol-\]col,line/total lines
+set statusline+=%c%V,%l/%L
 " | percentage of file
 set statusline+=\|%3.4(%P%)
 

@@ -9,11 +9,11 @@ function! libui#tabs#TabLine()
             let s .= '%#TabLine#'
         endif
 
-        " set the tab page $1(for mouse clicks)
+        " set the tab page $1 (for mouse clicks)
         let s .= '%' . (i + 1) . 'T'
 
         " the label is made by TabLabel()
-        let s .= ' %{libui#tabs#TabLabel(' . (i + 1) . ')} '
+        let s .= '%{libui#tabs#TabLabel(' . (i + 1) . ')} '
     endfor
 
     " after the last tab fill with TabLineFill and reset tab page nr
@@ -32,14 +32,14 @@ function! libui#tabs#TabLabel(n)
     let buflist = tabpagebuflist(a:n)
     let winnr = tabpagewinnr(a:n)
     let l = pathshorten(expand('#'.buflist[winnr - 1].':p:~'))
-    if l == ""
-        let l = "No Name"
+    if empty(l)
+        let l = 'No Name'
     endif
-    if getbufvar(buflist[winnr - 1], "&modified")
-        let l .= ' [+]'
+    if getbufvar(buflist[winnr - 1], '&modified')
+        let l .= '|+'
     endif
     if len(buflist) > 1
-        let l = len(buflist).'w '.l
+        let l = len(buflist).'w|'.l
     endif
     return '['.a:n.':'.l.']'
 endfunction
