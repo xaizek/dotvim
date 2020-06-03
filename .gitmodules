@@ -79,3 +79,6 @@
 [submodule "pack/apps/opt/vifm"]
 	path = pack/apps/opt/vifm
 	url = https://github.com/vifm/vifm.vim.git
+[submodule "pack/filetypes/start/qml"]
+	path = pack/filetypes/start/qml
+	url = https://github.com/peterhoeg/vim-qml.git
