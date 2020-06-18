@@ -1,0 +1,57 @@
+*uncov.txt*               For Vim version 7.4         Last change: 2017 May 09
+
+
+                       uncov plugin documentation
+
+
+uncov plugin                                    *uncov*
+
+1. Prerequisites................................|uncov-prerequisites|
+2. Description..................................|uncov-description|
+3. Usage........................................|uncov-usage|
+
+Author:  xaizek <xaizek@posteo.net>
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+1. Prerequisites                                *uncov-prerequisites*
+
+Vim-fugitive plugin by Tim Pope:
+
+    https://github.com/tpope/vim-fugitive.git
+
+This dependency can be removed in future versions.
+
+==============================================================================
+2. Description                                  *uncov-description*
+
+This plugin provides integration with uncov command-line tool.  It helps to
+view latest coverage information about currently opened file easily.
+
+The plugin opens a separate tab page with contents current file had at the
+moment of coverage collection.  The buffer in that tab:
+
+ * has sign column set to show covered and missed lines;
+ * has location list filled with list of uncovered lines;
+ * has folds set on ranges that are covered;
+ * has cursor set near its position in the original buffer;
+ * displays file coverage information on command-line (once).
+
+==============================================================================
+3. Usage                                        *uncov-usage*
+
+:Uncov [buildid]                                *uncov-:Uncov* *:Uncov*
+
+In non-uncov buffer, loads coverage of current file in a buffer of a new tab
+page.  When already in uncov buffer, reloads coverage of a file in current
+buffer, but possibly from a different build.
+
+Without argument latest build (@@) is used.
+
+:UncovInfo                                      *uncov-:UncovInfo* *:UncovInfo*
+
+Loads coverage of current file in a buffer of a new tab page.
+The command is local to buffers created by this plugin.
+
+------------------------------------------------------------------------------
+ vim:tw=78:ts=8:ft=help:norl:
