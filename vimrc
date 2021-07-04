@@ -801,10 +801,29 @@ let g:vimsyn_folding = 'f'
 " ==============================================================================
 " misc commands and functions
 
-if !exists(":DiffOrig")
-  command DiffOrig set noautowrite | vert new | set bt=nofile | r # | 0d_
-              \ | diffthis | wincmd p | diffthis | set autowrite
-endif
+function! s:DiffOrig()
+    set noautowrite
+
+    try
+        let l:ft = &filetype
+
+        leftabove vert new
+        set buftype=nofile
+
+        read #
+        0delete_
+
+        " set file type here to not do it to an empty buffer
+        let &filetype = l:ft
+
+        diffthis
+        wincmd p
+        diffthis
+    finally
+        set autowrite
+    endtry
+endfunction
+command! DiffOrig call s:DiffOrig()
 
 " query title of page at URL in the current line (whole line) and insert it one
 " line above
