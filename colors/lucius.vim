@@ -247,7 +247,7 @@ hi Question         guifg=fg                                        gui=none
 hi Question         ctermfg=fg                                      cterm=none
 " meta and special keys used with map, unprintable characters
 hi SpecialKey       guifg=#404040
-hi SpecialKey       ctermfg=237
+hi SpecialKey       ctermfg=241
 " titles for output from :set all, :autocmd, etc
 hi Title            guifg=#62bdde                                   gui=none
 hi Title            ctermfg=74                                      cterm=none
@@ -315,20 +315,22 @@ hi PMenuThumb                               ctermbg=102             cterm=none
 " Status Line
 " -----------
 " status line for current window
-hi StatusLine       guifg=#e0e0e0           guibg=#363946           gui=bold
+hi StatusLine       guifg=#e0e0e0           guibg=#313441           gui=none
 hi StatusLine       ctermfg=254             ctermbg=237             cterm=bold
 " status line for non-current windows
 hi StatusLineNC     guifg=#767986           guibg=#363946           gui=none
 hi StatusLineNC     ctermfg=244             ctermbg=237             cterm=none
 
+hi User1            guifg=#e0e0e0           guibg=#313441           gui=none
+hi StatusLine       ctermfg=254             ctermbg=238             cterm=none
 
 " Tab Lines
 " ---------
 " tab pages line, not active tab page label
 hi TabLine          guifg=#b6bf98           guibg=#363946           gui=none
-hi TabLine          ctermfg=244             ctermbg=236             cterm=none
+hi TabLine          ctermfg=246             ctermbg=236             cterm=none
 " tab pages line, where there are no labels
-hi TabLineFill      guifg=#cfcfaf           guibg=#363946           gui=none
+hi TabLineFill      guifg=#ffff55           guibg=#363946           gui=none
 hi TabLineFill      ctermfg=187             ctermbg=236             cterm=none
 " tab pages line, active tab page label
 hi TabLineSel       guifg=#efefef           guibg=#414658           gui=bold
