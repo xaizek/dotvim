@@ -185,9 +185,9 @@ nnoremap <silent> cp :let g:substitutemotion_reg = v:register
               \ <bar> set opfunc=libedit#subm#SubstituteMotion<CR>g@
 
 " ------------------------------------------------------------------------------
-" expand double { ("{{") as {<cr>}
+" expand "{," as "{\n}"
 
-inoremap <silent> { <c-r>=<SID>ExpandBracket()<cr>
+inoremap <silent> , <c-r>=<SID>ExpandBracket()<cr>
 function! s:ExpandBracket()
     let l:line = getline('.')
     let l:col = col('.') - 2
@@ -199,7 +199,7 @@ function! s:ExpandBracket()
             return "\<cr>\<esc>o}\<esc>k^"
         endif
     endif
-    return '{'
+    return ','
 endfunction
 
 " ------------------------------------------------------------------------------
