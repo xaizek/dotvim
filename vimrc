@@ -845,7 +845,7 @@ function! AddBasicTemplate()
 
     " add file template
     let l:template = findfile('.src_template', '.;')
-    if !empty(l:template)
+    if !empty(l:template) && filereadable(l:template)
         let l:file = readfile(l:template)
         call append(0, l:file)
     endif
