@@ -202,6 +202,16 @@ function! s:ExpandBracket()
     return ','
 endfunction
 
+inoremap <silent> : <c-r>=<SID>ExpandBracketWithSemicolon()<cr>
+function! s:ExpandBracketWithSemicolon()
+    let l:line = getline('.')
+    let l:col = col('.') - 2
+    if '{' == l:line[l:col]
+        return "\<bs>{\<esc>o};\<esc>\"_O"
+    endif
+    return ':'
+endfunction
+
 " ------------------------------------------------------------------------------
 
 " use unix-style eol by default
