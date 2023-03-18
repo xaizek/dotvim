@@ -487,11 +487,11 @@ set backup
 
 " directory where to store backup files
 let s:backup_dir = libcfg#cfg#CreateVimStorageDir('bak')
-execute 'set backupdir='.s:backup_dir.'/,.,~/tmp,~/'
+execute 'set backupdir='.s:backup_dir.'//,.,~/tmp,~/'
 
 " directory where to store swap files
 let s:swap_dir = libcfg#cfg#CreateVimStorageDir('swap')
-execute 'set directory='.s:swap_dir.'/'
+execute 'set directory='.s:swap_dir.'//'
 
 " directory where to store persistent undo files
 let s:undo_dir = libcfg#cfg#CreateVimStorageDir('undo')
