@@ -437,9 +437,9 @@ else
 endif
 
 " clears error list and marks
-nnoremap <leader>ce : call setqflist([])
-                  \\| doautocmd QuickFixCmdPost make
-                  \\| cwindow<cr>
+nnoremap <silent> <leader>ce : call setqflist([])
+                           \\| doautocmd QuickFixCmdPost make
+                           \\| cwindow<cr>
 
 " automatically reread file changed by external application
 set autoread
