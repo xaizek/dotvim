@@ -306,12 +306,7 @@ endfun
 fun! s:ReadFile( dir, filename)
   let realdir= s:CheckDirForFile( a:dir, a:filename )
   if realdir=='' | return '' | endif
-  " if has('dos16') || has('gui_win32s') || has('win16') || ha
-  if !has('unix') && !&shellslash && &shell !~ 'sh[a-z.]*$'
-    return system('type "'.fnamemodify(realdir,':gs?/?\\?.').a:filename.'"')
-  else
-    return system( 'cat "'.escape(realdir.a:filename,'\$*').'"' )
-  endif
+  return join(readfile(realdir.a:filename), '\n')
 endfun
 
 " Define/undefine a ';' or ',' separated list
