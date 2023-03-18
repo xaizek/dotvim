@@ -565,7 +565,7 @@ set scrolloff=4
 " show partially entered commands
 set showcmd
 
-" set slepp check languages
+" set spell check languages
 set spelllang=en,ru
 
 " show at most 20 suggestions on z=
