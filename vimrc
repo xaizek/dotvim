@@ -752,16 +752,16 @@ set expandtab
 set tabstop=4
 
 " number of spaces inserted for tabulation replacement
-set softtabstop=4
+set softtabstop=-1
+
+" width of a shift for normal, visual and selection modes
+set shiftwidth=0
 
 " show tabulation characters as a period and trailing whitespace as a dot
 " also make it clear whether horizontal scroll is needed
 set list
 set listchars=tab:.\ ,trail:·
 set listchars+=precedes:<,extends:>
-
-" width of a shift for normal, visual and selection modes
-set shiftwidth=4
 
 " round indentation to multiple of 'shiftwidth'
 set shiftround
