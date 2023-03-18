@@ -729,6 +729,9 @@ endif
 
 autocmd BufEnter,BufWinEnter,WinEnter * :call <SID>SetParams()
 function! <SID>SetParams()
+    if &colorcolumn != 0
+        return
+    endif
     if search('^[^a-z]*vim: .*colorcolumn=', 'nw') != 0
         return
     endif
