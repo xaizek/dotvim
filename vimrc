@@ -42,8 +42,6 @@ endif
 if &loadplugins == 1
     " plugin settings
     set runtimepath+=~/.vim/rcs
-    " local development versions of plugins
-    set runtimepath+=~/repos/vifm/data/vim/
 endif
 
 " ==============================================================================
