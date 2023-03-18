@@ -1,6 +1,6 @@
 " Rename.vim  -  Rename a buffer within Vim and on the disk
 "
-" Copyright June 2007-2011 by Christian J. Robinson <heptite@gmail.com>
+" Copyright June 2007-2021 by Christian J. Robinson <heptite@gmail.com>
 "
 " Distributed under the terms of the Vim license.  See ":help license".
 "
@@ -8,7 +8,7 @@
 "
 " :Rename[!] {newname}
 
-command! -nargs=* -complete=file -bang Rename call Rename(<q-args>, '<bang>')
+command! -nargs=1 -complete=file -bang Rename call Rename(<q-args>, '<bang>')
 
 function! Rename(name, bang)
 	let l:name    = a:name
@@ -28,7 +28,7 @@ function! Rename(name, bang)
 	let l:status = 1
 
 	let v:errmsg = ''
-	silent! exe 'saveas' . a:bang . ' ' . l:name
+	silent! exe 'silent! saveas' . a:bang . ' ' . l:name
 
 	if v:errmsg =~# '^$\|^E329'
 		let l:lastbufnr = bufnr('$')
