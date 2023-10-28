@@ -1057,8 +1057,6 @@ unlet s:vimrc_local_path
 " ==============================================================================
 " experiments and tests
 
-let g:pymode_syntax=1
-
-map [[ ][%0
+finish
 
 " vim: set textwidth=80 syntax+=.autofold :
