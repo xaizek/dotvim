@@ -553,8 +553,8 @@ nnoremap <silent> <leader>m :2match SecondaryHighlight /<c-r>//<cr>
 " clear marking
 nnoremap <silent> <leader>cm :2match none<cr>
 
-" increase history size
-set history=10000
+" increase history size (don't make it 10000, Vim becomes slow to start/quit)
+set history=1000
 
 " correct encoding detection
 set fileencodings=ucs-bom,utf-8,default,cp1251,cp866
